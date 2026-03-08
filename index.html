@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+    <title>Pride Travel Scout</title>
+
+    <!-- 1. External Dependencies -->
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f20d8f",
+                        "background-light": "#f8f5f7",
+                        "background-dark": "#22101a",
+                        "pride-red": "#FF0018",
+                        "pride-orange": "#FFA52C",
+                        "pride-yellow": "#FFFF41",
+                        "pride-green": "#008018",
+                        "pride-blue": "#0000F9",
+                        "pride-purple": "#86007D",
+                    },
+                    fontFamily: {
+                        "display": ["Outfit", "sans-serif"],
+                        "sans": ["Outfit", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                }
+            }
+        };
+    </script>
+
+    <!-- 2. Custom CSS -->
+    <style>
+        .pride-gradient-text {
+            background: linear-gradient(to right, #FF0018, #FFA52C, #eab308, #008018, #0000F9, #86007D);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Dark mode: Pride gradient does not have an innate background pill. Added where necessary via wrapper class dark-pill. */
+        html.dark .dark-pill {
+            background-color: white !important;
+            border-radius: 9999px !important;
+            padding: 0.1rem 0.8rem !important;
+            display: inline-block !important;
+            border: 2px solid white !important;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+        }
+
+        html.dark .pride-gradient-text {
+            background: linear-gradient(to right, #FF0018, #FFA52C, #eab308, #008018, #0000F9, #86007D);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+        }
+
+        .rainbow-border {
+            position: relative;
+            z-index: 0;
+        }
+
+        .rainbow-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #FF0018, #FFA52C, #FFFF41, #008018, #0000F9, #86007D);
+            z-index: -1;
+            border-radius: 1.1rem;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        html.dark body {
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8f5f7;
+            color: #1e293b;
+            min-height: 100vh;
+            padding-bottom: 5rem;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' var(--fill, 0), 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .fill-1 {
+            --fill: 1;
+        }
+
+        .pride-gradient-bg {
+            background: linear-gradient(45deg, #FF0018, #FFA52C, #eab308, #008018, #0000F9, #86007D);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+
+        /* Rainbow Search Card */
+        .rainbow-card-bg {
+            background: linear-gradient(45deg, #FF0018, #FFA52C, #FFFF41, #008018, #0000F9, #86007D);
+        }
+
+        .pill-input {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 9999px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .btn-pride-yellow {
+            background: linear-gradient(to right, #facc15, #fb923c);
+            color: #1e293b;
+        }
+
+        /* View Management */
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
+        /* ===== PRIDE SCOUT AUTH STYLES ===== */
+        #ps-auth-modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+        }
+
+        #ps-auth-modal-backdrop.open {
+            display: flex;
+        }
+
+        #ps-auth-modal {
+            background: #fff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            width: min(420px, 92vw);
+            box-shadow: 0 25px 60px rgba(242, 13, 143, 0.18);
+            animation: psModalIn .25s ease;
+        }
+
+        @keyframes psModalIn {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ps-tab {
+            cursor: pointer;
+            padding: .5rem 1.25rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: .85rem;
+            transition: .2s;
+        }
+
+        .ps-tab.active {
+            background: linear-gradient(90deg, #f20d8f, #86007D);
+            color: #fff;
+        }
+
+        .ps-tab:not(.active) {
+            color: #888;
+        }
+
+        .ps-input {
+            width: 100%;
+            border: 2px solid #e5e7eb;
+            border-radius: .75rem;
+            padding: .65rem 1rem;
+            font-size: .9rem;
+            outline: none;
+            transition: .2s;
+            margin-bottom: .75rem;
+            font-family: inherit;
+        }
+
+        .ps-input:focus {
+            border-color: #f20d8f;
+        }
+
+        .ps-btn-primary {
+            width: 100%;
+            padding: .75rem;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: .9rem;
+            background: linear-gradient(90deg, #f20d8f, #86007D);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: .2s;
+            margin-bottom: .5rem;
+            font-family: inherit;
+        }
+
+        .ps-btn-primary:hover {
+            opacity: .9;
+            transform: translateY(-1px);
+        }
+
+        .ps-btn-google {
+            width: 100%;
+            padding: .7rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: .85rem;
+            background: #fff;
+            color: #444;
+            border: 2px solid #e5e7eb;
+            cursor: pointer;
+            transition: .2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            font-family: inherit;
+        }
+
+        .ps-btn-google:hover {
+            border-color: #4285F4;
+            color: #4285F4;
+        }
+
+        .ps-error {
+            color: #e11d48;
+            font-size: .8rem;
+            margin-bottom: .5rem;
+            min-height: 1.1rem;
+        }
+
+        #ps-user-menu-wrap {
+            position: fixed;
+            top: 14px;
+            right: 16px;
+            z-index: 9000;
+        }
+
+        #ps-user-btn {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .4rem .9rem;
+            background: linear-gradient(90deg, #f20d8f, #86007D);
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: .8rem;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        #ps-user-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + .5rem);
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .15);
+            min-width: 160px;
+            overflow: hidden;
+            z-index: 999;
+        }
+
+        #ps-user-dropdown.open {
+            display: block;
+        }
+
+        .ps-dd-item {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .75rem 1rem;
+            font-size: .85rem;
+            font-weight: 600;
+            cursor: pointer;
+            color: #333;
+            transition: .15s;
+        }
+
+        .ps-dd-item:hover {
+            background: #fdf0f7;
+            color: #f20d8f;
+        }
+
+        #ps-trips-panel {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9998;
+            background: rgba(0, 0, 0, .5);
+            backdrop-filter: blur(4px);
+        }
+
+        #ps-trips-panel.open {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        #ps-trips-inner {
+            background: #fff;
+            border-radius: 1.5rem 1.5rem 0 0;
+            width: min(480px, 100vw);
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 1.75rem;
+            box-shadow: 0 -8px 40px rgba(242, 13, 143, .15);
+            animation: psPanelIn .3s ease;
+        }
+
+        @keyframes psPanelIn {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .ps-trip-card {
+            background: #fdf0f7;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: .75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: .5rem;
+        }
+
+        .ps-save-btn {
+            background: #f0f0f0;
+            border: none;
+            border-radius: 999px;
+            padding: .35rem .85rem;
+            font-size: .78rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            transition: .2s;
+            color: #555;
+            font-family: inherit;
+            white-space: nowrap;
+        }
+
+        .ps-save-btn.saved {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .ps-save-btn:hover:not(.saved) {
+            background: #fdf0f7;
+            color: #f20d8f;
+        }
+    </style>
+    <meta name="theme-color" content="#f20d8f">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://pridetravel.github.io/PrideTravelScoutAPP/icon-512.png">
+    <!-- Firebase SDK (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
+    <script>
+        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark')
+        } else {
+            document.documentElement.classList.remove('dark')
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-slate-900 font-display text-slate-900 dark:text-white min-h-screen pb-24">
+    <!-- Top Navigation / Brand -->
+    <header
+        class="sticky top-0 z-50 bg-background-light dark:bg-slate-900/80 backdrop-blur-md px-6 py-4 flex items-center justify-between border-b"
+        style="border-bottom: 4px solid; border-image: linear-gradient(to right, #FF0018, #FFA52C, #FFFF41, #008018, #0000F9, #86007D) 1;">
+        <div class="flex items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+            onclick="toggleView('homeView')" title="Back to Home">
+            <div class="w-8 h-8 rounded-lg pride-gradient-bg flex items-center justify-center shadow-lg">
+                <span class="material-symbols-outlined text-white text-xl font-black">flight_takeoff</span>
+            </div>
+            <h1 class="text-xl font-extrabold tracking-tight inline-block dark-pill"><span
+                    class="pride-gradient-text">Pride Scout</span></h1>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto mt-6 px-4">
+        <!-- View 1: Explore (Home) -->
+        <div id="homeView" class="view-section active space-y-8">
+            <!-- 1. Search & Info Section -->
+            <section class="rainbow-card-bg rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+
+
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="material-symbols-outlined text-white text-3xl">map</span>
+                    <h2 class="text-2xl font-black text-black italic">Plan Your Journey</h2>
+                </div>
+
+                <form id="searchForm" class="space-y-4">
+                    <div class="space-y-3">
+                        <div class="flex flex-col gap-1">
+                            <label for="departure"
+                                class="text-xs font-black text-slate-700 dark:text-black ml-2 uppercase tracking-wide">Departure
+                                City</label>
+                            <div class="relative">
+                                <span
+                                    class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary">flight_takeoff</span>
+                                <input id="departure"
+                                    class="w-full pl-12 pr-4 py-4 pill-input border-none focus:ring-4 focus:ring-white/30 text-sm font-bold placeholder:text-slate-500 text-slate-900 dark:text-black"
+                                    placeholder="e.g. New York, LHR" type="text" required />
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="destination"
+                                class="text-xs font-black text-slate-700 dark:text-black ml-2 uppercase tracking-wide">Destination
+                                (City, Country or Region)</label>
+                            <div class="relative">
+                                <span
+                                    class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary">location_on</span>
+                                <input id="destination"
+                                    class="w-full pl-12 pr-4 py-4 pill-input border-none focus:ring-4 focus:ring-white/30 text-sm font-bold placeholder:text-slate-500 text-slate-900 dark:text-black"
+                                    placeholder="e.g. Paris, USA, Asia" type="text" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col gap-3">
+                        <div class="flex flex-col gap-1">
+                            <label for="dateStart"
+                                class="text-xs font-black text-slate-700 dark:text-black ml-2 uppercase tracking-wide">Departure
+                                Date</label>
+                            <div class="relative">
+                                <span
+                                    class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary">calendar_today</span>
+                                <input id="dateStart"
+                                    class="w-full pl-12 pr-4 py-4 pill-input border-none focus:ring-4 focus:ring-white/30 text-xs font-bold text-slate-900 dark:text-black"
+                                    type="date" required />
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <label for="dateEnd"
+                                class="text-xs font-black text-slate-700 dark:text-black ml-2 uppercase tracking-wide">Return
+                                Date</label>
+                            <div class="relative">
+                                <span
+                                    class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-primary">event_repeat</span>
+                                <input id="dateEnd"
+                                    class="w-full pl-12 pr-4 py-4 pill-input border-none focus:ring-4 focus:ring-white/30 text-xs font-bold text-slate-900 dark:text-black"
+                                    type="date" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit"
+                        class="w-full btn-pride-yellow font-black py-4 rounded-full shadow-xl flex items-center justify-center gap-3 text-lg active:scale-95 transition-all mt-4 border-b-4 border-orange-600">
+                        <span class="material-symbols-outlined font-black">search</span> Find your Pride
+                    </button>
+                </form>
+            </section>
+
+            <!-- 2. Safe Hotspots Section -->
+            <section id="hotspots-section">
+                <div class="flex justify-between items-end mb-4">
+                    <h3 class="text-xl font-bold inline-block dark-pill"><span class="pride-gradient-text">Safe
+                            Hotspots</span></h3>
+                    <button onclick="showAllHotspots()" class="text-sm text-primary font-bold hover:underline">View
+                        More</button>
+                </div>
+                <div id="hotspotsContainer" class="flex gap-4 overflow-x-auto hide-scrollbar pb-6 -mx-4 px-4 snap-x">
+                    <!-- JS populated -->
+                </div>
+            </section>
+
+            <!-- 3. Trending Pride Events Section -->
+            <section id="trending-events-section" class="pb-12">
+                <h3 class="text-xl font-bold mb-4 inline-block dark-pill"><span class="pride-gradient-text">Trending
+                        Pride Events</span></h3>
+                <div id="eventsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- JS populated -->
+                </div>
+            </section>
+        </div>
+
+        <!-- View 2: Results -->
+        <div id="resultsView" class="view-section space-y-8 pb-32">
+            <!-- Back button for results view -->
+            <button onclick="toggleView('homeView')" class="flex items-center gap-2 text-primary font-bold mb-4">
+                <span class="material-symbols-outlined">arrow_back</span> Back to search
+            </button>
+            <div id="resultsContainer">
+                <!-- Results injected here -->
+            </div>
+        </div>
+
+        <!-- View 3: All Safe Hotspots -->
+        <div id="allHotspotsView" class="view-section space-y-8 pb-32">
+            <!-- Back button for all hotspots view -->
+            <button onclick="toggleView('homeView')" class="flex items-center gap-2 text-primary font-bold mb-4">
+                <span class="material-symbols-outlined">arrow_back</span> Back
+            </button>
+            <h2 class="text-3xl font-black mb-2 inline-block dark-pill"><span class="pride-gradient-text">Explore More
+                    Safe Hotspots</span></h2>
+            <p class="text-slate-500 dark:text-slate-400 dark:text-slate-300 text-sm font-medium mb-6">Discover 20
+                trending LGBTQ+ destinations, events, and
+                neighborhoods across the globe.</p>
+
+            <div id="allHotspotsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Randomized Hotspots injected here -->
+            </div>
+        </div>
+    </main>
+
+
+    <!-- Dark Mode Toggle -->
+    <div class="max-w-5xl mx-auto px-6 mb-8 flex justify-end">
+        <button onclick="toggleDarkMode()"
+            class="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 dark:text-white rounded-full font-bold text-sm shadow-sm transition-colors hover:bg-slate-300 dark:hover:bg-slate-600">
+            <span class="material-symbols-outlined text-sm hidden dark:block">light_mode</span>
+            <span class="material-symbols-outlined text-sm block dark:hidden">dark_mode</span>
+            Toggle Light / Dark View
+        </button>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+            }
+        }
+    </script>
+    <!-- Footer / Legal Section -->
+    <section class="max-w-5xl mx-auto pt-8 pb-12 px-6 border-t border-slate-200 dark:border-slate-700">
+        <h4 class="text-xs font-bold text-slate-700 dark:text-slate-200 mb-4 uppercase tracking-wider">Terms &
+            Conditions and Legal
+            Disclaimer
+        </h4>
+        <div class="space-y-4 text-[10px] leading-relaxed text-slate-500 dark:text-slate-400 dark:text-slate-300">
+            <p><span class="font-bold text-slate-600">1. SCOPE OF SERVICE:</span> This Application curated to prioritize
+                locations that demonstrate established LGBTQ+ inclusivity and maintain robust legislative protections.
+            </p>
+            <p><span class="font-bold text-slate-600">2. GENERAL BOOKING CONDITIONS:</span> All arrangements made
+                through
+                this Application are strictly subject to the terms and conditions of respective third-party vendors.</p>
+            <p><span class="font-bold text-slate-600">3. CANCELLATION FEES:</span> All cancellation policies are
+                determined solely by the individual carrier, hotel, or tour operator. We have no control over these
+                third-party policies.</p>
+            <p><span class="font-bold text-slate-600">4. TRAVEL INSURANCE:</span> Travel insurance is strongly
+                recommended to protect your investment. Failure to purchase insurance may result in a total loss of
+                prepaid funds.</p>
+            <p><span class="font-bold text-slate-600">5. PURPOSE OF DATA COLLECTION:</span> Your email address is
+                collected specifically to provide you with curated updates, including but not limited to:</p>
+            <ul class="list-disc list-inside pl-2 space-y-1 text-slate-500 dark:text-slate-400 dark:text-slate-300">
+                <li><span class="font-semibold text-slate-600">Event Alerts:</span> Updates on upcoming festivals, pride
+                    events, and seasonal gatherings (e.g., Pig Week, Beef Dip, Christmas Markets).</li>
+                <li><span class="font-semibold text-slate-600">Travel &amp; Lodging:</span> Exclusive hotel offers,
+                    circuit party accommodations, and cruise-related promotions.</li>
+                <li><span class="font-semibold text-slate-600">Destination Insights:</span> Information regarding
+                    LGBTQ-friendly travel destinations and local venue recommendations.</li>
+            </ul>
+            <p><span class="font-bold text-slate-600">6. CONSENT &amp; COMMUNICATION:</span> By subscribing, you grant
+                us permission to send automated marketing and informational emails to the address provided. You may
+                opt-out of these communications at any time by clicking the "Unsubscribe" link found at the bottom of
+                our emails or by contacting our support team directly.</p>
+            <p><span class="font-bold text-slate-600">7. PRIVACY &amp; SECURITY:</span> We value your privacy,
+                especially regarding travel preferences and community affiliations.</p>
+            <ul class="list-disc list-inside pl-2 space-y-1 text-slate-500 dark:text-slate-400 dark:text-slate-300">
+                <li><span class="font-semibold text-slate-600">No Third-Party Sales:</span> We do not sell, rent, or
+                    lease our subscription lists to third parties.</li>
+                <li><span class="font-semibold text-slate-600">Secure Storage:</span> Your data is stored using
+                    industry-standard encryption (e.g., Firebase Authentication and Firestore) to protect against
+                    unauthorized access.</li>
+                <li><span class="font-semibold text-slate-600">Service Providers:</span> We may share your email with
+                    trusted service providers (such as email delivery platforms) solely for the purpose of sending these
+                    alerts.</li>
+            </ul>
+            <p class="pt-4 font-medium">© 2026 TravelinPride.com.</p>
+        </div>
+    </section>
+
+    <!-- Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-800/95 backdrop-blur-lg border-t border-primary/10 px-6 py-2 flex justify-between items-center z-50 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]"
+        style="border-top: 3px solid; border-image: linear-gradient(to right, #FF0018, #FFA52C, #FFFF41, #008018, #0000F9, #86007D) 1;">
+        <a href="javascript:void(0)" onclick="toggleView('homeView', this)"
+            class="nav-item flex flex-col items-center gap-1 text-primary active-nav" data-view="homeView">
+            <span class="material-symbols-outlined fill-1">explore</span>
+            <span class="text-[10px] font-black uppercase">Explore</span>
+        </a>
+
+        <div class="relative -top-8">
+            <div
+                class="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white shadow-2xl pride-gradient-bg border-4 border-white">
+                <span class="material-symbols-outlined text-3xl font-black">map</span>
+            </div>
+        </div>
+        <a href="javascript:void(0)"
+            class="nav-item flex flex-col items-center gap-1 text-slate-400 dark:text-slate-300 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined">security</span>
+            <span class="text-[10px] font-black uppercase">Safety</span>
+        </a>
+
+    </nav>
+    <!-- Pride Scout Auth Modal -->
+    <div id="ps-auth-modal-backdrop">
+        <div id="ps-auth-modal">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+                <div
+                    style="background:linear-gradient(90deg,#f20d8f,#86007D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;font-size:1.1rem;">
+                    Pride Scout Account
+                </div>
+                <button onclick="psCloseModal()"
+                    style="background:none;border:none;cursor:pointer;font-size:1.4rem;color:#888;">&#x2715;</button>
+            </div>
+            <div style="display:flex;gap:.5rem;margin-bottom:1.25rem;">
+                <button class="ps-tab active" id="ps-tab-in" onclick="psSwitchTab('in')">Sign In</button>
+                <button class="ps-tab" id="ps-tab-up" onclick="psSwitchTab('up')">Create Account</button>
+            </div>
+            <p id="ps-modal-msg"
+                style="font-size:.82rem;color:#f20d8f;font-weight:600;margin-bottom:.5rem;min-height:1.1rem;"></p>
+            <input class="ps-input" id="ps-auth-name" type="text" placeholder="Your name" style="display:none;" />
+            <input class="ps-input" id="ps-auth-email" type="email" placeholder="Email address" autocomplete="email" />
+            <input class="ps-input" id="ps-auth-pass" type="password" placeholder="Password"
+                autocomplete="current-password" />
+            <a href="#" id="ps-auth-forgot" onclick="psForgotPassword(event)"
+                style="font-size:.8rem;color:#f20d8f;text-decoration:none;display:block;text-align:right;margin-top:.2rem;margin-bottom:.5rem;">Forgot
+                Password?</a>
+            <div id="ps-auth-error" class="ps-error"></div>
+            <button class="ps-btn-primary" id="ps-auth-submit" onclick="psSubmitAuth()">Sign In</button>
+            <div style="text-align:center;color:#ccc;font-size:.8rem;margin:.5rem 0;">or</div>
+            <button class="ps-btn-google" onclick="psGoogleSignIn()">
+                <svg width="18" height="18" viewBox="0 0 48 48">
+                    <path fill="#EA4335"
+                        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.07 17.74 9.5 24 9.5z" />
+                    <path fill="#4285F4"
+                        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                    <path fill="#FBBC05"
+                        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                    <path fill="#34A853"
+                        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-3.57-13.46-8.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+                </svg>
+                Continue with Google
+            </button>
+        </div>
+    </div>
+
+    <!-- Saved Trips Panel -->
+    <div id="ps-trips-panel" onclick="psCloseTripPanel(event)">
+        <div id="ps-trips-inner">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+                <h2
+                    style="font-weight:900;font-size:1.1rem;background:linear-gradient(90deg,#f20d8f,#86007D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+                    My Saved Trips
+                </h2>
+                <button onclick="psTripPanel(false)"
+                    style="background:none;border:none;cursor:pointer;font-size:1.3rem;color:#888;">&#x2715;</button>
+            </div>
+            <div id="ps-trips-list">
+                <p style="color:#aaa;font-size:.9rem;text-align:center;padding:2rem 0;">No saved trips yet. Search for a
+                    destination and tap Save Trip!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- User menu button (rendered by JS) -->
+    <div id="ps-user-menu-wrap"></div>
+
+    <script>
+        (function () {
+            const FB_CFG = {
+                apiKey: "AIzaSyBr8E41ny_oPeQ5pjrpwuRS-Ub1pZNUhUc",
+                authDomain: "pride-scout-26f4e.firebaseapp.com",
+                projectId: "pride-scout-26f4e",
+                storageBucket: "pride-scout-26f4e.firebasestorage.app",
+                messagingSenderId: "402384469695",
+                appId: "1:402384469695:web:13fa09d6c9c287d8c3100a",
+                measurementId: "G-7SHNRD677F"
+            };
+            firebase.initializeApp(FB_CFG);
+            const auth = firebase.auth();
+            const db = firebase.firestore();
+            let currentUser = null;
+            let savedTripIds = new Set();
+            let savedTripDocIds = new Map();
+
+            // Auth state
+            auth.onAuthStateChanged(async (user) => {
+                currentUser = user;
+                renderUserBtn(user);
+                if (user) {
+                    await refreshSavedIds();
+
+                    const params = new URLSearchParams(window.location.search);
+                    const shareId = params.get('shareId');
+                    if (shareId) {
+                        try {
+                            const sharedSnap = await db.collection('shared_trips').doc(shareId).get();
+                            if (sharedSnap.exists) {
+                                const st = sharedSnap.data();
+                                const tripsSnap = await db.collection('users').doc(user.uid).collection('trips').where('shareId', '==', shareId).get();
+                                if (tripsSnap.empty) {
+                                    await db.collection('users').doc(user.uid).collection('trips').add({
+                                        destination: st.destination,
+                                        departure: st.departure,
+                                        dateStart: st.dateStart,
+                                        dateEnd: st.dateEnd,
+                                        tripKey: st.tripKey,
+                                        createdAt: Date.now(),
+                                        savedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                                        shareId: shareId
+                                    });
+                                    alert("You have joined the collaborative trip to " + st.destination + "!");
+                                    await refreshSavedIds();
+                                }
+                                window.history.replaceState({}, document.title, window.location.pathname);
+                            } else {
+                                alert("This shared trip no longer exists.");
+                                window.history.replaceState({}, document.title, window.location.pathname);
+                            }
+                        } catch (e) { console.error("Error joining shared trip", e); }
+                    }
+
+                    refreshSaveButtons();
+                }
+                else { savedTripIds.clear(); refreshSaveButtons(); }
+            });
+
+            async function refreshSavedIds() {
+                if (!currentUser) return;
+                const snap = await db.collection('users').doc(currentUser.uid).collection('trips').get();
+                savedTripIds.clear();
+                savedTripDocIds.clear();
+                snap.docs.forEach(d => {
+                    savedTripIds.add(d.data().tripKey);
+                    savedTripDocIds.set(d.data().tripKey, d.id);
+                });
+            }
+
+            function getUserInitials(user) {
+                if (!user) return '?';
+                let initials = '?';
+                if (user.displayName) {
+                    const parts = user.displayName.trim().split(/[\s.]+/);
+                    if (parts.length >= 2) {
+                        initials = (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+                    } else if (parts[0].length >= 2) {
+                        initials = parts[0].slice(0, 2).toUpperCase();
+                    } else if (parts[0].length === 1) {
+                        initials = parts[0].toUpperCase();
+                    }
+                } else if (user.email) {
+                    initials = user.email.slice(0, 2).toUpperCase();
+                }
+                return initials;
+            }
+
+            // Header user button
+            function renderUserBtn(user) {
+                const wrap = document.getElementById('ps-user-menu-wrap');
+                if (!wrap) return;
+                if (user) {
+                    let initials = getUserInitials(user);
+
+                    wrap.innerHTML = `
+            <button id="ps-user-btn" onclick="psToggleDropdown()">
+              <span style="width:1.4rem;height:1.4rem;border-radius:50%;background:rgba(255,255,255,.3);
+                display:inline-flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:900;">
+                ${initials}
+              </span>
+            </button>
+            <div id="ps-user-dropdown">
+              <div class="ps-dd-item" onclick="psTripPanel(true)">&#128278; My Saved Trips</div>
+              <div class="ps-dd-item" onclick="psSignOut()" style="color:#e11d48;">&#128075; Sign Out</div>
+            </div>`;
+                } else {
+                    wrap.innerHTML = `<button id="ps-user-btn" onclick="psOpenModal()">&#127987;&#65039;&#8205;&#127752; Sign In</button>`;
+                }
+            }
+
+            window.psToggleDropdown = function () {
+                document.getElementById('ps-user-dropdown')?.classList.toggle('open');
+            };
+            document.addEventListener('click', e => {
+                if (!e.target.closest('#ps-user-menu-wrap'))
+                    document.getElementById('ps-user-dropdown')?.classList.remove('open');
+            });
+
+            // Modal helpers
+            window.psOpenModal = function (msg) {
+                document.getElementById('ps-auth-modal-backdrop').classList.add('open');
+                if (msg) document.getElementById('ps-modal-msg').textContent = msg;
+                setTimeout(() => document.getElementById('ps-auth-email')?.focus(), 50);
+            };
+            window.psCloseModal = function () {
+                document.getElementById('ps-auth-modal-backdrop').classList.remove('open');
+                document.getElementById('ps-auth-error').textContent = '';
+                document.getElementById('ps-modal-msg').textContent = '';
+            };
+            window.psSwitchTab = function (tab) {
+                const isUp = tab === 'up';
+                document.getElementById('ps-tab-in').className = 'ps-tab' + (isUp ? '' : ' active');
+                document.getElementById('ps-tab-up').className = 'ps-tab' + (isUp ? ' active' : '');
+                document.getElementById('ps-auth-name').style.display = isUp ? 'block' : 'none';
+                document.getElementById('ps-auth-submit').textContent = isUp ? 'Create Account' : 'Sign In';
+                document.getElementById('ps-auth-pass').autocomplete = isUp ? 'new-password' : 'current-password';
+                const forgotEl = document.getElementById('ps-auth-forgot');
+                if (forgotEl) forgotEl.style.display = isUp ? 'none' : 'block';
+                document.getElementById('ps-auth-error').textContent = '';
+            };
+            window.psForgotPassword = async function (e) {
+                e.preventDefault();
+                const email = document.getElementById('ps-auth-email').value.trim();
+                const errEl = document.getElementById('ps-auth-error');
+                if (!email) {
+                    errEl.style.color = '#e11d48';
+                    errEl.textContent = 'Please enter your email address first.';
+                    return;
+                }
+                errEl.textContent = '';
+                try {
+                    await auth.sendPasswordResetEmail(email);
+                    errEl.style.color = '#15803d'; // Green for success
+                    errEl.textContent = 'Password reset email sent. Check your inbox.';
+                    setTimeout(() => errEl.style.color = '#e11d48', 5000); // Reset color
+                } catch (err) {
+                    errEl.style.color = '#e11d48';
+                    errEl.textContent = (err.message || '').replace('Firebase: ', '').replace(/ \(auth\/[^)]+\)/, '');
+                }
+            };
+
+            window.psSubmitAuth = async function () {
+                const email = document.getElementById('ps-auth-email').value.trim();
+                const pass = document.getElementById('ps-auth-pass').value;
+                const name = document.getElementById('ps-auth-name').value.trim();
+                const isUp = document.getElementById('ps-tab-up').classList.contains('active');
+                const errEl = document.getElementById('ps-auth-error');
+                errEl.textContent = '';
+                try {
+                    if (isUp) {
+                        const cred = await auth.createUserWithEmailAndPassword(email, pass);
+                        if (name) await cred.user.updateProfile({ displayName: name });
+                        await db.collection('users').doc(cred.user.uid).set({
+                            email, displayName: name || '', createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        }, { merge: true });
+                    } else {
+                        await auth.signInWithEmailAndPassword(email, pass);
+                    }
+                    psCloseModal();
+                } catch (e) {
+                    errEl.textContent = (e.message || '').replace('Firebase: ', '').replace(/ \(auth\/[^)]+\)/, '');
+                }
+            };
+            window.psGoogleSignIn = async function () {
+                const provider = new firebase.auth.GoogleAuthProvider();
+                try {
+                    const cred = await auth.signInWithPopup(provider);
+                    await db.collection('users').doc(cred.user.uid).set({
+                        email: cred.user.email, displayName: cred.user.displayName || '',
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    }, { merge: true });
+                    psCloseModal();
+                } catch (e) {
+                    document.getElementById('ps-auth-error').textContent = (e.message || '').replace('Firebase: ', '').replace(/ \(auth\/[^)]+\)/, '');
+                }
+            };
+            window.psSignOut = async function () {
+                await auth.signOut();
+                document.getElementById('ps-user-dropdown')?.classList.remove('open');
+            };
+
+            // Save Trip
+            window.psSaveTrip = async function (dest, dep, ds, de, btnEl) {
+                if (!currentUser) { psOpenModal('Sign in to save trips!'); return; }
+                const key = [dest, dep, ds, de].join('|');
+                if (savedTripIds.has(key)) return;
+                const docRef = await db.collection('users').doc(currentUser.uid).collection('trips').add({
+                    destination: dest, departure: dep, dateStart: ds, dateEnd: de,
+                    tripKey: key, savedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    bookmarks: []
+                });
+                savedTripIds.add(key);
+                savedTripDocIds.set(key, docRef.id);
+                if (btnEl) { btnEl.classList.add('saved'); btnEl.innerHTML = '&#10003; Saved!'; }
+            };
+
+            window.psBookmarkPlace = async function (placeName, placeType, dest, dep, ds, de, btnEl) {
+                if (!currentUser) { psOpenModal('Sign in to save bookmarks!'); return; }
+                const key = [dest, dep, ds, de].join('|');
+
+                let docId = savedTripDocIds.get(key);
+                if (!docId) {
+                    const docRef = await db.collection('users').doc(currentUser.uid).collection('trips').add({
+                        destination: dest, departure: dep, dateStart: ds, dateEnd: de,
+                        tripKey: key, savedAt: firebase.firestore.FieldValue.serverTimestamp(),
+                        bookmarks: []
+                    });
+                    savedTripIds.add(key);
+                    savedTripDocIds.set(key, docRef.id);
+                    docId = docRef.id;
+                    refreshSaveButtons();
+                }
+
+                const initials = getUserInitials(currentUser);
+                const updateObj = { bookmarks: firebase.firestore.FieldValue.arrayUnion({ name: placeName, type: placeType, addedBy: initials }) };
+
+                const tSnap = await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).get();
+                if (tSnap.exists && tSnap.data().shareId) {
+                    try { await db.collection('shared_trips').doc(tSnap.data().shareId).set(updateObj, { merge: true }); }
+                    catch (e) { console.error(e); }
+                }
+
+                await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).set(updateObj, { merge: true });
+
+                if (btnEl) {
+                    btnEl.innerHTML = '<span class="material-symbols-outlined text-[14px]">bookmark_added</span>';
+                    btnEl.classList.add('text-pride-green');
+                    btnEl.classList.remove('text-slate-400');
+                    btnEl.classList.remove('hover:bg-slate-200');
+                    btnEl.disabled = true;
+                    if (btnEl.title) btnEl.title = 'Saved to trip';
+                }
+            };
+
+            window.psAddNote = async function (docId, inputId) {
+                if (!currentUser) return;
+                const inputEl = document.getElementById(inputId);
+                if (!inputEl) return;
+                const noteText = inputEl.value.trim();
+                if (!noteText) return;
+
+                const initials = getUserInitials(currentUser);
+                const newNote = {
+                    text: noteText,
+                    addedAt: Date.now(),
+                    addedBy: initials
+                };
+
+                const updateObj = { notes: firebase.firestore.FieldValue.arrayUnion(newNote) };
+
+                const tSnap = await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).get();
+                if (tSnap.exists && tSnap.data().shareId) {
+                    try { await db.collection('shared_trips').doc(tSnap.data().shareId).set(updateObj, { merge: true }); }
+                    catch (e) { console.error(e); }
+                }
+
+                await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).set(updateObj, { merge: true });
+
+                inputEl.value = '';
+                psLoadTrips();
+            };
+
+            window.psSaveBookingInfo = async function (docId, type, inputId) {
+                if (!currentUser) return;
+                const inputEl = document.getElementById(inputId);
+                if (!inputEl) return;
+                const val = inputEl.value.trim();
+
+                const updateObj = {};
+                updateObj[`bookingInfo_${type}`] = val;
+
+                const tSnap = await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).get();
+                if (tSnap.exists && tSnap.data().shareId) {
+                    try { await db.collection('shared_trips').doc(tSnap.data().shareId).set(updateObj, { merge: true }); }
+                    catch (e) { console.error(e); }
+                }
+
+                await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).set(updateObj, { merge: true });
+
+                const oldBtnHTML = inputEl.nextElementSibling.innerHTML;
+                inputEl.nextElementSibling.innerHTML = '&#10003;';
+                inputEl.nextElementSibling.style.background = '#10b981';
+                inputEl.nextElementSibling.style.color = '#fff';
+                setTimeout(() => {
+                    inputEl.nextElementSibling.innerHTML = oldBtnHTML;
+                    inputEl.nextElementSibling.style.background = '#eee';
+                    inputEl.nextElementSibling.style.color = '#333';
+                }, 1000);
+            };
+
+            window.psDeleteNote = async function (docId, noteObjStr) {
+                if (!currentUser) return;
+                try {
+                    const noteObj = JSON.parse(decodeURIComponent(noteObjStr));
+                    const updateObj = { notes: firebase.firestore.FieldValue.arrayRemove(noteObj) };
+
+                    const tSnap = await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).get();
+                    if (tSnap.exists && tSnap.data().shareId) {
+                        try { await db.collection('shared_trips').doc(tSnap.data().shareId).update(updateObj); }
+                        catch (e) { console.error(e); }
+                    }
+
+                    await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).update(updateObj);
+                    psLoadTrips();
+                } catch (e) {
+                    console.error("Error deleting note", e);
+                }
+            };
+
+            window.psEmailTrip = async function (e, origin, dest, start, end, weather, lgbtqSafety) {
+                e.preventDefault();
+                const subject = `Trip Idea: ${dest} for Pride Travel`;
+                const gFlights = `https://www.google.com/travel/flights?q=${encodeURIComponent(origin + ' to ' + dest + ' ' + start)}`;
+                let body = `Hey,\n\nI found a great trip idea using Pride Travel Scout!\n\nDestination: ${dest}\nDates: ${start} to ${end}\nFrom: ${origin}\n\nWeather: ${weather}\nLGBTQ Safety: ${lgbtqSafety}\n\nCheck out flights:\nGoogle Flights: ${gFlights}\n\n`;
+
+                const key = [dest, origin, start, end].join('|');
+                let bookmarksText = '';
+                let notesText = '';
+
+                if (currentUser && savedTripDocIds && savedTripDocIds.has(key)) {
+                    const docId = savedTripDocIds.get(key);
+                    try {
+                        const doc = await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).get();
+                        if (doc.exists) {
+                            const t = doc.data();
+                            if (t.bookmarks && t.bookmarks.length > 0) {
+                                bookmarksText = "Bookmarked Places:\n" + t.bookmarks.map(b => `- ${b.name} (${b.type})`).join('\n') + "\n\n";
+                            }
+                            if (t.notes && t.notes.length > 0) {
+                                notesText = "Notes:\n" + t.notes.map(n => `- ${n.text}`).join('\n') + "\n\n";
+                            }
+                            if (t.note) {
+                                notesText += "Notes:\n" + t.note + "\n\n";
+                            }
+                        }
+                    } catch (err) { console.error("Error fetching trip for email", err); }
+                }
+
+                body += bookmarksText + notesText + `Sent from Pride Travel Scout`;
+                window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            };
+
+            window.psSmsTrip = async function (e, origin, dest, start, end, weather, lgbtqSafety) {
+                e.preventDefault();
+                const gFlights = `https://www.google.com/travel/flights?q=${encodeURIComponent(origin + ' to ' + dest + ' ' + start)}`;
+                let body = `Trip Idea from Pride Travel Scout!\n\nDestination: ${dest}\nDates: ${start} to ${end}\nFrom: ${origin}\n\nWeather: ${weather}\nLGBTQ Safety: ${lgbtqSafety}\n\nGoogle Flights: ${gFlights}\n\n`;
+
+                const key = [dest, origin, start, end].join('|');
+                let bookmarksText = '';
+                let notesText = '';
+
+                if (currentUser && savedTripDocIds && savedTripDocIds.has(key)) {
+                    const docId = savedTripDocIds.get(key);
+                    try {
+                        const doc = await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).get();
+                        if (doc.exists) {
+                            const t = doc.data();
+                            if (t.bookmarks && t.bookmarks.length > 0) {
+                                bookmarksText = "Bookmarks:\n" + t.bookmarks.map(b => `- ${b.name}`).join('\n') + "\n\n";
+                            }
+                            if (t.notes && t.notes.length > 0) {
+                                notesText = "Notes:\n" + t.notes.map(n => `- ${n.text}`).join('\n') + "\n\n";
+                            }
+                            if (t.note) {
+                                notesText += "Notes:\n" + t.note + "\n\n";
+                            }
+                        }
+                    } catch (err) { console.error("Error fetching trip for SMS", err); }
+                }
+
+                body += bookmarksText + notesText;
+
+                // Detect iOS vs Android/Others for SMS link format
+                const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+                const separator = isIOS ? '&' : '?';
+                window.location.href = `sms:${separator}body=${encodeURIComponent(body)}`;
+            };
+
+            window.psShareTrip = async function (docId, tripKey) {
+                if (!currentUser) return;
+                try {
+                    const docRef = db.collection('users').doc(currentUser.uid).collection('trips').doc(docId);
+                    const docSnap = await docRef.get();
+                    if (!docSnap.exists) return;
+                    let t = docSnap.data();
+
+                    let shareId = t.shareId;
+                    if (!shareId) {
+                        const sharedRef = await db.collection('shared_trips').add({
+                            ...t,
+                            sharedBy: currentUser.uid,
+                            sharedAt: Date.now()
+                        });
+                        shareId = sharedRef.id;
+                        await docRef.update({ shareId: shareId });
+                    }
+
+                    const shareUrl = window.location.href.split('?')[0] + '?shareId=' + shareId;
+                    navigator.clipboard.writeText(shareUrl).then(() => {
+                        alert("Trip is now Collaborative!\n\nCopied to clipboard!\nShare this link with friends so they can add notes and bookmarks:\n\n" + shareUrl);
+                    }).catch(err => {
+                        console.error('Failed to copy', err);
+                        alert("Trip is now Collaborative!\nShare this link with friends so they can add notes and bookmarks:\n\n" + shareUrl);
+                    });
+                    psLoadTrips();
+                } catch (e) {
+                    console.error("Error sharing trip", e);
+                    if (e.code === 'permission-denied') {
+                        alert("Permission Denied: You need to update your Firebase Security Rules in the Firebase Console to allow access to the 'shared_trips' collection.");
+                    } else {
+                        alert("Error creating shared trip. Check console.");
+                    }
+                }
+            };
+
+            function refreshSaveButtons() {
+                document.querySelectorAll('.ps-save-btn[data-trip-key]').forEach(btn => {
+                    if (savedTripIds.has(btn.dataset.tripKey)) {
+                        btn.classList.add('saved'); btn.innerHTML = '&#10003; Saved!';
+                    } else {
+                        btn.classList.remove('saved'); btn.innerHTML = '&#128278; Save Trip';
+                    }
+                });
+            }
+
+            // Trips panel
+            window.psTripPanel = function (open) {
+                document.getElementById('ps-trips-panel').classList[open ? 'add' : 'remove']('open');
+                document.getElementById('ps-user-dropdown')?.classList.remove('open');
+                if (open) psLoadTrips();
+            };
+            window.psCloseTripPanel = function (e) {
+                if (e.target === document.getElementById('ps-trips-panel')) psTripPanel(false);
+            };
+            async function psLoadTrips() {
+                if (!currentUser) return;
+                const list = document.getElementById('ps-trips-list');
+                list.innerHTML = '<p style="color:#aaa;text-align:center;padding:1rem;">Loading...</p>';
+                try {
+                    const snap = await db.collection('users').doc(currentUser.uid)
+                        .collection('trips').orderBy('savedAt', 'desc').get();
+                    if (snap.empty) {
+                        list.innerHTML = '<p style="color:#aaa;font-size:.9rem;text-align:center;padding:2rem 0;">No saved trips yet.</p>';
+                        return;
+                    }
+                    const HTMLs = await Promise.all(snap.docs.map(async doc => {
+                        const t = doc.data();
+
+                        if (t.shareId) {
+                            try {
+                                const sharedSnap = await db.collection('shared_trips').doc(t.shareId).get();
+                                if (sharedSnap.exists) {
+                                    const st = sharedSnap.data();
+                                    t.notes = st.notes || [];
+                                    t.bookmarks = st.bookmarks || [];
+                                    t.bookingInfo_flight = st.bookingInfo_flight || t.bookingInfo_flight;
+                                    t.bookingInfo_hotel = st.bookingInfo_hotel || t.bookingInfo_hotel;
+                                    t.bookingInfo_tour = st.bookingInfo_tour || t.bookingInfo_tour;
+                                }
+                            } catch (e) { console.error("Could not fetch shared contents", e); }
+                        }
+
+                        const dateStr = (t.dateStart && t.dateEnd) ? t.dateStart + ' to ' + t.dateEnd : '';
+                        let bookmarksHtml = '';
+                        if (t.bookmarks && t.bookmarks.length > 0) {
+                            bookmarksHtml = '<div style="margin-top:.5rem; font-size:.8rem; background:rgba(0,0,0,0.02); padding:.5rem; border-radius:6px;">' +
+                                '<div style="font-weight:bold; margin-bottom:.2rem; color:#f20d8f; display:flex; align-items:center; gap:4px;">' +
+                                '<span class="material-symbols-outlined" style="font-size:14px;">bookmarks</span> Bookmarked Places</div>' +
+                                '<ul style="list-style:none; padding:0; margin:0; color:#444;">' +
+                                t.bookmarks.map(b => '<li style="margin-bottom:.2rem; display:flex; align-items:center; gap:4px;"><span class="material-symbols-outlined" style="color:#aaa; font-size:12px;">fiber_manual_record</span> <strong>' + b.name + '</strong> <span style="font-size:.7rem; color:#888;">(' + b.type + ')</span>' + (b.addedBy ? '<span style="font-size:.6rem; color:#fff; background:linear-gradient(90deg,#f20d8f,#86007D); padding:2px 5px; border-radius:99px; font-weight:bold; margin-left:4px;">' + b.addedBy + '</span>' : '') + '</li>').join('') +
+                                '</ul></div>';
+                        }
+                        let notesHtml = '';
+                        if (t.notes && t.notes.length > 0) {
+                            notesHtml = '<div style="margin-top:.5rem; font-size:.8rem; background:rgba(0,0,0,0.02); padding:.5rem; border-radius:6px;">' +
+                                '<div style="font-weight:bold; margin-bottom:.4rem; color:#f20d8f; display:flex; align-items:center; gap:4px;">' +
+                                '<span class="material-symbols-outlined" style="font-size:14px;">notes</span> Saved Notes</div>' +
+                                '<ul style="list-style:none; padding:0; margin:0; color:#444;">' +
+                                t.notes.map(n => {
+                                    const dateStr = new Date(n.addedAt).toLocaleDateString();
+                                    const noteObjStr = encodeURIComponent(JSON.stringify(n));
+                                    const addedByHtml = n.addedBy ? '<span style="font-size:.6rem; color:#fff; background:linear-gradient(90deg,#f20d8f,#86007D); padding:2px 5px; border-radius:99px; font-weight:bold;">' + n.addedBy + '</span>' : '';
+                                    return '<li style="margin-bottom:.3rem; display:flex; justify-content:space-between; align-items:flex-start; gap:4px; background:#fff; padding:6px; border-radius:4px; border:1px solid #eee;">' +
+                                        '<div style="flex:1; word-break:break-word;">' +
+                                        '<div style="display:flex; align-items:center; gap:6px; margin-bottom:2px;"><span style="font-size:9px; font-weight:bold; text-transform:uppercase; color:#888;">' + dateStr + '</span>' + addedByHtml + '</div>' +
+                                        '<span>' + n.text + '</span>' +
+                                        '</div>' +
+                                        '<button onclick="psDeleteNote(\'' + doc.id + '\', \'' + noteObjStr + '\')" title="Delete Note" style="background:none; border:none; color:#e11d48; cursor:pointer; padding:0; margin-left:4px; opacity:0.6; transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">' +
+                                        '<span class="material-symbols-outlined" style="font-size:16px;">delete</span></button>' +
+                                        '</li>';
+                                }).join('') +
+                                '</ul></div>';
+                        }
+
+                        return '<div class="ps-trip-card" style="flex-direction:column; align-items:stretch; gap:.5rem;">'
+                            + '<div style="display:flex; justify-content:space-between; align-items:flex-start;">'
+                            + '<div style="flex:1;">'
+                            + '<div style="font-weight:800;font-size:.95rem;margin-bottom:.2rem;color:#000;">' + (t.shareId ? '<span class="material-symbols-outlined" style="font-size:1rem;color:#f20d8f;margin-right:4px;">group</span>' : '&#9992;&#65039; ')
+                            + (t.departure || '?') + ' &#8594; ' + t.destination + '</div>'
+                            + (dateStr ? '<div style="font-size:.8rem;color:#333;margin-bottom:.4rem;">&#128197; ' + dateStr + '</div>' : '')
+                            + '<button onclick="psReSearch(\'' + t.destination + '\',\'' + (t.departure || '') + '\',\'' + (t.dateStart || '') + '\',\'' + (t.dateEnd || '') + '\')"'
+                            + ' style="font-size:.75rem;font-weight:700;background:linear-gradient(90deg,#f20d8f,#86007D);color:#fff;border:none;border-radius:999px;padding:.3rem .75rem;cursor:pointer;font-family:inherit;margin-right:.5rem;">'
+                            + '&#128269; Search Again</button>'
+                            + '<button onclick="psEmailTrip(event, \'' + (t.departure || '') + '\', \'' + t.destination + '\', \'' + (t.dateStart || '') + '\', \'' + (t.dateEnd || '') + '\', \'Varies\', \'Varies\')"'
+                            + ' style="font-size:.75rem;font-weight:700;background:#e5e7eb;color:#374151;border:none;border-radius:999px;padding:.3rem .75rem;cursor:pointer;font-family:inherit;margin-right:.5rem;">'
+                            + '&#x1F4E7; Email</button>'
+                            + '<button onclick="psSmsTrip(event, \'' + (t.departure || '') + '\', \'' + t.destination + '\', \'' + (t.dateStart || '') + '\', \'' + (t.dateEnd || '') + '\', \'Varies\', \'Varies\')"'
+                            + ' style="font-size:.75rem;font-weight:700;background:#e5e7eb;color:#374151;border:none;border-radius:999px;padding:.3rem .75rem;cursor:pointer;font-family:inherit;margin-right:.5rem;">'
+                            + '&#128241; Text</button>'
+                            + '<button onclick="psShareTrip(\'' + doc.id + '\', \'' + t.tripKey + '\')"'
+                            + ' style="font-size:.75rem;font-weight:700;background:#e5e7eb;color:#374151;border:none;border-radius:999px;padding:.3rem .75rem;cursor:pointer;font-family:inherit;">'
+                            + '&#128101; Collaborate</button>'
+                            + '</div>'
+                            + '<button onclick="psDeleteTrip(\'' + doc.id + '\',\'' + t.tripKey + '\')" title="Remove" style="background:none;border:none;cursor:pointer;color:#e11d48;font-size:1.1rem;">&#128465;&#65039;</button>'
+                            + '</div>'
+                            + bookmarksHtml
+                            + notesHtml
+                            + '<div style="margin-top:.5rem; font-size:.8rem; background:rgba(0,0,0,0.02); padding:.5rem; border-radius:6px;">'
+                            + '<div style="font-weight:bold; margin-bottom:.4rem; color:#f20d8f; display:flex; align-items:center; gap:4px;">'
+                            + '<span class="material-symbols-outlined" style="font-size:14px;">airplane_ticket</span> Booking Details</div>'
+                            + '<div style="display:flex; flex-direction:column; gap:6px;">'
+                            + '<div style="display:flex; align-items:center; gap:6px;">'
+                            + '<span class="material-symbols-outlined" title="Flight" style="font-size:16px; width:20px; text-align:center; color:#555;">flight_takeoff</span>'
+                            + '<input type="text" id="booking-flight-' + doc.id + '" placeholder="Flight details..." value="' + (t.bookingInfo_flight || '').replace(/"/g, '&quot;') + '" style="flex:1; border:1px solid #ccc; border-radius:4px; padding:.3rem .5rem; font-size:.75rem; font-family:inherit; outline:none; color:#333;">'
+                            + '<button onclick="psSaveBookingInfo(\'' + doc.id + '\', \'flight\', \'booking-flight-' + doc.id + '\')" style="background:#eee;color:#333;border:none;border-radius:4px;padding:.3rem .5rem;font-size:.7rem;font-weight:bold;cursor:pointer;">Save</button>'
+                            + '</div>'
+                            + '<div style="display:flex; align-items:center; gap:6px;">'
+                            + '<span class="material-symbols-outlined" title="Hotel" style="font-size:16px; width:20px; text-align:center; color:#555;">hotel</span>'
+                            + '<input type="text" id="booking-hotel-' + doc.id + '" placeholder="Hotel details..." value="' + (t.bookingInfo_hotel || '').replace(/"/g, '&quot;') + '" style="flex:1; border:1px solid #ccc; border-radius:4px; padding:.3rem .5rem; font-size:.75rem; font-family:inherit; outline:none; color:#333;">'
+                            + '<button onclick="psSaveBookingInfo(\'' + doc.id + '\', \'hotel\', \'booking-hotel-' + doc.id + '\')" style="background:#eee;color:#333;border:none;border-radius:4px;padding:.3rem .5rem;font-size:.7rem;font-weight:bold;cursor:pointer;">Save</button>'
+                            + '</div>'
+                            + '<div style="display:flex; align-items:center; gap:6px;">'
+                            + '<span class="material-symbols-outlined" title="Tour" style="font-size:16px; width:20px; text-align:center; color:#555;">explore</span>'
+                            + '<input type="text" id="booking-tour-' + doc.id + '" placeholder="Tour details..." value="' + (t.bookingInfo_tour || '').replace(/"/g, '&quot;') + '" style="flex:1; border:1px solid #ccc; border-radius:4px; padding:.3rem .5rem; font-size:.75rem; font-family:inherit; outline:none; color:#333;">'
+                            + '<button onclick="psSaveBookingInfo(\'' + doc.id + '\', \'tour\', \'booking-tour-' + doc.id + '\')" style="background:#eee;color:#333;border:none;border-radius:4px;padding:.3rem .5rem;font-size:.7rem;font-weight:bold;cursor:pointer;">Save</button>'
+                            + '</div></div></div>'
+                            + '<div style="margin-top:.5rem; display:flex; gap:6px;">'
+                            + '<input type="text" id="note-input-' + doc.id + '" placeholder="e.g. Meet friends at 8PM" '
+                            + 'style="flex:1; border:1px solid #ccc; border-radius:6px; padding:.4rem .6rem; font-size:.8rem; font-family:inherit; outline:none; color:#333; box-sizing:border-box;">'
+                            + '<button onclick="psAddNote(\'' + doc.id + '\', \'note-input-' + doc.id + '\')" '
+                            + 'style="background:linear-gradient(90deg,#f20d8f,#86007D);color:#fff;border:none;border-radius:6px;padding:.4rem .75rem;font-size:.8rem;font-weight:bold;cursor:pointer;font-family:inherit;">Save Note</button>'
+                            + '</div>'
+                            + '</div>';
+                    }));
+                    list.innerHTML = HTMLs.join('');
+                } catch (e) { list.innerHTML = '<p style="color:#e11d48;font-size:.85rem;text-align:center;">Error loading trips.</p>'; }
+            }
+            window.psDeleteTrip = async function (docId, key) {
+                await db.collection('users').doc(currentUser.uid).collection('trips').doc(docId).delete();
+                savedTripIds.delete(key); refreshSaveButtons(); psLoadTrips();
+            };
+            window.psReSearch = function (dest, dep, ds, de) {
+                psTripPanel(false);
+                const get = id => document.getElementById(id);
+                let searchDest = dest ? dest.split(',')[0].trim() : '';
+
+                if (dest && typeof window.DATABASE !== 'undefined') {
+                    const normalized = searchDest.toLowerCase();
+                    if (window.DATABASE.mappings && window.DATABASE.mappings.cities && window.DATABASE.mappings.cities[normalized]) {
+                        const codes = window.DATABASE.mappings.cities[normalized];
+                        if (codes && codes.length > 0) {
+                            searchDest = codes[0].toUpperCase();
+                        }
+                    } else if (window.DATABASE.details) {
+                        const match = Object.values(window.DATABASE.details).find(d => d.name === dest || d.name.toLowerCase().startsWith(normalized));
+                        if (match && match.iata) {
+                            searchDest = match.iata;
+                        }
+                    }
+                }
+
+                if (get('destination')) get('destination').value = searchDest;
+                if (get('departure') && dep) get('departure').value = dep;
+                if (get('dateStart') && ds) get('dateStart').value = ds;
+                if (get('dateEnd') && de) get('dateEnd').value = de;
+                const form = get('searchForm');
+                if (form) form.dispatchEvent(new Event('submit'));
+            };
+
+            // Called by result card rendering
+            window.psMakeSaveBtn = function (dest, dep, ds, de) {
+                const key = [dest, dep, ds, de].join('|');
+                const saved = savedTripIds.has(key);
+                return '<button class="ps-save-btn' + (saved ? ' saved' : '') + '" data-trip-key="' + key + '"'
+                    + ' onclick="psSaveTrip(\'' + dest + '\',\'' + dep + '\',\'' + ds + '\',\'' + de + '\',this)">'
+                    + (saved ? '&#10003; Saved!' : '&#128278; Save Trip') + '</button>';
+            };
+
+            renderUserBtn(null); // show Sign In immediately
+        })();
+    </script>
+
+    <script src="destinations.js"></script>
+    <script>
+
+        (function () {
+            // Standalone mode IDs matching HTML
+            const CONTAINER_ID = '';
+
+            // --- VIEW MANAGEMENT ---
+            window.toggleView = function (viewId, navEl = null) {
+                const views = document.querySelectorAll('.view-section');
+                views.forEach(v => v.classList.remove('active'));
+                const target = document.getElementById(viewId);
+                if (target) {
+                    target.classList.add('active');
+                    window.scrollTo(0, 0);
+                }
+
+                // Update Bottom Nav state
+                if (navEl) {
+                    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('text-primary', 'active-nav'));
+                    document.querySelectorAll('.nav-item').forEach(n => n.classList.add('text-slate-400 dark:text-slate-300'));
+                    navEl.classList.remove('text-slate-400 dark:text-slate-300');
+                    navEl.classList.add('text-primary', 'active-nav');
+                }
+            };
+
+            window.showView = function (viewId) {
+                toggleView(viewId);
+            };
+
+            window.quickSearch = function (cityName, start, end) {
+                const destInput = document.getElementById('destination');
+                const dateStartInput = document.getElementById('dateStart');
+                const dateEndInput = document.getElementById('dateEnd');
+                const departureInput = document.getElementById('departure');
+
+                if (destInput) destInput.value = cityName;
+
+                if (start && dateStartInput && dateEndInput) {
+                    // Event logic: pre-fill suggested departure (event start - 1) and return (event end + 1)
+                    // These are one-time defaults — changing departure afterward does NOT recalculate return
+                    try {
+                        const parts = start.split('-');
+                        const sDate = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+
+                        const endParts = (end || start).split('-');
+                        const eDate = new Date(parseInt(endParts[0], 10), parseInt(endParts[1], 10) - 1, parseInt(endParts[2], 10));
+
+                        // Suggest: 1 day before event start
+                        sDate.setDate(sDate.getDate() - 1);
+                        // Suggest: 1 day after event end
+                        eDate.setDate(eDate.getDate() + 1);
+
+                        const formatDate = (d) => {
+                            const yyyy = d.getFullYear();
+                            const mm = String(d.getMonth() + 1).padStart(2, '0');
+                            const dd = String(d.getDate()).padStart(2, '0');
+                            return `${yyyy}-${mm}-${dd}`;
+                        };
+
+                        dateStartInput.value = formatDate(sDate);
+                        dateEndInput.value = formatDate(eDate);
+                    } catch (e) {
+                        console.error("QuickSearch date error", e);
+                    }
+                }
+
+                // Always check if form is complete before searching
+                const isComplete = departureInput?.value && dateStartInput?.value && dateEndInput?.value;
+                if (isComplete) {
+                    const searchForm = document.getElementById('searchForm');
+                    if (searchForm) searchForm.dispatchEvent(new Event('submit'));
+                } else {
+                    // Not complete: go home so user can fill in missing fields
+                    toggleView('homeView');
+                    window.scrollTo(0, 0);
+                    if (!departureInput?.value && departureInput) {
+                        departureInput.focus();
+                    } else if (destInput) {
+                        destInput.focus();
+                    }
+                }
+            };
+            let DESTINATION_LINKS = {}; // Loaded from destinations.js
+            window.DATABASE = { mappings: { regions: {}, countries: {}, cities: {} }, details: {} };
+            let SPECIAL_EVENTS_DATA = [];
+            let SAFE_HOTSPOTS_DATA = [];
+
+            // === DESTINATIONS DATA LOADER ===
+            // Load all destination data from the external destinations.js script
+            let _destinationsLoaded = false;
+
+            function loadDestinationsData() {
+                if (_destinationsLoaded) return Promise.resolve();
+
+                const data = window.__DESTINATIONS_DATA__;
+                if (!data) {
+                    console.error('[Pride Travel Scout] destinations.js not loaded! Make sure destinations.js is in the same directory.');
+                    return Promise.reject('No destination data');
+                }
+
+                console.log('[Pride Travel Scout] Loading destinations data...');
+
+                // Populate DESTINATION_LINKS
+                if (data.destinationLinks) {
+                    Object.assign(DESTINATION_LINKS, data.destinationLinks);
+                    console.log('  ✓ Destination links:', Object.keys(DESTINATION_LINKS).length);
+                }
+
+                // Populate DATABASE mappings and details
+                if (data.mappings) {
+                    window.DATABASE.mappings = data.mappings;
+                    console.log('  ✓ Mappings loaded (regions:', Object.keys(data.mappings.regions || {}).length,
+                        ', countries:', Object.keys(data.mappings.countries || {}).length,
+                        ', cities:', Object.keys(data.mappings.cities || {}).length, ')');
+                }
+                if (data.details) {
+                    window.DATABASE.details = data.details;
+                    console.log('  ✓ Destination details:', Object.keys(data.details).length);
+                }
+
+                // Populate SPECIAL_EVENTS_DATA
+                if (data.specialEvents) {
+                    SPECIAL_EVENTS_DATA.push(...data.specialEvents);
+                    console.log('  ✓ Special events:', SPECIAL_EVENTS_DATA.length);
+                }
+
+                // Populate EVENT_HOTELS (stored on window for access inside form handler)
+                if (data.eventHotels) {
+                    window._EVENT_HOTELS = data.eventHotels;
+                    console.log('  ✓ Event hotels:', Object.keys(data.eventHotels).length);
+                }
+
+                // Populate SAFE_HOTSPOTS_DATA
+                if (data.safeHotspots) {
+                    SAFE_HOTSPOTS_DATA.push(...data.safeHotspots);
+                    console.log('  ✓ Safe hotspots:', SAFE_HOTSPOTS_DATA.length);
+                }
+
+                _destinationsLoaded = true;
+                console.log('[Pride Travel Scout] ✓ All destination data loaded successfully');
+
+                // Trigger UI population now that data is available
+                if (typeof populateTrendingEvents === 'function') populateTrendingEvents();
+                if (typeof populateSafeHotspots === 'function') populateSafeHotspots();
+
+                return Promise.resolve();
+            }
+
+            // Load data immediately (synchronous since destinations.js is already loaded)
+            loadDestinationsData();
+            // === END DESTINATIONS DATA LOADER ===
+
+            const form = document.querySelector('#searchForm');
+            const container = document.querySelector('#resultsContainer');
+
+            if (form) {
+                // Auto-suggest return date only when it hasn't been set yet
+                const dateStartInput = document.querySelector('#dateStart');
+                const dateEndInput = document.querySelector('#dateEnd');
+
+                if (dateStartInput && dateEndInput) {
+                    dateStartInput.addEventListener('input', function () {
+                        // Only auto-fill return date if it's empty (don't overwrite pre-filled event dates)
+                        if (this.value && !dateEndInput.value) {
+                            try {
+                                // Create date safely in local time
+                                const parts = this.value.split('-');
+                                if (parts.length !== 3) return;
+
+                                const year = parseInt(parts[0], 10);
+                                const month = parseInt(parts[1], 10) - 1;
+                                const day = parseInt(parts[2], 10);
+
+                                // Do NOT auto-fill until the user has typed a full valid modern year.
+                                // This stops interstitial year typing (like '0002') from auto-filling as 1902.
+                                if (isNaN(year) || year < 2000) return;
+
+                                const startDate = new Date(year, month, day);
+                                startDate.setFullYear(year);
+                                const nextDay = new Date(startDate);
+                                nextDay.setDate(startDate.getDate() + 1);
+
+                                const yyyy = String(nextDay.getFullYear()).padStart(4, '0');
+                                const mm = String(nextDay.getMonth() + 1).padStart(2, '0');
+                                const dd = String(nextDay.getDate()).padStart(2, '0');
+
+                                dateEndInput.value = `${yyyy}-${mm}-${dd}`;
+                            } catch (e) {
+                                console.error("Date auto-update error", e);
+                            }
+                        }
+                    });
+                }
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    // Ensure destination data is loaded before searching
+                    await loadDestinationsData();
+
+                    const origin = document.querySelector('#departure').value.trim();
+                    const destinationInput = document.querySelector('#destination').value.trim().toLowerCase();
+                    const dateStart = document.querySelector('#dateStart').value;
+                    const dateEnd = document.querySelector('#dateEnd').value;
+
+                    if (!origin || !destinationInput || !dateStart || !dateEnd) {
+                        alert("Please fill in all fields.");
+                        return;
+                    }
+
+                    let targets = [];
+
+                    if (DATABASE.mappings.regions[destinationInput]) {
+                        targets = DATABASE.mappings.regions[destinationInput];
+                    } else if (DATABASE.mappings.countries[destinationInput]) {
+                        targets = DATABASE.mappings.countries[destinationInput];
+                    } else if (DATABASE.mappings.cities && DATABASE.mappings.cities[destinationInput]) {
+                        targets = DATABASE.mappings.cities[destinationInput];
+                    } else {
+                        // Check if direct key exists or IATA match
+                        const iataMatch = Object.keys(DATABASE.details).find(key =>
+                            DATABASE.details[key].iata && DATABASE.details[key].iata.toLowerCase() === destinationInput
+                        );
+
+                        if (DATABASE.details[destinationInput]) {
+                            targets = [destinationInput];
+                        } else if (iataMatch) {
+                            targets = [iataMatch];
+                        } else {
+                            alert("Destination not located in our curated list. Please try another city.");
+                            return;
+                        }
+                    }
+
+                    container.innerHTML = '';
+                    if (typeof showView === 'function') showView('resultsView');
+
+                    targets.forEach((targetKey, index) => {
+                        let data = DATABASE.details[targetKey];
+
+                        // Safety check if mapping exists but details missing (shouldn't happen with correct data)
+                        if (!data) {
+                            alert("Destination details currently unavailable.");
+                            return;
+                        }
+
+                        // Specific Hotels for Events
+                        const EVENT_HOTELS = window._EVENT_HOTELS || {}; // Loaded from destinations.json
+
+                        // --- EVENT DETECTION LOGIC ---
+                        let eventContent = '';
+                        const searchStart = new Date(dateStart);
+                        const searchEnd = new Date(dateEnd);
+                        const bufferTime = 14 * 24 * 60 * 60 * 1000; // 14 Days Buffer
+
+                        // 1. Search in SPECIAL_EVENTS_DATA (Primary Source)
+                        let matchingEvents = SPECIAL_EVENTS_DATA.filter(e => {
+                            // Check city match - only match events for THIS specific city (targetKey)
+                            const normalize = s => s ? s.toLowerCase().trim() : '';
+                            const cityMatch = normalize(e.city) === normalize(targetKey);
+
+                            if (!cityMatch) return false;
+
+                            // Check Date Overlap with Buffer
+                            const eStart = new Date(e.start);
+                            const eEnd = new Date(e.end);
+                            const startBuffer = new Date(eStart.getTime() - bufferTime);
+                            const endBuffer = new Date(eEnd.getTime() + bufferTime);
+
+                            return (searchStart <= endBuffer && searchEnd >= startBuffer);
+                        });
+
+                        // 2. Fallback to internal DATABASE.details events
+                        if (matchingEvents.length === 0 && data.events) {
+                            const internalMatches = data.events.filter(e => {
+                                const eStart = new Date(e.start);
+                                const eEnd = new Date(e.end);
+                                const startBuffer = new Date(eStart.getTime() - bufferTime);
+                                const endBuffer = new Date(eEnd.getTime() + bufferTime);
+                                return (searchStart <= endBuffer && searchEnd >= startBuffer);
+                            });
+                            matchingEvents.push(...internalMatches);
+                        }
+
+                        // Randomize Standard Hotels
+                        let randomHotels = getRandomSubset(data.hotels, 4);
+
+                        // Inject Featured Event Hotel
+                        let firstMatchingEvent = matchingEvents.length > 0 ? matchingEvents[0] : null;
+
+                        if (firstMatchingEvent && firstMatchingEvent.hotels && firstMatchingEvent.hotels.length > 0) {
+                            const randomEventHotelName = firstMatchingEvent.hotels[Math.floor(Math.random() * firstMatchingEvent.hotels.length)];
+
+                            const specialHotel = {
+                                name: randomEventHotelName,
+                                type: 'Event Special',
+                                tags: ['Featured', 'Pride Partner']
+                            };
+
+                            // Prepend to top of list
+                            randomHotels.unshift(specialHotel);
+                            randomHotels = randomHotels.slice(0, 4); // Keep list size managed
+                        } else if (firstMatchingEvent && EVENT_HOTELS[firstMatchingEvent.name]) {
+                            // Legacy fallback if map matches old hardcoded name
+                            const eventHotelNames = EVENT_HOTELS[firstMatchingEvent.name];
+                            const randomEventHotelName = eventHotelNames[Math.floor(Math.random() * eventHotelNames.length)];
+                            const specialHotel = { name: randomEventHotelName, type: 'Event Special', tags: ['Featured'] };
+                            randomHotels.unshift(specialHotel);
+                            randomHotels = randomHotels.slice(0, 4);
+                        }
+
+                        const randomNightlife = getRandomSubset(data.nightlife, 3);
+                        const randomTours = data.tours.slice(0, 5);
+                        const fareEstimate = calculateFareEstimate(data.baseFare);
+                        const delay = index * 200;
+
+
+                        if (matchingEvents.length > 0) {
+                            const carouselItems = matchingEvents.map(event => {
+                                const hasTravelInPrideLink = event.link && event.link.includes('travelinpride.com');
+                                const isCruise = event.type === 'Cruise';
+                                // Cruise: show cruise website as "Official" + Google as second. TravelInPride: Official + Google. Others: only Google.
+                                const showOfficialBtn = hasTravelInPrideLink || isCruise || (event.link && !event.link.includes('google.com/search'));
+                                const officialLink = event.link || getEventsLink(data.name, dateStart);
+                                const link1 = officialLink;
+                                const link2 = `https://www.google.com/search?q=${encodeURIComponent(event.name + " 2026")}`;
+
+                                const bannerTitle = isCruise ? "LGBTQ Cruise Alert" : "Pride Event Detected!";
+                                const bannerIcon = isCruise ? "directions_boat" : "celebration";
+                                const bgClass = isCruise ? "from-blue-600 to-cyan-500" : "from-pride-purple to-pride-blue";
+
+                                return `
+                                <div class="snap-center shrink-0 w-[85%] sm:w-80 bg-gradient-to-r ${bgClass} rounded-xl shadow-lg p-5 text-white relative overflow-hidden group">
+                                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                                        <span class="material-symbols-outlined text-6xl">${bannerIcon}</span>
+                                    </div>
+                                    <button onclick="window.psBookmarkPlace('${event.name.replace(/'/g, "\\'")}', '${isCruise ? 'Cruise' : 'Event'}', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this event" class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 transition-colors text-white z-10 opacity-0 group-hover:opacity-100 cursor-pointer">
+                                        <span class="material-symbols-outlined text-[18px] pointer-events-none">bookmark_border</span>
+                                    </button>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="material-symbols-outlined text-pride-yellow fill-1">stars</span>
+                                        <h4 class="font-bold text-lg leading-tight truncate">${bannerTitle}</h4>
+                                        ${matchingEvents.length > 1 ? '<span class="ml-auto text-[10px] font-black uppercase tracking-wider bg-white/20 px-2 py-0.5 rounded text-white backdrop-blur-sm shadow-sm ring-1 ring-white/30">MULTIPLE</span>' : ''}
+                                    </div>
+                                    <a href="${link1}" target="_blank" class="font-bold text-white text-xl mb-1 hover:underline cursor-pointer flex items-center gap-1 group block whitespace-nowrap overflow-hidden text-ellipsis">
+                                        ${event.name}
+                                    </a>
+                                    <p class="text-xs text-white/80 mb-4 flex items-center gap-1 font-medium">
+                                        <span class="material-symbols-outlined text-sm">calendar_today</span>
+                                        ${event.start} &ndash; ${event.end}
+                                    </p>
+                                    <div class="flex gap-2">
+                                        ${showOfficialBtn ? `
+                                        <a href="${link1}" target="_blank" class="flex-1 py-2 bg-white text-black dark:text-white dark:bg-slate-800/20 hover:bg-white dark:bg-slate-800/30 rounded-lg text-center text-xs font-bold backdrop-blur-sm transition-colors flex items-center justify-center gap-1 px-1">
+                                            <span class="material-symbols-outlined text-sm">language</span>
+                                            Official
+                                        </a>` : ''}
+                                        <a href="${link2}" target="_blank" class="flex-1 py-2 border border-white/30 hover:bg-white/10 dark:bg-slate-800/10 rounded-lg text-center text-xs font-bold transition-colors flex items-center justify-center gap-1 px-1">
+                                            <span class="material-symbols-outlined text-sm">search</span>
+                                            Google
+                                        </a>
+                                    </div>
+                                </div>`;
+                            }).join('');
+
+                            eventContent = `
+                            <div class="mt-4 -mx-6 px-6">
+                                <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 hide-scrollbar" style="scroll-padding-left: 1.5rem;">
+                                    ${carouselItems}
+                                </div>
+                            </div>
+                        `;
+                        }
+
+                        // Calculate safety score properties
+                        const safetyScore = data.safetyScore || 85;
+                        let safetyColor = 'text-pride-green';
+                        let safetyLabel = 'Excellent Inclusivity';
+                        if (safetyScore < 50) {
+                            safetyColor = 'text-pride-red';
+                            safetyLabel = 'Caution Advised';
+                        } else if (safetyScore < 65) {
+                            safetyColor = 'text-pride-yellow';
+                            safetyLabel = 'Moderate Inclusivity';
+                        } else {
+                            safetyColor = 'text-pride-green';
+                            safetyLabel = 'Excellent Inclusivity';
+                        }
+                        const safetyOffset = 251.2 * (1 - safetyScore / 100);
+
+                        const card = document.createElement('div');
+                        card.className = "bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-primary/10 overflow-hidden fade-in-up";
+                        card.style.animationDelay = `${delay}ms`;
+                        card.innerHTML = `
+                         <!-- Result Header -->
+                        <div class="pride-gradient-bg p-6 flex justify-between items-center"
+                             >
+                            <div class="flex items-center gap-4">
+                                <div class="text-4xl select-none filter drop-shadow-md">${data.image}</div>
+                                <div>
+                                    <h2 class="text-sm font-black italic text-white">${formatDisplayName(data)}</h2>
+                                    <span class="text-[10px] font-black text-white/80 uppercase tracking-widest flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-[12px] text-primary">verified</span> Travel Scout Report
+                                    </span>
+                                </div>
+                            </div>
+                            <a href="#" onclick="window.psEmailTrip(event, '${origin.replace(/'/g, "\\'")}', '${data.name.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', '${data.weather}', '${data.lgbtqSafety}')" 
+                               class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary transition-all active:scale-95 hover:bg-primary hover:text-white shadow-lg shadow-primary/10"
+                               title="Email Result">
+                                <span class="material-symbols-outlined text-xl">mail</span>
+                            </a>
+            ${psMakeSaveBtn(data.name, origin, dateStart, dateEnd)}
+                        </div>
+
+                        <div class="p-4 space-y-6 bg-slate-50 dark:bg-gray-800">
+                            <!-- 3 & 4. Flight & Hotel Hub -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Flight Card -->
+                                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border-l-4 border-pride-blue shadow-md">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <div class="px-3 py-1 bg-pride-blue/10 rounded-lg">
+                                            <span class="font-extrabold text-lg dark-pill"><span class="pride-gradient-text">Flights</span></span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-[10px] font-black text-slate-400 dark:text-slate-300 uppercase tracking-widest block">Booking Dates</span>
+                                            <span class="text-[11px] font-bold text-pride-blue">${formatDateShort(dateStart)} &ndash; ${formatDateShort(dateEnd)}</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-2xl font-bold mb-1 text-slate-900 dark:text-white">${fareEstimate} <span class="text-xs font-normal text-slate-500 dark:text-slate-400 dark:text-slate-300">/ round-trip</span></p>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300 mb-4">Cheapest options via regional budget carriers</p>
+                                    <div class="flex gap-2">
+                                        <a href="${getGoogleFlightsLink(origin, data.name, dateStart, dateEnd)}" target="_blank"
+                                           class="flex-1 py-2 bg-pride-blue text-white rounded-full font-bold text-sm flex items-center justify-center gap-2 transition-opacity hover:opacity-90">
+                                            Google
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- Hotel Card -->
+                                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border-l-4 border-pride-purple shadow-md relative overflow-hidden">
+                                    <div class="absolute -right-4 -top-4 w-16 h-16 pride-gradient-bg rotate-45 opacity-10"></div>
+                                    <div class="flex justify-between items-start mb-4">
+                                        <div class="px-3 py-1 bg-pride-purple/10 rounded-lg">
+                                            <span class="font-extrabold text-lg dark-pill"><span class="pride-gradient-text">Hotels</span></span>
+                                        </div>
+                                        <div class="text-right">
+                                            <span class="text-[10px] font-black text-slate-400 dark:text-slate-300 uppercase tracking-widest block">Stay Period</span>
+                                            <span class="text-[11px] font-bold text-pride-purple">${formatDateShort(dateStart)} &ndash; ${formatDateShort(dateEnd)}</span>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-3 mb-6">
+                                        ${randomHotels.map(h => {
+                            const badge = getHotelBadge(h);
+                            const isLGBTQOwned = h.tags && h.tags.some(t => t === 'LGBTQ Owned/Operated' || t === 'LGBTQ Owned');
+                            return `
+                                            <div class="flex items-start justify-between text-xs border-b border-slate-50 dark:border-slate-700 pb-2 last:border-0 gap-2">
+                                                <div class="flex-1 min-w-0">
+                                                    <span class="font-black text-slate-800 dark:text-slate-100 block leading-tight">${h.name}</span>
+                                                    <div class="flex flex-wrap items-center gap-1 mt-0.5">
+                                                        <span class="text-[9px] font-bold px-1.5 py-0.5 ${isLGBTQOwned ? 'bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400'} rounded whitespace-nowrap">${badge}</span>
+                                                    </div>
+                                                </div>
+                                                <button onclick="window.psBookmarkPlace('${h.name.replace(/'/g, "\\'")}', 'Hotel', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this hotel" class="w-6 h-6 flex items-center justify-center rounded bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors text-slate-400 shrink-0 mt-0.5">
+                                                    <span class="material-symbols-outlined text-[14px]">bookmark</span>
+                                                </button>
+                                            </div>
+                                        `}).join('')}
+                                    </div>
+                                    <a href="${getExpediaLink(data.name, dateStart, dateEnd)}" target="_blank"
+                                       class="w-full py-3 bg-pride-purple text-white rounded-full font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-pride-purple/20 active:scale-95 transition-all mb-2">
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span> Book All on Expedia
+                                    </a>
+                                    <a href="${getBookingComLink(data.name, dateStart, dateEnd)}" target="_blank"
+                                       class="w-full py-3 bg-blue-600 text-white rounded-full font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-blue-600/20 active:scale-95 transition-all">
+                                        <span class="material-symbols-outlined text-sm">open_in_new</span> Book on Booking.com
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Misterbnb Card -->
+                            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border-l-4 border-pride-red shadow-md mb-4">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="px-3 py-1 bg-pride-red/10 rounded-lg">
+                                        <span class="font-extrabold text-lg dark-pill"><span class="pride-gradient-text">LGBTQ Rentals</span></span>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="text-[10px] font-black text-slate-400 dark:text-slate-300 uppercase tracking-widest block">Stay Period</span>
+                                        <span class="text-[11px] font-bold text-pride-red">${formatDateShort(dateStart)} &ndash; ${formatDateShort(dateEnd)}</span>
+                                    </div>
+                                </div>
+                                <p class="text-sm font-bold text-slate-900 dark:text-white mb-2">Apartments, Condos, Villas and Homes</p>
+                                <a href="https://www.misterbandb.com" target="_blank"
+                                   class="w-full py-3 bg-pride-red text-white rounded-full font-black text-sm flex items-center justify-center gap-2 shadow-lg shadow-pride-red/20 active:scale-95 transition-all mb-4">
+                                    <span class="material-symbols-outlined text-sm">search</span> Search on Misterb&b
+                                </a>
+                                <div class="bg-slate-50 dark:bg-slate-700/50 p-4 rounded-lg border border-slate-100 dark:border-slate-700">
+                                    <p class="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
+                                        <strong class="text-pride-red">Reminder:</strong> Before you book, double-check the listing details! Ensure you've selected "Entire Place" if you want total privacy. If you’re okay with a "Shared Room" or "Private Room in a Home," make sure the host’s house rules align with your comfort and safety.
+                                    </p>
+                                </div>
+                            </div>
+
+                             <!-- 5. Safety & Neighborhoods -->
+                            <section class="bg-white dark:bg-slate-800 p-6 rounded-xl border-l-4 border-pride-green shadow-md relative overflow-hidden">
+                                <div class="absolute -right-6 -top-6 w-24 h-24 bg-pride-green/5 rounded-full"></div>
+                                <h3 class="text-xl font-bold mb-4 inline-block dark-pill">
+                                    <span class="pride-gradient-text">Safety & Districts</span>
+                                </h3>
+
+                                ${eventContent}
+
+                                <div class="flex items-center gap-6 my-6">
+                                    <a href="https://www.equaldex.com/equality-index" target="_blank" class="flex flex-col items-center hover:scale-105 transition-transform flex-shrink-0">
+                                        <span class="text-xs font-bold text-slate-500 dark:text-slate-400 mb-1 underline tracking-wider uppercase">Equaldex</span>
+                                        <div class="relative w-32 h-32 flex items-center justify-center">
+                                            <svg viewBox="0 0 96 96" class="w-full h-full transform -rotate-90">
+                                                <circle class="text-slate-100 dark:text-slate-700" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+                                                <circle class="${safetyColor}" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="${safetyOffset}" stroke-width="10" stroke-linecap="round"></circle>
+                                            </svg>
+                                            <div class="absolute inset-0 flex flex-col items-center justify-center px-4">
+                                                <span class="text-4xl font-black ${safetyColor} leading-none mb-1">${safetyScore}</span>
+                                                <span class="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-300 leading-tight text-center">Equality Index<br>Score</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="flex-1">
+                                        <p class="font-black text-slate-800 dark:text-slate-100">${safetyLabel}</p>
+                                        <p class="text-sm text-slate-500 dark:text-slate-400 dark:text-slate-300 leading-relaxed">${data.lgbtqSafety}</p>
+                                    </div>
+                                </div>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300 mb-6 -mt-2">
+                                    The Equality Index measures the current status of LGBT rights, laws, and freedoms as well as public attitudes towards LGBT people.
+                                </p>
+                                <div class="space-y-3">
+                                    <div class="flex items-center gap-3 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-slate-100 dark:border-slate-700">
+                                        <div class="w-10 h-10 rounded-full bg-pride-yellow/20 flex items-center justify-center text-pride-yellow shadow-inner">
+                                            <span class="material-symbols-outlined font-black">hub</span>
+                                        </div>
+                                        <div>
+                                        </div>
+                                    </div>
+                                </div>
+                                ${DESTINATION_LINKS[targetKey] ? `
+                                <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-700">
+                                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">LGBTQ+ Guides & Resources</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${DESTINATION_LINKS[targetKey].gaycities ? `<a href="${DESTINATION_LINKS[targetKey].gaycities}" target="_blank" class="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg text-xs font-bold hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">public</span> GayCities</a>` : ''}
+                                        ${DESTINATION_LINKS[targetKey].travelgay ? `<a href="${DESTINATION_LINKS[targetKey].travelgay}" target="_blank" class="px-3 py-1.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-lg text-xs font-bold hover:bg-purple-200 dark:hover:bg-purple-900/50 transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">travel_explore</span> TravelGay</a>` : ''}
+                                        ${DESTINATION_LINKS[targetKey].youtube ? `<a href="${DESTINATION_LINKS[targetKey].youtube}" target="_blank" class="px-3 py-1.5 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-lg text-xs font-bold hover:bg-red-200 dark:hover:bg-red-900/50 transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">play_circle</span> YouTube Guide</a>` : ''}
+                                    </div>
+                                </div>
+                                ` : ''}
+                            </section>
+
+                            <!-- 6. Bars & Nightlife -->
+                            <section>
+                                <h3 class="text-xl font-bold mb-4 inline-block dark-pill">
+                                    <span class="pride-gradient-text">Vibrant Nightlife</span>
+                                </h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    ${randomNightlife.map((n, i) => {
+                                const colors = ['pride-red', 'pride-blue', 'pride-purple', 'pride-orange'];
+                                const icons = ['local_bar', 'celebration', 'music_note', 'wine_bar'];
+                                const color = colors[i % colors.length];
+                                const icon = icons[i % icons.length];
+                                return `
+                                        <div class="bg-white p-4 rounded-xl border border-${color}/20 group hover:bg-${color} transition-colors duration-300 relative cursor-default">
+                                            <button onclick="window.psBookmarkPlace('${n.name.replace(/'/g, "\\'")}', 'Nightlife', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this place" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10">
+                                                <span class="material-symbols-outlined text-[16px]">bookmark</span>
+                                            </button>
+                                            <div class="w-10 h-10 bg-${color} rounded-full flex items-center justify-center text-white mb-3 group-hover:bg-white dark:bg-slate-800 group-hover:text-${color}">
+                                                <span class="material-symbols-outlined">${icon}</span>
+                                            </div>
+                                            <p class="font-bold group-hover:text-white text-black" style="color: black !important;">${n.name}</p>
+                                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300 group-hover:text-white/80">${n.type} &bull; ${n.tags[0]}</p>
+                                        </div>
+                                        `;
+                            }).join('')}
+                                </div>
+                            </section>
+
+                            <!-- 7. Weather Forecast -->
+                            <section class="bg-gradient-to-r from-pride-red/10 via-pride-yellow/10 to-pride-purple/10 rounded-xl p-5 border border-primary/20">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="font-bold dark-pill"><span class="pride-gradient-text">${getMonthName(dateStart)} ${new Date(dateStart).getUTCFullYear()} Weather Outlook</span></h3>
+                                    <span class="text-primary font-bold">${data.weather.replace(/[.\s]*\d+[°&]?(deg;)?\s*[CF]/g, '').trim()}</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    ${(() => {
+                                const monthIndex = new Date(dateStart).getUTCMonth();
+                                const monthName = getMonthName(dateStart);
+                                const mWeather = data.monthlyWeather ? data.monthlyWeather[monthIndex] : null;
+                                const highTemp = mWeather ? mWeather.high : '72°F';
+                                const lowTemp = mWeather ? mWeather.low : '55°F';
+                                const summary = mWeather ? mWeather.summary : 'Sunny';
+                                return `
+                            <div class="w-full flex items-center gap-5 p-3 bg-white dark:bg-slate-800/60 rounded-xl">
+                                <div class="flex-shrink-0">${getWeatherIcon(summary)}</div>
+                                <div class="flex-1">
+                                    <p class="text-xs font-black text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-widest mb-1">${monthName} Average</p>
+                                    <div class="flex items-baseline gap-3">
+                                        <span class="text-2xl font-black text-slate-900 dark:text-white">${highTemp}</span>
+                                        <span class="text-sm font-bold text-slate-400 dark:text-slate-300">High</span>
+                                        <span class="text-lg font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300">${lowTemp}</span>
+                                        <span class="text-sm font-bold text-slate-400 dark:text-slate-300">Low</span>
+                                    </div>
+                                    <p class="text-xs font-bold text-primary mt-1">${summary}</p>
+                                </div>
+                            </div>
+                        `;
+                            })()}
+                                </div>
+                            </section>
+
+                            <!-- 8. Must-See Tours & Excursions -->
+                            <section class="pb-4">
+                                <h3 class="text-xl font-bold mb-4 inline-block dark-pill">
+                                    <span class="pride-gradient-text">Unmissable Tours</span>
+                                </h3>
+                                <div class="space-y-4">
+                                    ${randomTours.map(t => {
+                                const tourName = typeof t === 'object' ? t.name : t;
+                                const tourStyle = typeof t === 'object' ? t.style : 'Featured Tour';
+                                return `
+                                    <div class="flex gap-4 items-center bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm group cursor-pointer border border-slate-100 dark:border-slate-700 hover:border-primary/20">
+                                        <div class="flex-1">
+                                            <p class="font-bold text-sm text-slate-900 dark:text-white">${tourName}</p>
+                                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300">Approx. 3 hours • ${tourStyle}</p>
+                                        </div>
+                                        <button onclick="window.psBookmarkPlace('${tourName.replace(/'/g, "\\'")}', 'Tour', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this tour" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors text-slate-400">
+                                            <span class="material-symbols-outlined text-[18px]">bookmark</span>
+                                        </button>
+                                    </div>
+                                    `;
+                            }).join('')}
+                                </div>
+                                <a href="${getViatorLink(data.name, dateStart, dateEnd)}" target="_blank"
+                                   class="mt-4 block w-full py-3 border-2 border-pride-purple text-pride-purple rounded-full font-bold text-sm flex items-center justify-center gap-2 transition-colors hover:bg-pride-purple/5">
+                                    Explore all tours on Viator
+                                </a>
+                            </section>
+                        </div>
+                        `;
+                        container.appendChild(card);
+                    });
+
+                });
+            }
+
+            function formatDisplayName(data) {
+                // Desired: "City, Airport Code, Country or Region"
+                // data.name is typically "City, Country"
+                // data.iata is "CODE"
+
+                if (data.name.includes(',')) {
+                    const parts = data.name.split(',');
+                    const city = parts[0].trim();
+                    const country = parts.slice(1).join(',').trim();
+                    return `${city}, ${data.iata}, ${country} `;
+                }
+                return `${data.name}, ${data.iata} `;
+            }
+
+            function getRandomSubset(arr, count) {
+                if (!arr) return [];
+                const shuffled = [...arr].sort(() => 0.5 - Math.random());
+                return shuffled.slice(0, count);
+            }
+
+            function getHotelBadge(h) {
+                if (h.type === 'Event Special') return 'Event Special';
+                let specialTags = ['LGBTQ Owned/Operated', 'LGBTQ Friendly', 'LGBTQ Hotels & Resorts', 'LGBTQ Resort', 'LGBTQ Hotel', 'LGBTQ Owned', 'Gay Hotel', 'Men Only', 'Adults Only', 'Adults-Only', 'Mens Only'];
+                if (h.tags) {
+                    let found = h.tags.find(t => specialTags.includes(t));
+                    if (found) {
+                        if (found === 'Men Only' || found === 'Mens Only') found = 'Men-Only';
+                        if (found === 'Adults Only') found = 'Adults-Only';
+                        if (h.type && found.toLowerCase().includes(h.type.toLowerCase())) {
+                            return found;
+                        }
+                        return `${h.type} ${found}`;
+                    }
+                }
+                return h.type;
+            }
+
+            function calculateFareEstimate(baseRange) {
+                if (!baseRange) return "$500 - $1600";
+                const min = baseRange[0];
+                const max = baseRange[1] * 2; // Double top end
+                return `$${min} - $${max} `;
+            }
+
+            function getGoogleFlightsLink(origin, destination, start, end) {
+                const q = `Flights from ${origin} to ${destination} on ${start} returning ${end} `;
+                return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}`;
+            }
+
+            function getNightlifeIcon(type) {
+                const t = type.toLowerCase();
+                if (t.includes('sauna') || t.includes('bath')) return '<span class="material-symbols-outlined">hot_tub</span>';
+                if (t.includes('club') || t.includes('disco')) return '<span class="material-symbols-outlined">celebration</span>';
+                if (t.includes('bar')) return '<span class="material-symbols-outlined">local_bar</span>';
+                return '<span class="material-symbols-outlined">music_note</span>';
+            }
+
+            function getExpediaLink(destination, start, end) {
+                return `https://www.expedia.com/Hotel-Search?destination=${encodeURIComponent(destination)}&startDate=${start}&endDate=${end}&amenities=LGBTQ_WELCOMING`;
+            }
+
+            function getBookingComLink(destination, start, end) {
+                // Appends the Travel Proud filter if applicable (or uses keyword search workaround)
+                return `https://www.booking.com/searchresults.html?ss=${encodeURIComponent(destination + ' LGBTQ Friendly')}&checkin=${start}&checkout=${end}&nflt=property_type%3D204`;
+            }
+
+            function getViatorLink(destination, start, end) {
+                return `https://www.viator.com/searchResults/all?text=${encodeURIComponent(destination)}&startDate=${start}&endDate=${end}`;
+            }
+
+            function getEmailLink(origin, data, start, end) {
+                const subject = `Trip Idea: ${data.name} for Pride Travel`;
+                const body = `Hey,\n\nI found a great trip idea using Pride Travel Scout!\n\nDestination: ${data.name}\nDates: ${start} to ${end}\nFrom: ${origin}\n\nWeather: ${data.weather}\nLGBTQ Safety: ${data.lgbtqSafety}\n\nCheck out flights:\nGoogle Flights: ${getGoogleFlightsLink(origin, data.name, start, end)}\n\nSent from Pride Travel Scout`;
+                return `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            }
+
+            function getWeatherIcon(weatherString) {
+                const w = weatherString.toLowerCase();
+                if (w.includes('rain')) return '<span class="material-symbols-outlined text-pride-blue">rainy</span>';
+                if (w.includes('cloud')) return '<span class="material-symbols-outlined text-slate-400 dark:text-slate-300">cloudy</span>';
+                if (w.includes('snow')) return '<span class="material-symbols-outlined text-slate-200">snowing</span>';
+                return '<span class="material-symbols-outlined text-pride-orange">sunny</span>';
+            }
+
+            function getEventsLink(destination, dateString) {
+                const month = getMonthName(dateString);
+                const q = `LGBTQ Events in ${destination} in ${month}`;
+                return `https://www.google.com/search?q=${encodeURIComponent(q)}`;
+            }
+
+            function getMonthName(dateString) {
+                const date = new Date(dateString);
+                return date.toLocaleString('default', { month: 'long', timeZone: 'UTC' });
+            }
+
+            function formatDateShort(dateString) {
+                if (!dateString) return '';
+                const date = new Date(dateString + 'T00:00:00');
+                return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            }
+
+            window.showAllHotspots = function () {
+                populateAllHotspots();
+                toggleView('allHotspotsView');
+            };
+
+            function populateAllHotspots() {
+                const grid = document.getElementById('allHotspotsGrid');
+                if (!grid) return;
+
+                const eventPool = [];
+                const cityPool = [];
+                const districtPool = [];
+
+                // 1. Collect Events
+                if (typeof SPECIAL_EVENTS_DATA !== 'undefined') {
+                    SPECIAL_EVENTS_DATA.forEach(e => {
+                        eventPool.push({
+                            type: e.type || 'Event',
+                            name: e.name,
+                            location: e.city,
+                            date: e.start,
+                            endDate: e.end,
+                            searchQuery: e.city
+                        });
+                    });
+                }
+
+                // 2. Collect Destinations & Districts
+                if (typeof DATABASE !== 'undefined' && DATABASE.details) {
+                    Object.keys(DATABASE.details).forEach(key => {
+                        const data = DATABASE.details[key];
+                        // Add to City Pool
+                        const cityEqScore = data.safetyScore || null;
+                        cityPool.push({
+                            type: 'Destination',
+                            name: data.name,
+                            location: data.iata || '',
+                            searchQuery: key,
+                            eqScore: cityEqScore
+                        });
+
+                        // Add to District Pool if available
+                        if (data.lgbtqDistrict) {
+                            districtPool.push({
+                                type: 'District',
+                                name: data.lgbtqDistrict,
+                                location: data.name.split(',')[0],
+                                searchQuery: key,
+                                eqScore: cityEqScore
+                            });
+                        }
+                    });
+                }
+
+                // 3. Balanced Selection (Target 60 total: ~20 Events, ~20 Cities, ~20 Districts)
+                // Ensure 3-5 cruises show up in the view more tab
+                const cruisePool = eventPool.filter(e => e.type === 'Cruise');
+                const otherEventPool = eventPool.filter(e => e.type !== 'Cruise');
+
+                const numCruises = Math.floor(Math.random() * 3) + 3; // 3 to 5
+                const selectedCruises = getRandomSubset(cruisePool, Math.min(numCruises, cruisePool.length));
+                const selectedOtherEvents = getRandomSubset(otherEventPool, 20 - selectedCruises.length);
+                const selectedEvents = [...selectedCruises, ...selectedOtherEvents];
+
+                const selectedCities = getRandomSubset(cityPool, 20);
+                const selectedDistricts = getRandomSubset(districtPool, 20);
+
+                let selected = [...selectedEvents, ...selectedCities, ...selectedDistricts];
+
+                // 4. Backfill if total < 20
+                if (selected.length < 60) {
+                    const remainingTarget = 60 - selected.length;
+                    const usedNames = new Set(selected.map(s => s.name + s.type));
+                    const allRemaining = [...eventPool, ...cityPool, ...districtPool]
+                        .filter(item => !usedNames.has(item.name + item.type));
+
+                    const extra = getRandomSubset(allRemaining, remainingTarget);
+                    selected = [...selected, ...extra];
+                }
+
+                // Shuffle final list
+                selected = getRandomSubset(selected, selected.length);
+
+                grid.innerHTML = selected.map(h => {
+                    let icon = 'location_on';
+                    let badgeClass = 'bg-primary text-white';
+                    if (h.type === 'Event' || h.type === 'Cruise') {
+                        icon = h.type === 'Cruise' ? 'directions_boat' : 'event_upcoming';
+                        badgeClass = h.type === 'Cruise' ? 'bg-blue-500 text-white' : 'bg-yellow-400 text-slate-900 dark:text-white';
+                    } else if (h.type === 'District') {
+                        icon = 'explore';
+                        badgeClass = 'bg-orange-500 text-white';
+                    }
+
+                    return `
+                    <div onclick="quickSearch('${h.searchQuery}', '${h.date || ''}', '${h.endDate || ''}')" class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-lg border-l-4 border-primary flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform group relative">
+                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">${icon}</span>
+                        </div>
+                        <div class="overflow-hidden flex-1 pr-6">
+                            <span class="text-[10px] font-black px-2 py-0.5 rounded-md uppercase mb-1 inline-block ${badgeClass}">${getHotelBadge(h)}</span>
+                            <p class="font-black text-slate-900 dark:text-white truncate">${h.name}</p>
+                            <p class="text-xs font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-tighter">${h.location} ${h.date ? '&bull; ' + h.date : ''}</p>
+                            ${(h.type === 'Destination' || h.type === 'District') && h.eqScore ? `
+                            <div class="mt-1 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs ${h.eqScore >= 75 ? 'text-green-500' : h.eqScore >= 60 ? 'text-yellow-500' : 'text-red-500'}">shield</span>
+                                <span class="text-[10px] font-bold ${h.eqScore >= 75 ? 'text-green-600' : h.eqScore >= 60 ? 'text-yellow-600' : 'text-red-600'}">Equaldex: ${h.eqScore}/100</span>
+                            </div>` : ''}
+                        </div>
+                        <button onclick="event.stopPropagation(); window.psBookmarkPlace('${h.name.replace(/'/g, "\\'")}', '${h.type}', '${h.searchQuery.replace(/'/g, "\\'")}', '${h.searchQuery.replace(/'/g, "\\'")}', '${h.date || ''}', '${h.endDate || ''}', this)" title="Bookmark" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10 opacity-0 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-600">
+                            <span class="material-symbols-outlined text-[16px] pointer-events-none">bookmark_border</span>
+                        </button>
+                    </div>
+                `;
+                }).join('');
+            }
+
+
+
+            function populateSafeHotspots() {
+                const container = document.getElementById('hotspotsContainer');
+                if (!container) return;
+
+                // Make Amsterdam permanently featured for World Pride
+                const amsterdam = SAFE_HOTSPOTS_DATA.find(h => h.city === 'Amsterdam');
+                const others = SAFE_HOTSPOTS_DATA.filter(h => h.city !== 'Amsterdam');
+                const randomHotspots = [amsterdam, ...getRandomSubset(others, 2)];
+
+                container.innerHTML = randomHotspots.map(h => {
+                    const cityEvents = SPECIAL_EVENTS_DATA.filter(e => e.city.toLowerCase() === h.city.toLowerCase() && e.type !== 'Cruise');
+                    let eventTagHtml = '';
+                    let searchParams = `\'${h.city}\'`;
+
+                    if (h.city.toLowerCase() === 'amsterdam') {
+                        eventTagHtml = `<span class="bg-pride-orange text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg truncate max-w-[200px]">World Pride & Amsterdam Pride 2026</span>`;
+                        searchParams = `'Amsterdam', '2026-07-25', '2026-08-08'`;
+                    } else if (cityEvents.length > 0) {
+                        const randomEvent = cityEvents[Math.floor(Math.random() * cityEvents.length)];
+                        eventTagHtml = `<span class="bg-pride-orange text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg truncate max-w-[200px]">Event: ${randomEvent.name}</span>`;
+                        searchParams = `'${h.city}', '${randomEvent.start}', '${randomEvent.end}'`;
+                    } else {
+                        eventTagHtml = `<span class="bg-pride-blue text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg max-w-[200px]">Trending Destination</span>`;
+                    }
+
+                    return `
+                    <div onclick="quickSearch(${searchParams})"
+                        class="min-w-[280px] snap-center rounded-3xl overflow-hidden relative group shadow-2xl cursor-pointer active:scale-95 transition-transform rainbow-border">
+                        <img class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110"
+                            src="${h.image}" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            ${eventTagHtml}
+                            <h4 class="text-white text-2xl font-black mb-1">${h.city}, ${h.country}</h4>
+                            <div class="flex items-center gap-2 text-white/90 text-xs font-bold">
+                                <span class="material-symbols-outlined text-sm text-green-400 fill-1">verified_user</span>
+                                Equality Index Score: ${h.safetyScore}/100
+                            </div>
+                        </div>
+                    </div>
+                `;
+                }).join('');
+            }
+
+            function populateTrendingEvents() {
+                const grid = document.getElementById('eventsGrid');
+                if (!grid) return;
+
+                const allCruises = SPECIAL_EVENTS_DATA.filter(e => e.type === 'Cruise');
+                const otherEvents = SPECIAL_EVENTS_DATA.filter(e => e.type !== 'Cruise');
+
+                let randomEvents = [];
+                if (allCruises.length > 0) {
+                    const randomCruise = allCruises[Math.floor(Math.random() * allCruises.length)];
+                    randomEvents.push(randomCruise);
+                    randomEvents = randomEvents.concat(getRandomSubset(otherEvents, 3));
+                    randomEvents.sort(() => Math.random() - 0.5);
+                } else {
+                    randomEvents = getRandomSubset(SPECIAL_EVENTS_DATA, 4);
+                }
+                grid.innerHTML = randomEvents.map(e => `
+                                <div onclick="quickSearch('${e.city}', '${e.start}', '${e.end}')" class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-lg border-l-4 border-primary flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform relative group">
+                                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                        <span class="material-symbols-outlined">${e.type === 'Cruise' ? 'directions_boat' : 'event_upcoming'}</span>
+                                    </div>
+                                    <div class="overflow-hidden pr-6">
+                                        <p class="font-black text-slate-900 dark:text-white truncate">${e.name}</p>
+                                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-tighter">${e.city} &bull; ${e.start}</p>
+                                    </div>
+                                    <button onclick="event.stopPropagation(); window.psBookmarkPlace('${e.name.replace(/'/g, "\\'")}', '${e.type === 'Cruise' ? 'Cruise' : 'Event'}', '${e.city.replace(/'/g, "\\'")}', '${e.city.replace(/'/g, "\\'")}', '${e.start}', '${e.end}', this)" title="Bookmark this event" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10 opacity-0 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-600">
+                                        <span class="material-symbols-outlined text-[16px] pointer-events-none">bookmark_border</span>
+                                    </button>
+                                </div>
+                            `).join('');
+            }
+        })();
+    </script>
+    <script>
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('sw.js') // or your specific URL
+                .then(function (registration) {
+                    console.log('Service Worker registered successfully:', registration);
+                })
+                .catch(function (error) {
+                    console.log('Service Worker registration failed:', error);
+                });
+        }
+
+    </script>
+</body>
+
+</html>
