@@ -1,0 +1,45 @@
+{
+  "name": "Pride Travel Scout",
+  "short_name": "PrideTravel",
+  "version": "2.0.1",
+  "id": "/PrideTravelScoutAPP/",
+  "start_url": "/PrideTravelScoutAPP/index.html",
+  "scope": "/PrideTravelScoutAPP/",
+  "display": "standalone",
+  "display_override": ["standalone", "window-controls-overlay"],
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "description": "Pride Travel Scout app was created to make travel planning safer, easier, and more empowering for the LGBTQ community. Explore by region or country to discover welcoming destinations with curated listings for hotels, tours, and nightlife.",
+  "dir": "auto",
+  "lang": "en-US",
+  "categories": ["travel", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Search Hotels",
+      "short_name": "Hotels",
+      "url": "/PrideTravelScoutAPP/index.html#hotels",
+      "description": "Find LGBTQ+ friendly hotels"
+    },
+    {
+      "name": "Upcoming Events",
+      "short_name": "Events",
+      "url": "/PrideTravelScoutAPP/index.html#events",
+      "description": "View LGBTQ+ events and pride dates"
+    }
+  ]
+}
