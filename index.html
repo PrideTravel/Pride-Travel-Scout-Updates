@@ -1676,6 +1676,7 @@
                         }
 
                         const randomNightlife = getRandomSubset(data.nightlife, 3);
+                        const randomRestaurants = data.restaurants ? getRandomSubset(data.restaurants, 3) : [];
                         const randomTours = data.tours.slice(0, 5);
                         const fareEstimate = calculateFareEstimate(data.baseFare);
                         const delay = index * 200;
@@ -1924,16 +1925,15 @@
                                 <div class="grid grid-cols-2 gap-3">
                                     ${randomNightlife.map((n, i) => {
                                 const colors = ['pride-red', 'pride-blue', 'pride-purple', 'pride-orange'];
-                                const icons = ['local_bar', 'celebration', 'music_note', 'wine_bar'];
                                 const color = colors[i % colors.length];
-                                const icon = icons[i % icons.length];
+                                const icon = getNightlifeIcon(n.type);
                                 return `
                                         <div class="bg-white p-4 rounded-xl border border-${color}/20 group hover:bg-${color} transition-colors duration-300 relative cursor-default">
                                             <button onclick="window.psBookmarkPlace('${n.name.replace(/'/g, "\\'")}', 'Nightlife', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this place" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10">
                                                 <span class="material-symbols-outlined text-[16px]">bookmark</span>
                                             </button>
                                             <div class="w-10 h-10 bg-${color} rounded-full flex items-center justify-center text-white mb-3 group-hover:bg-white dark:bg-slate-800 group-hover:text-${color}">
-                                                <span class="material-symbols-outlined">${icon}</span>
+                                                ${icon}
                                             </div>
                                             <p class="font-bold group-hover:text-white text-black" style="color: black !important;">${n.name}</p>
                                             <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300 group-hover:text-white/80">${n.type} &bull; ${n.tags[0]}</p>
@@ -1942,6 +1942,34 @@
                             }).join('')}
                                 </div>
                             </section>
+
+                            <!-- Restaurants & Cafes -->
+                            ${randomRestaurants.length > 0 ? `
+                            <section>
+                                <h3 class="text-xl font-bold mb-4 inline-block dark-pill">
+                                    <span class="pride-gradient-text">Restaurants & Cafes</span>
+                                </h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    ${randomRestaurants.map((r, i) => {
+                                const colors = ['pride-green', 'pride-yellow', 'pride-blue', 'pride-red'];
+                                const color = colors[i % colors.length];
+                                const icon = getRestaurantIcon(r.type);
+                                return `
+                                        <div class="bg-white p-4 rounded-xl border border-${color}/20 group hover:bg-${color} transition-colors duration-300 relative cursor-default">
+                                            <button onclick="window.psBookmarkPlace('${r.name.replace(/'/g, "\\'")}', 'Dining', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this place" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10">
+                                                <span class="material-symbols-outlined text-[16px]">bookmark</span>
+                                            </button>
+                                            <div class="w-10 h-10 bg-${color} rounded-full flex items-center justify-center text-white mb-3 group-hover:bg-white dark:bg-slate-800 group-hover:text-${color}">
+                                                ${icon}
+                                            </div>
+                                            <p class="font-bold group-hover:text-white text-black" style="color: black !important;">${r.name}</p>
+                                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300 group-hover:text-white/80">${r.type} &bull; ${r.tags[0]}</p>
+                                        </div>
+                                        `;
+                            }).join('')}
+                                </div>
+                            </section>
+                            ` : ''}
 
                             <!-- 7. Weather Forecast -->
                             <section class="bg-gradient-to-r from-pride-red/10 via-pride-yellow/10 to-pride-purple/10 rounded-xl p-5 border border-primary/20">
@@ -2062,11 +2090,18 @@
             }
 
             function getNightlifeIcon(type) {
-                const t = type.toLowerCase();
+                const t = (type || '').toLowerCase();
                 if (t.includes('sauna') || t.includes('bath')) return '<span class="material-symbols-outlined">hot_tub</span>';
                 if (t.includes('club') || t.includes('disco')) return '<span class="material-symbols-outlined">celebration</span>';
                 if (t.includes('bar')) return '<span class="material-symbols-outlined">local_bar</span>';
+                if (t.includes('cruising')) return '<span class="material-symbols-outlined">visibility</span>';
                 return '<span class="material-symbols-outlined">music_note</span>';
+            }
+
+            function getRestaurantIcon(type) {
+                const t = (type || '').toLowerCase();
+                if (t.includes('cafe') || t.includes('coffee')) return '<span class="material-symbols-outlined">coffee</span>';
+                return '<span class="material-symbols-outlined">restaurant</span>';
             }
 
             function getExpediaLink(destination, start, end) {
