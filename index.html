@@ -1353,13 +1353,7 @@
 
     <script>
         // Data is now loaded via fetch in the loadDestinationsData function
-        (function () {
-            if (typeof window.psLoadDestinationsData === 'function') {
-                window.psLoadDestinationsData().catch(err => {
-                    console.error("Initial data load failed:", err);
-                });
-            }
-        })();
+        // (Call moved to end of main script block for correct initialization)
     </script>
     <script>
 
@@ -1510,15 +1504,12 @@
                 }
             }
 
-            // Expose globally for the script.onload callback
-            window.psLoadDestinationsData = loadDestinationsData;
-
-            // Load data immediately if script somehow loaded first,
-            // otherwise the onload handler will trigger it.
-            if (window.__DESTINATIONS_DATA__) {
-                loadDestinationsData();
-            }
             // === END DESTINATIONS DATA LOADER ===
+
+            // Trigger initial load
+            loadDestinationsData().catch(err => {
+                console.error("Initial data load failed:", err);
+            });
 
             const form = document.querySelector('#searchForm');
             const container = document.querySelector('#resultsContainer');
@@ -2133,109 +2124,94 @@
 
                 const eventPool = [];
                 const cityPool = [];
-                const districtPool = [];
+                const cruisePool = [];
 
-                // 1. Collect Events
+                // 1. Collect Data
                 if (typeof SPECIAL_EVENTS_DATA !== 'undefined') {
                     SPECIAL_EVENTS_DATA.forEach(e => {
-                        eventPool.push({
+                        const item = {
                             type: e.type || 'Event',
                             name: e.name,
                             location: e.city,
                             date: e.start,
                             endDate: e.end,
                             searchQuery: e.city
-                        });
+                        };
+                        if (e.type === 'Cruise') {
+                            cruisePool.push(item);
+                        } else {
+                            eventPool.push(item);
+                        }
                     });
                 }
 
-                // 2. Collect Destinations & Districts
                 if (typeof DATABASE !== 'undefined' && DATABASE.details) {
                     Object.keys(DATABASE.details).forEach(key => {
                         const data = DATABASE.details[key];
-                        // Add to City Pool
-                        const cityEqScore = data.safetyScore || null;
                         cityPool.push({
                             type: 'Destination',
                             name: data.name,
                             location: data.iata || '',
                             searchQuery: key,
-                            eqScore: cityEqScore
+                            eqScore: data.safetyScore
                         });
-
-                        // Add to District Pool if available
-                        if (data.lgbtqDistrict) {
-                            districtPool.push({
-                                type: 'District',
-                                name: data.lgbtqDistrict,
-                                location: data.name.split(',')[0],
-                                searchQuery: key,
-                                eqScore: cityEqScore
-                            });
-                        }
                     });
                 }
 
-                // 3. Balanced Selection (Target 60 total: ~20 Events, ~20 Cities, ~20 Districts)
-                // Ensure 3-5 cruises show up in the view more tab
-                const cruisePool = eventPool.filter(e => e.type === 'Cruise');
-                const otherEventPool = eventPool.filter(e => e.type !== 'Cruise');
+                // 2. Selection (Target 30 total: 5 Cruises, 20 Events, 5 Destinations)
+                const selectedCruises = getRandomSubset(cruisePool, 5);
+                const selectedEvents = getRandomSubset(eventPool, 20);
+                const selectedDestinations = getRandomSubset(cityPool, 5);
 
-                const numCruises = Math.floor(Math.random() * 3) + 3; // 3 to 5
-                const selectedCruises = getRandomSubset(cruisePool, Math.min(numCruises, cruisePool.length));
-                const selectedOtherEvents = getRandomSubset(otherEventPool, 20 - selectedCruises.length);
-                const selectedEvents = [...selectedCruises, ...selectedOtherEvents];
+                const sections = [
+                    { title: 'Pride Cruise Alerts', icon: 'directions_boat', color: 'pride-blue', items: selectedCruises },
+                    { title: 'Trending Pride Events', icon: 'event_upcoming', color: 'pride-purple', items: selectedEvents },
+                    { title: 'Featured Destinations', icon: 'location_on', color: 'pride-green', items: selectedDestinations }
+                ];
 
-                const selectedCities = getRandomSubset(cityPool, 20);
-                const selectedDistricts = getRandomSubset(districtPool, 20);
+                grid.innerHTML = sections.map(section => {
+                    if (section.items.length === 0) return '';
 
-                let selected = [...selectedEvents, ...selectedCities, ...selectedDistricts];
+                    const itemsHtml = section.items.map(h => {
+                        let icon = 'location_on';
+                        let badgeClass = 'bg-primary text-white';
+                        if (h.type === 'Event' || h.type === 'Cruise') {
+                            icon = h.type === 'Cruise' ? 'directions_boat' : 'event_upcoming';
+                            badgeClass = h.type === 'Cruise' ? 'bg-blue-500 text-white' : 'bg-yellow-400 text-slate-900 dark:text-white';
+                        }
 
-                // 4. Backfill if total < 20
-                if (selected.length < 60) {
-                    const remainingTarget = 60 - selected.length;
-                    const usedNames = new Set(selected.map(s => s.name + s.type));
-                    const allRemaining = [...eventPool, ...cityPool, ...districtPool]
-                        .filter(item => !usedNames.has(item.name + item.type));
-
-                    const extra = getRandomSubset(allRemaining, remainingTarget);
-                    selected = [...selected, ...extra];
-                }
-
-                // Shuffle final list
-                selected = getRandomSubset(selected, selected.length);
-
-                grid.innerHTML = selected.map(h => {
-                    let icon = 'location_on';
-                    let badgeClass = 'bg-primary text-white';
-                    if (h.type === 'Event' || h.type === 'Cruise') {
-                        icon = h.type === 'Cruise' ? 'directions_boat' : 'event_upcoming';
-                        badgeClass = h.type === 'Cruise' ? 'bg-blue-500 text-white' : 'bg-yellow-400 text-slate-900 dark:text-white';
-                    } else if (h.type === 'District') {
-                        icon = 'explore';
-                        badgeClass = 'bg-orange-500 text-white';
-                    }
+                        return `
+                        <div onclick="quickSearch('${h.searchQuery}', '${h.date || ''}', '${h.endDate || ''}')" class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-lg border-l-4 border-${section.color === 'pride-blue' ? 'pride-blue' : section.color === 'pride-purple' ? 'pride-purple' : 'pride-green'} flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform group relative">
+                            <div class="w-12 h-12 rounded-xl bg-${section.color}/10 flex items-center justify-center text-${section.color} shrink-0 group-hover:bg-${section.color} group-hover:text-white transition-colors">
+                                <span class="material-symbols-outlined">${icon}</span>
+                            </div>
+                            <div class="overflow-hidden flex-1 pr-6">
+                                <span class="text-[10px] font-black px-2 py-0.5 rounded-md uppercase mb-1 inline-block ${badgeClass}">${getHotelBadge(h)}</span>
+                                <p class="font-black text-slate-900 dark:text-white truncate">${h.name}</p>
+                                <p class="text-xs font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-tighter">${h.location} ${h.date ? '&bull; ' + h.date : ''}</p>
+                                ${h.eqScore ? `
+                                <div class="mt-1 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-xs ${h.eqScore >= 75 ? 'text-green-500' : h.eqScore >= 60 ? 'text-yellow-500' : 'text-red-500'}">shield</span>
+                                    <span class="text-[10px] font-bold ${h.eqScore >= 75 ? 'text-green-600' : h.eqScore >= 60 ? 'text-yellow-600' : 'text-red-600'}">Equaldex: ${h.eqScore}/100</span>
+                                </div>` : ''}
+                            </div>
+                            <button onclick="event.stopPropagation(); window.psBookmarkPlace('${h.name.replace(/'/g, "\\'")}', '${h.type}', '${h.searchQuery.replace(/'/g, "\\'")}', '${h.searchQuery.replace(/'/g, "\\'")}', '${h.date || ''}', '${h.endDate || ''}', this)" title="Bookmark" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10 opacity-0 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-600">
+                                <span class="material-symbols-outlined text-[16px] pointer-events-none">bookmark_border</span>
+                            </button>
+                        </div>
+                        `;
+                    }).join('');
 
                     return `
-                    <div onclick="quickSearch('${h.searchQuery}', '${h.date || ''}', '${h.endDate || ''}')" class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-lg border-l-4 border-primary flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform group relative">
-                        <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
-                            <span class="material-symbols-outlined">${icon}</span>
-                        </div>
-                        <div class="overflow-hidden flex-1 pr-6">
-                            <span class="text-[10px] font-black px-2 py-0.5 rounded-md uppercase mb-1 inline-block ${badgeClass}">${getHotelBadge(h)}</span>
-                            <p class="font-black text-slate-900 dark:text-white truncate">${h.name}</p>
-                            <p class="text-xs font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-tighter">${h.location} ${h.date ? '&bull; ' + h.date : ''}</p>
-                            ${(h.type === 'Destination' || h.type === 'District') && h.eqScore ? `
-                            <div class="mt-1 flex items-center gap-1">
-                                <span class="material-symbols-outlined text-xs ${h.eqScore >= 75 ? 'text-green-500' : h.eqScore >= 60 ? 'text-yellow-500' : 'text-red-500'}">shield</span>
-                                <span class="text-[10px] font-bold ${h.eqScore >= 75 ? 'text-green-600' : h.eqScore >= 60 ? 'text-yellow-600' : 'text-red-600'}">Equaldex: ${h.eqScore}/100</span>
-                            </div>` : ''}
-                        </div>
-                        <button onclick="event.stopPropagation(); window.psBookmarkPlace('${h.name.replace(/'/g, "\\'")}', '${h.type}', '${h.searchQuery.replace(/'/g, "\\'")}', '${h.searchQuery.replace(/'/g, "\\'")}', '${h.date || ''}', '${h.endDate || ''}', this)" title="Bookmark" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10 opacity-0 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-600">
-                            <span class="material-symbols-outlined text-[16px] pointer-events-none">bookmark_border</span>
-                        </button>
+                    <div class="col-span-full mt-6 mb-2">
+                         <div class="px-4 py-2 bg-${section.color}/10 rounded-xl inline-block border-l-4 border-${section.color === 'pride-blue' ? 'pride-blue' : section.color === 'pride-purple' ? 'pride-purple' : 'pride-green'}">
+                            <span class="font-black text-lg italic pride-gradient-text">${section.title}</span>
+                         </div>
                     </div>
-                `;
+                    <div class="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${itemsHtml}
+                    </div>
+                    `;
                 }).join('');
             }
 
@@ -2245,22 +2221,20 @@
                 const container = document.getElementById('hotspotsContainer');
                 if (!container) return;
 
-                if (!SAFE_HOTSPOTS_DATA || SAFE_HOTSPOTS_DATA.length === 0) {
-                    console.warn('[Pride Travel Scout] No hotspots data available');
-                    return;
-                }
+                // Amsterdam 2026 World Pride is PERMANENT
+                const amsterdamPride = {
+                    city: 'Amsterdam',
+                    country: 'Netherlands',
+                    safetyScore: 94,
+                    image: 'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=800&q=80',
+                    featured: true
+                };
 
-                // Make Amsterdam permanently featured for World Pride (Defensive check)
-                const amsterdam = SAFE_HOTSPOTS_DATA.find(h => h.city && h.city.toLowerCase() === 'amsterdam');
-                const others = SAFE_HOTSPOTS_DATA.filter(h => !h.city || h.city.toLowerCase() !== 'amsterdam');
+                // Filter others from the "featured post list" (SAFE_HOTSPOTS_DATA)
+                const others = (SAFE_HOTSPOTS_DATA || []).filter(h => h.city && h.city.toLowerCase() !== 'amsterdam');
 
-                let randomHotspots = [];
-                if (amsterdam) {
-                    randomHotspots.push(amsterdam);
-                    randomHotspots.push(...getRandomSubset(others, 2));
-                } else {
-                    randomHotspots = getRandomSubset(SAFE_HOTSPOTS_DATA, 3);
-                }
+                // Final selection: Amsterdam + 2 others
+                const randomHotspots = [amsterdamPride, ...getRandomSubset(others, 2)];
 
                 container.innerHTML = randomHotspots.filter(h => h).map(h => {
                     const cityEvents = SPECIAL_EVENTS_DATA.filter(e => e.city && h.city && e.city.toLowerCase() === h.city.toLowerCase() && e.type !== 'Cruise');
@@ -2309,16 +2283,19 @@
                 const allCruises = SPECIAL_EVENTS_DATA.filter(e => e.type === 'Cruise');
                 const otherEvents = SPECIAL_EVENTS_DATA.filter(e => e.type !== 'Cruise');
 
-                let randomEvents = [];
+                // Pick 5 total: At least 1 cruise
+                const selected = [];
                 if (allCruises.length > 0) {
-                    const randomCruise = allCruises[Math.floor(Math.random() * allCruises.length)];
-                    randomEvents.push(randomCruise);
-                    randomEvents = randomEvents.concat(getRandomSubset(otherEvents, 3));
-                    randomEvents.sort(() => Math.random() - 0.5);
-                } else {
-                    randomEvents = getRandomSubset(SPECIAL_EVENTS_DATA, 4);
+                    selected.push(allCruises[Math.floor(Math.random() * allCruises.length)]);
                 }
-                grid.innerHTML = randomEvents.filter(e => e).map(e => `
+
+                const remainingNeeded = 5 - selected.length;
+                selected.push(...getRandomSubset(otherEvents, remainingNeeded));
+
+                // Shuffle final list
+                const finalEvents = getRandomSubset(selected, selected.length);
+
+                grid.innerHTML = finalEvents.filter(e => e).map(e => `
                                 <div onclick="quickSearch('${e.city || ''}', '${e.start || ''}', '${e.end || ''}')" class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-lg border-l-4 border-primary flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform relative group">
                                     <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
                                         <span class="material-symbols-outlined">${e.type === 'Cruise' ? 'directions_boat' : 'event_upcoming'}</span>
