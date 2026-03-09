@@ -1443,13 +1443,13 @@
                     }
                 }
             };
-            let DESTINATION_LINKS = {}; // Loaded from destinations.js
+            let DESTINATION_LINKS = {}; // Loaded from traveldestinations.json
             window.DATABASE = { mappings: { regions: {}, countries: {}, cities: {} }, details: {} };
             let SPECIAL_EVENTS_DATA = [];
             let SAFE_HOTSPOTS_DATA = [];
 
             // === DESTINATIONS DATA LOADER ===
-            // Load all destination data from the external destinations.js script
+            // Load all destination data from traveldestinations.json
             let _destinationsLoaded = false;
 
             async function loadDestinationsData() {
@@ -1617,7 +1617,7 @@
                         }
 
                         // Specific Hotels for Events
-                        const EVENT_HOTELS = window._EVENT_HOTELS || {}; // Loaded from destinations.json
+                        const EVENT_HOTELS = window._EVENT_HOTELS || {}; // Loaded from traveldestinations.json
 
                         // --- EVENT DETECTION LOGIC ---
                         let eventContent = '';
