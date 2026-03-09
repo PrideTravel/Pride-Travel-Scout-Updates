@@ -2158,112 +2158,196 @@
                 const grid = document.getElementById('allHotspotsGrid');
                 if (!grid) return;
 
+                // Ensure data is loaded
+                if (!SPECIAL_EVENTS_DATA.length) {
+                    grid.innerHTML = '<div class="col-span-full text-center py-10"><p class="text-slate-500">Loading your pride guide...</p></div>';
+                    return;
+                }
+
                 const eventPool = SPECIAL_EVENTS_DATA.filter(e => e.type !== 'Cruise');
                 const cruisePool = SPECIAL_EVENTS_DATA.filter(e => e.type === 'Cruise');
                 const cityPool = [];
                 if (typeof DATABASE !== 'undefined' && DATABASE.details) {
                     Object.keys(DATABASE.details).forEach(key => {
                         const data = DATABASE.details[key];
-                        cityPool.push({
-                            type: 'Destination',
-                            name: data.name,
-                            location: data.iata || '',
-                            searchQuery: key,
-                            eqScore: data.safetyScore
-                        });
+                        if (data && data.name) {
+                            cityPool.push({
+                                type: 'Destination',
+                                name: data.name,
+                                location: data.iata || '',
+                                searchQuery: key,
+                                eqScore: data.safetyScore
+                            });
+                        }
                     });
                 }
 
-                // 20 Events, 5 Cruises, 5 Destinations
-                const selectedEvents = getRandomSubset(eventPool, 20);
-                const selectedCruises = getRandomSubset(cruisePool, 5);
-                const selectedDestinations = getRandomSubset(cityPool, 5);
+                // User wants 30 total: 20 Events, 5 Cruises, 5 Destinations
+                const selEvents = getRandomSubset(eventPool, 20);
+                const selCruises = getRandomSubset(cruisePool, 5);
+                const selCities = getRandomSubset(cityPool, 5);
 
                 const sections = [
-                    { title: 'LGBTQ Events', items: selectedEvents, color: 'pride-purple', icon: 'event_upcoming' },
-                    { title: 'LGBTQ Cruises', items: selectedCruises, color: 'pride-blue', icon: 'directions_boat' },
-                    { title: 'Destinations', items: selectedDestinations, color: 'pride-green', icon: 'location_on' }
+                    { title: 'LGBTQ Events', items: selEvents, color: 'pride-purple', icon: 'event_upcoming' },
+                    { title: 'LGBTQ Cruises', items: selCruises, color: 'pride-blue', icon: 'directions_boat' },
+                    { title: 'Destinations', items: selCities, color: 'pride-green', icon: 'location_on' }
                 ];
 
-                grid.innerHTML = sections.map(section => {
-                    if (section.items.length === 0) return '';
-
+                grid.innerHTML = sections.map(s => {
                     const titleBox = `
-                        <div class="col-span-full mt-6 mb-2">
-                             <div class="px-3 py-1 bg-${section.color}/10 rounded-lg inline-block border-l-4 border-${section.color}">
-                                <span class="font-extrabold text-lg italic pride-gradient-text">${section.title}</span>
-                             </div>
+                        <div class="col-span-full mt-8 mb-4">
+                            <div class="px-4 py-2 bg-${s.color}/10 rounded-xl inline-flex items-center gap-2 border-l-4 border-${s.color} shadow-sm">
+                                <span class="material-symbols-outlined text-${s.color}">${s.icon}</span>
+                                <span class="font-extrabold text-xl pride-gradient-text">${s.title}</span>
+                            </div>
                         </div>`;
 
-                    const itemsHtml = section.items.map(h => {
-                        let badgeClass = 'bg-primary text-white';
-                        if (h.type === 'Event' || h.type === 'Cruise') {
-                            badgeClass = h.type === 'Cruise' ? 'bg-blue-500 text-white' : 'bg-yellow-400 text-slate-900 dark:text-white';
-                        }
-                        const curType = h.type === 'Destination' ? 'Destination' : (h.type === 'Cruise' ? 'Cruise' : 'Event');
+                    const items = s.items.map(h => {
+                        const location = h.location || h.city || '';
+                        const meta = h.date ? `${location} • ${h.date}` : location;
+                        const query = h.searchQuery || h.city || h.name;
 
                         return `
-                        <div onclick="quickSearch('${h.searchQuery}', '${h.date || ''}', '${h.endDate || ''}')" class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-lg border-l-4 border-${section.color} flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform group relative">
-                            <div class="w-12 h-12 rounded-xl bg-${section.color}/10 flex items-center justify-center text-${section.color} shrink-0 group-hover:bg-${section.color} group-hover:text-white transition-colors">
-                                <span class="material-symbols-outlined">${section.icon}</span>
-                            </div>
-                            <div class="overflow-hidden flex-1 pr-6">
-                                <span class="text-[10px] font-black px-2 py-0.5 rounded-md uppercase mb-1 inline-block ${badgeClass}">${h.type}</span>
-                                <p class="font-black text-slate-900 dark:text-white truncate">${h.name}</p>
-                                <p class="text-xs font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-tighter">${h.location} ${h.date ? '&bull; ' + h.date : ''}</p>
-                                ${h.eqScore ? `
-                                <div class="mt-1 flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-xs ${h.eqScore >= 75 ? 'text-green-500' : h.eqScore >= 60 ? 'text-yellow-500' : 'text-red-500'}">shield</span>
-                                    <span class="text-[10px] font-bold ${h.eqScore >= 75 ? 'text-green-600' : h.eqScore >= 60 ? 'text-yellow-600' : 'text-red-600'}">Equaldex: ${h.eqScore}/100</span>
-                                </div>` : ''}
-                            </div>
-                            <button onclick="event.stopPropagation(); window.psBookmarkPlace('${h.name.replace(/'/g, "\'")}', '${curType}', '${h.searchQuery.replace(/'/g, "\'")}', '${h.searchQuery.replace(/'/g, "\'")}', '${h.date || ''}', '${h.endDate || ''}', this)" title="Bookmark" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10 opacity-0 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-600">
-                                <span class="material-symbols-outlined text-[16px] pointer-events-none">bookmark_border</span>
-                            </button>
-                        </div>`;
+                            <div onclick="quickSearch('${query.replace(/'/g, "\\'")}', '${h.start || ''}', '${h.end || ''}')" 
+                                 class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-lg border-l-4 border-${s.color} flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform group relative">
+                                <div class="w-12 h-12 rounded-xl bg-${s.color}/10 flex items-center justify-center text-${s.color} shrink-0">
+                                    <span class="material-symbols-outlined">${s.icon}</span>
+                                </div>
+                                <div class="overflow-hidden flex-1 pr-6">
+                                    <p class="font-black text-slate-900 dark:text-white truncate text-lg">${h.name}</p>
+                                    <p class="text-xs font-bold text-slate-500 uppercase tracking-tighter">${meta}</p>
+                                </div>
+                                <div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                                </div>
+                            </div>`;
                     }).join('');
 
-                    return titleBox + `<div class="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">${itemsHtml}</div>`;
+                    return titleBox + `<div class="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">${items}</div>`;
                 }).join('');
-                function populateTrendingEvents() {
-                    const grid = document.getElementById('eventsGrid');
-                    if (!grid) return;
-                    if (!SPECIAL_EVENTS_DATA || SPECIAL_EVENTS_DATA.length === 0) return;
+            }
 
-                    const allCruises = SPECIAL_EVENTS_DATA.filter(e => e.type === 'Cruise');
-                    const otherEvents = SPECIAL_EVENTS_DATA.filter(e => e.type !== 'Cruise');
+            function populateTrendingEvents() {
+                const grid = document.getElementById('eventsGrid');
+                if (!grid) return;
 
-                    const selectedCruises = getRandomSubset(allCruises, 2);
-                    const selectedEvents = getRandomSubset(otherEvents, 4);
-
-                    let htmlContent = '';
-                    if (selectedEvents.length > 0) {
-                        htmlContent += `<div class="col-span-full mb-2"><div class="px-3 py-1 bg-pride-purple/10 rounded-lg inline-block border-l-4 border-pride-purple"><span class="font-extrabold text-lg dark-pill"><span class="pride-gradient-text">LGBTQ Events</span></span></div></div>`;
-                        htmlContent += selectedEvents.map(e => renderTrendingCardSnippet(e)).join('');
-                    }
-                    if (selectedCruises.length > 0) {
-                        htmlContent += `<div class="col-span-full mt-4 mb-2"><div class="px-3 py-1 bg-pride-blue/10 rounded-lg inline-block border-l-4 border-pride-blue"><span class="font-extrabold text-lg dark-pill"><span class="pride-gradient-text">LGBTQ Cruises</span></span></div></div>`;
-                        htmlContent += selectedCruises.map(e => renderTrendingCardSnippet(e)).join('');
-                    }
-                    grid.innerHTML = htmlContent;
+                if (!SPECIAL_EVENTS_DATA || SPECIAL_EVENTS_DATA.length === 0) {
+                    grid.innerHTML = '<p class="col-span-full text-center text-slate-400 py-10 italic">Checking for upcoming pride events...</p>';
+                    return;
                 }
 
-                function renderTrendingCardSnippet(e) {
-                    const type = e.type === 'Cruise' ? 'Cruise' : 'Event';
-                    return `<div onclick="quickSearch('${(e.city || '').replace(/'/g, "\\'")}', '${e.start || ''}', '${e.end || ''}')" class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-lg border-l-4 border-primary flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform relative group">
-                    <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0"><span class="material-symbols-outlined">${type === 'Cruise' ? 'directions_boat' : 'event_upcoming'}</span></div>
-                    <div class="overflow-hidden pr-6"><p class="font-black text-slate-900 dark:text-white truncate">${e.name || 'Unnamed Event'}</p><p class="text-xs font-bold text-slate-500 uppercase tracking-tighter">${e.city || 'Unknown'} &bull; ${e.start || 'TBA'}</p></div>
-                    <button onclick="event.stopPropagation(); window.psBookmarkPlace('${(e.name || '').replace(/'/g, "\\'")}', '${type}', '${(e.city || '').replace(/'/g, "\\'")}', '${(e.city || '').replace(/'/g, "\\'")}', '${e.start || ''}', '${e.end || ''}', this)" title="Bookmark" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10 opacity-0 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-600"><span class="material-symbols-outlined text-[16px]">bookmark_border</span></button>
-                </div>`;
+                const cruises = SPECIAL_EVENTS_DATA.filter(e => e.type === 'Cruise');
+                const events = SPECIAL_EVENTS_DATA.filter(e => e.type !== 'Cruise');
+
+                // User wants 6 total: 4 events and 2 cruises
+                const selEvents = getRandomSubset(events, 4);
+                const selCruises = getRandomSubset(cruises, 2);
+
+                let html = '';
+
+                if (selEvents.length) {
+                    html += `
+                        <div class="col-span-full mb-4">
+                            <div class="px-4 py-2 bg-pride-purple/10 rounded-xl inline-flex items-center gap-2 border-l-4 border-pride-purple shadow-sm">
+                                <span class="material-symbols-outlined text-pride-purple">event_upcoming</span>
+                                <span class="font-extrabold text-xl pride-gradient-text">Upcoming LGBTQ Events</span>
+                            </div>
+                        </div>` + selEvents.map(e => renderTrendingCardSnippet(e)).join('');
                 }
-            }) ();
+
+                if (selCruises.length) {
+                    html += `
+                        <div class="col-span-full mt-8 mb-4">
+                            <div class="px-4 py-2 bg-pride-blue/10 rounded-xl inline-flex items-center gap-2 border-l-4 border-pride-blue shadow-sm">
+                                <span class="material-symbols-outlined text-pride-blue">directions_boat</span>
+                                <span class="font-extrabold text-xl pride-gradient-text">Trending Cruises</span>
+                            </div>
+                        </div>` + selCruises.map(e => renderTrendingCardSnippet(e)).join('');
+                }
+
+                grid.innerHTML = html;
+            }
+
+            function renderTrendingCardSnippet(e) {
+                const type = e.type === 'Cruise' ? 'Cruise' : 'Event';
+                const icon = type === 'Cruise' ? 'directions_boat' : 'event_upcoming';
+                const borderColor = type === 'Cruise' ? 'border-pride-blue' : 'border-pride-purple';
+                const bgColor = type === 'Cruise' ? 'bg-pride-blue/10' : 'bg-pride-purple/10';
+                const colorClass = type === 'Cruise' ? 'text-pride-blue' : 'text-pride-purple';
+
+                return `
+                    <div onclick="quickSearch('${e.city.replace(/'/g, "\\'")}', '${e.start}', '${e.end}')" 
+                         class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-lg border-l-4 ${borderColor} flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform relative group">
+                        <div class="w-12 h-12 rounded-xl ${bgColor} flex items-center justify-center ${colorClass} shrink-0">
+                            <span class="material-symbols-outlined">${icon}</span>
+                        </div>
+                        <div class="overflow-hidden pr-6 flex-1">
+                            <p class="font-black text-slate-900 dark:text-white truncate text-base">${e.name}</p>
+                            <p class="text-xs font-bold text-slate-500 uppercase tracking-tighter">${e.city} &bull; ${formatDateShort(e.start)}</p>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="material-symbols-outlined text-slate-200 group-hover:text-primary transition-colors">arrow_forward_ios</span>
+                        </div>
+                    </div>`;
+            }
+
+            function populateSafeHotspots() {
+                const container = document.getElementById('hotspotsContainer');
+                if (!container) return;
+
+                // Requirement: Amsterdam Pride is the 1st permanent featured hotspot
+                const amsterdamPride = {
+                    city: 'Amsterdam',
+                    country: 'Netherlands',
+                    safetyScore: 94,
+                    image: 'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=800&q=80',
+                    featured: true
+                };
+
+                const others = (SAFE_HOTSPOTS_DATA || []).filter(h => h.city && h.city.toLowerCase() !== 'amsterdam');
+                // Use randomSubset for the other 2 destinations
+                const selectedOthers = getRandomSubset(others, 2);
+                const selected = [amsterdamPride, ...selectedOthers];
+
+                container.innerHTML = selected.filter(h => h).map((h, index) => {
+                    const cityEvents = SPECIAL_EVENTS_DATA.filter(e => e.city?.toLowerCase() === h.city?.toLowerCase() && e.type !== 'Cruise');
+                    let tag = `<span class="bg-pride-blue text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg">Trending Destination</span>`;
+                    let params = `'${h.city.replace(/'/g, "\\'")}'`;
+
+                    if (h.city === 'Amsterdam') {
+                        tag = `<span class="bg-pride-orange text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg truncate max-w-[200px]">World Pride & Amsterdam Pride 2026</span>`;
+                        params = `'Amsterdam', '2026-07-25', '2026-08-08'`;
+                    } else if (cityEvents.length) {
+                        tag = `<span class="bg-pride-orange text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg truncate max-w-[200px]">Event: ${cityEvents[0].name}</span>`;
+                        params = `'${h.city.replace(/'/g, "\\'")}', '${cityEvents[0].start}', '${cityEvents[0].end}'`;
+                    }
+
+                    // Add rainbow border class for Amsterdam to make it pop as permanent 1st
+                    const borderClass = h.city === 'Amsterdam' ? 'rainbow-border' : '';
+
+                    return `
+                        <div onclick="quickSearch(${params})" 
+                             class="min-w-[280px] snap-center rounded-3xl overflow-hidden relative group shadow-2xl cursor-pointer active:scale-95 transition-transform ${borderClass}">
+                            <img class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110" src="${h.image}" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6">
+                                ${tag}
+                                <h4 class="text-white text-2xl font-black mb-1">${h.city}, ${h.country}</h4>
+                                <div class="flex items-center gap-2 text-white/90 text-xs font-bold">
+                                    <span class="material-symbols-outlined text-sm text-green-400 fill-1">verified_user</span> Equality Index: ${h.safetyScore || 'N/A'}/100
+                                </div>
+                            </div>
+                        </div>`;
+                }).join('');
+            }
+        })();
     </script>
     <script>
-            if (typeof navigator.serviceWorker !== 'undefined') {
-                navigator.serviceWorker.register('sw.js')
-                    .then(function (registration) { console.log('Service Worker registered'); })
-                    .catch(function (error) { console.log('Service Worker failed', error); });
-            }
+        if (typeof navigator.serviceWorker !== 'undefined') {
+            navigator.serviceWorker.register('sw.js')
+                .then(function (registration) { console.log('Service Worker registered'); })
+                .catch(function (error) { console.log('Service Worker failed', error); });
+        }
     </script>
 </body>
 
