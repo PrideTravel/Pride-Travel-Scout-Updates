@@ -1593,7 +1593,10 @@
 
                         // Safety check if mapping exists but details missing (shouldn't happen with correct data)
                         if (!data) {
-                            alert("Destination details currently unavailable.");
+                            // Only alert if this is the only target, otherwise just skip this one
+                            if (targets.length === 1) {
+                                alert("Destination details currently unavailable.");
+                            }
                             return;
                         }
 
@@ -1608,9 +1611,12 @@
 
                         // 1. Search in SPECIAL_EVENTS_DATA (Primary Source)
                         let matchingEvents = SPECIAL_EVENTS_DATA.filter(e => {
-                            // Check city match - only match events for THIS specific city (targetKey)
+                            // Check city match - match events for THIS specific city (targetKey) OR the city name in details
                             const normalize = s => s ? s.toLowerCase().trim() : '';
-                            const cityMatch = normalize(e.city) === normalize(targetKey);
+                            const targetCityName = normalize(data.name.split(',')[0]);
+                            const eventCity = normalize(e.city);
+
+                            const cityMatch = eventCity === normalize(targetKey) || eventCity === targetCityName;
 
                             if (!cityMatch) return false;
 
