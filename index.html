@@ -1351,7 +1351,15 @@
         })();
     </script>
 
-    <script src="destinations.js"></script>
+    <script>
+        // Use a dynamic script tag for destinations.js to prevent stale caching on GitHub
+        (function () {
+            const script = document.createElement('script');
+            script.src = 'destinations.js?v=' + Date.now();
+            script.async = false; // Maintain execution order
+            document.head.appendChild(script);
+        })();
+    </script>
     <script>
 
         (function () {
@@ -1446,58 +1454,73 @@
             function loadDestinationsData() {
                 if (_destinationsLoaded) return Promise.resolve();
 
-                const data = window.__DESTINATIONS_DATA__;
-                if (!data) {
-                    console.error('[Pride Travel Scout] destinations.js not loaded! Make sure destinations.js is in the same directory.');
-                    return Promise.reject('No destination data');
+                try {
+                    const data = window.__DESTINATIONS_DATA__;
+                    if (!data) {
+                        console.error('[Pride Travel Scout] destinations.js not loaded!');
+                        // Show a visible hint for the user on GitHub
+                        const hotspotsSection = document.getElementById('hotspots-section');
+                        if (hotspotsSection) {
+                            hotspotsSection.innerHTML = `
+                                <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-2xl border-2 border-red-200 dark:border-red-800 text-center">
+                                    <span class="material-symbols-outlined text-red-500 text-4xl mb-2">error</span>
+                                    <p class="text-red-800 dark:text-red-200 font-bold">Data failed to load.</p>
+                                    <p class="text-red-600 dark:text-red-300 text-sm">Please ensure destinations.js is present and try a hard refresh (Ctrl+F5).</p>
+                                </div>`;
+                        }
+                        return Promise.reject('No destination data');
+                    }
+
+                    console.log('[Pride Travel Scout] Loading destinations data...');
+
+                    // Populate DESTINATION_LINKS
+                    if (data.destinationLinks) {
+                        Object.assign(DESTINATION_LINKS, data.destinationLinks);
+                        console.log('  ✓ Destination links:', Object.keys(DESTINATION_LINKS).length);
+                    }
+
+                    // Populate DATABASE mappings and details
+                    if (data.mappings) {
+                        window.DATABASE.mappings = data.mappings;
+                        console.log('  ✓ Mappings loaded (regions:', Object.keys(data.mappings.regions || {}).length,
+                            ', countries:', Object.keys(data.mappings.countries || {}).length,
+                            ', cities:', Object.keys(data.mappings.cities || {}).length, ')');
+                    }
+                    if (data.details) {
+                        window.DATABASE.details = data.details;
+                        console.log('  ✓ Destination details:', Object.keys(data.details).length);
+                    }
+
+                    // Populate SPECIAL_EVENTS_DATA
+                    if (data.specialEvents) {
+                        SPECIAL_EVENTS_DATA.push(...data.specialEvents);
+                        console.log('  ✓ Special events:', SPECIAL_EVENTS_DATA.length);
+                    }
+
+                    // Populate EVENT_HOTELS
+                    if (data.eventHotels) {
+                        window._EVENT_HOTELS = data.eventHotels;
+                        console.log('  ✓ Event hotels:', Object.keys(data.eventHotels).length);
+                    }
+
+                    // Populate SAFE_HOTSPOTS_DATA
+                    if (data.safeHotspots) {
+                        SAFE_HOTSPOTS_DATA.push(...data.safeHotspots);
+                        console.log('  ✓ Safe hotspots:', SAFE_HOTSPOTS_DATA.length);
+                    }
+
+                    _destinationsLoaded = true;
+                    console.log('[Pride Travel Scout] ✓ All destination data loaded successfully');
+
+                    // Trigger UI population
+                    if (typeof populateTrendingEvents === 'function') populateTrendingEvents();
+                    if (typeof populateSafeHotspots === 'function') populateSafeHotspots();
+
+                    return Promise.resolve();
+                } catch (e) {
+                    console.error('[Pride Travel Scout] Error parsing destination data:', e);
+                    return Promise.reject(e);
                 }
-
-                console.log('[Pride Travel Scout] Loading destinations data...');
-
-                // Populate DESTINATION_LINKS
-                if (data.destinationLinks) {
-                    Object.assign(DESTINATION_LINKS, data.destinationLinks);
-                    console.log('  ✓ Destination links:', Object.keys(DESTINATION_LINKS).length);
-                }
-
-                // Populate DATABASE mappings and details
-                if (data.mappings) {
-                    window.DATABASE.mappings = data.mappings;
-                    console.log('  ✓ Mappings loaded (regions:', Object.keys(data.mappings.regions || {}).length,
-                        ', countries:', Object.keys(data.mappings.countries || {}).length,
-                        ', cities:', Object.keys(data.mappings.cities || {}).length, ')');
-                }
-                if (data.details) {
-                    window.DATABASE.details = data.details;
-                    console.log('  ✓ Destination details:', Object.keys(data.details).length);
-                }
-
-                // Populate SPECIAL_EVENTS_DATA
-                if (data.specialEvents) {
-                    SPECIAL_EVENTS_DATA.push(...data.specialEvents);
-                    console.log('  ✓ Special events:', SPECIAL_EVENTS_DATA.length);
-                }
-
-                // Populate EVENT_HOTELS (stored on window for access inside form handler)
-                if (data.eventHotels) {
-                    window._EVENT_HOTELS = data.eventHotels;
-                    console.log('  ✓ Event hotels:', Object.keys(data.eventHotels).length);
-                }
-
-                // Populate SAFE_HOTSPOTS_DATA
-                if (data.safeHotspots) {
-                    SAFE_HOTSPOTS_DATA.push(...data.safeHotspots);
-                    console.log('  ✓ Safe hotspots:', SAFE_HOTSPOTS_DATA.length);
-                }
-
-                _destinationsLoaded = true;
-                console.log('[Pride Travel Scout] ✓ All destination data loaded successfully');
-
-                // Trigger UI population now that data is available
-                if (typeof populateTrendingEvents === 'function') populateTrendingEvents();
-                if (typeof populateSafeHotspots === 'function') populateSafeHotspots();
-
-                return Promise.resolve();
             }
 
             // Load data immediately (synchronous since destinations.js is already loaded)
@@ -2025,6 +2048,7 @@
             }
 
             function getHotelBadge(h) {
+                if (!h) return 'Unknown';
                 if (h.type === 'Event Special') return 'Event Special';
                 let specialTags = ['LGBTQ Owned/Operated', 'LGBTQ Friendly', 'LGBTQ Hotels & Resorts', 'LGBTQ Resort', 'LGBTQ Hotel', 'LGBTQ Owned', 'Gay Hotel', 'Men Only', 'Adults Only', 'Adults-Only', 'Mens Only'];
                 if (h.tags) {
@@ -2035,10 +2059,10 @@
                         if (h.type && found.toLowerCase().includes(h.type.toLowerCase())) {
                             return found;
                         }
-                        return `${h.type} ${found}`;
+                        return `${h.type || 'Hotel'} ${found}`;
                     }
                 }
-                return h.type;
+                return h.type || 'Hotel';
             }
 
             function calculateFareEstimate(baseRange) {
@@ -2228,17 +2252,29 @@
                 const container = document.getElementById('hotspotsContainer');
                 if (!container) return;
 
-                // Make Amsterdam permanently featured for World Pride
-                const amsterdam = SAFE_HOTSPOTS_DATA.find(h => h.city === 'Amsterdam');
-                const others = SAFE_HOTSPOTS_DATA.filter(h => h.city !== 'Amsterdam');
-                const randomHotspots = [amsterdam, ...getRandomSubset(others, 2)];
+                if (!SAFE_HOTSPOTS_DATA || SAFE_HOTSPOTS_DATA.length === 0) {
+                    console.warn('[Pride Travel Scout] No hotspots data available');
+                    return;
+                }
 
-                container.innerHTML = randomHotspots.map(h => {
-                    const cityEvents = SPECIAL_EVENTS_DATA.filter(e => e.city.toLowerCase() === h.city.toLowerCase() && e.type !== 'Cruise');
+                // Make Amsterdam permanently featured for World Pride (Defensive check)
+                const amsterdam = SAFE_HOTSPOTS_DATA.find(h => h.city && h.city.toLowerCase() === 'amsterdam');
+                const others = SAFE_HOTSPOTS_DATA.filter(h => !h.city || h.city.toLowerCase() !== 'amsterdam');
+
+                let randomHotspots = [];
+                if (amsterdam) {
+                    randomHotspots.push(amsterdam);
+                    randomHotspots.push(...getRandomSubset(others, 2));
+                } else {
+                    randomHotspots = getRandomSubset(SAFE_HOTSPOTS_DATA, 3);
+                }
+
+                container.innerHTML = randomHotspots.filter(h => h).map(h => {
+                    const cityEvents = SPECIAL_EVENTS_DATA.filter(e => e.city && h.city && e.city.toLowerCase() === h.city.toLowerCase() && e.type !== 'Cruise');
                     let eventTagHtml = '';
                     let searchParams = `\'${h.city}\'`;
 
-                    if (h.city.toLowerCase() === 'amsterdam') {
+                    if (h.city && h.city.toLowerCase() === 'amsterdam') {
                         eventTagHtml = `<span class="bg-pride-orange text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg truncate max-w-[200px]">World Pride & Amsterdam Pride 2026</span>`;
                         searchParams = `'Amsterdam', '2026-07-25', '2026-08-08'`;
                     } else if (cityEvents.length > 0) {
@@ -2253,14 +2289,14 @@
                     <div onclick="quickSearch(${searchParams})"
                         class="min-w-[280px] snap-center rounded-3xl overflow-hidden relative group shadow-2xl cursor-pointer active:scale-95 transition-transform rainbow-border">
                         <img class="w-full h-72 object-cover transition-transform duration-700 group-hover:scale-110"
-                            src="${h.image}" />
+                            src="${h.image || 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80'}" />
                         <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
                         <div class="absolute bottom-6 left-6 right-6">
                             ${eventTagHtml}
-                            <h4 class="text-white text-2xl font-black mb-1">${h.city}, ${h.country}</h4>
+                            <h4 class="text-white text-2xl font-black mb-1">${h.city || 'Unknown City'}, ${h.country || ''}</h4>
                             <div class="flex items-center gap-2 text-white/90 text-xs font-bold">
                                 <span class="material-symbols-outlined text-sm text-green-400 fill-1">verified_user</span>
-                                Equality Index Score: ${h.safetyScore}/100
+                                Equality Index Score: ${h.safetyScore || 'N/A'}/100
                             </div>
                         </div>
                     </div>
@@ -2271,6 +2307,11 @@
             function populateTrendingEvents() {
                 const grid = document.getElementById('eventsGrid');
                 if (!grid) return;
+
+                if (!SPECIAL_EVENTS_DATA || SPECIAL_EVENTS_DATA.length === 0) {
+                    console.warn('[Pride Travel Scout] No special events data available');
+                    return;
+                }
 
                 const allCruises = SPECIAL_EVENTS_DATA.filter(e => e.type === 'Cruise');
                 const otherEvents = SPECIAL_EVENTS_DATA.filter(e => e.type !== 'Cruise');
@@ -2284,16 +2325,16 @@
                 } else {
                     randomEvents = getRandomSubset(SPECIAL_EVENTS_DATA, 4);
                 }
-                grid.innerHTML = randomEvents.map(e => `
-                                <div onclick="quickSearch('${e.city}', '${e.start}', '${e.end}')" class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-lg border-l-4 border-primary flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform relative group">
+                grid.innerHTML = randomEvents.filter(e => e).map(e => `
+                                <div onclick="quickSearch('${e.city || ''}', '${e.start || ''}', '${e.end || ''}')" class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-lg border-l-4 border-primary flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform relative group">
                                     <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
                                         <span class="material-symbols-outlined">${e.type === 'Cruise' ? 'directions_boat' : 'event_upcoming'}</span>
                                     </div>
                                     <div class="overflow-hidden pr-6">
-                                        <p class="font-black text-slate-900 dark:text-white truncate">${e.name}</p>
-                                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-tighter">${e.city} &bull; ${e.start}</p>
+                                        <p class="font-black text-slate-900 dark:text-white truncate">${e.name || 'Unnamed Event'}</p>
+                                        <p class="text-xs font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-tighter">${e.city || 'Unknown'} &bull; ${e.start || 'TBA'}</p>
                                     </div>
-                                    <button onclick="event.stopPropagation(); window.psBookmarkPlace('${e.name.replace(/'/g, "\\'")}', '${e.type === 'Cruise' ? 'Cruise' : 'Event'}', '${e.city.replace(/'/g, "\\'")}', '${e.city.replace(/'/g, "\\'")}', '${e.start}', '${e.end}', this)" title="Bookmark this event" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10 opacity-0 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-600">
+                                    <button onclick="event.stopPropagation(); window.psBookmarkPlace('${(e.name || '').replace(/'/g, "\\'")}', '${e.type === 'Cruise' ? 'Cruise' : 'Event'}', '${(e.city || '').replace(/'/g, "\\'")}', '${(e.city || '').replace(/'/g, "\\'")}', '${e.start || ''}', '${e.end || ''}', this)" title="Bookmark this event" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10 opacity-0 group-hover:opacity-100 dark:bg-slate-700 dark:hover:bg-slate-600">
                                         <span class="material-symbols-outlined text-[16px] pointer-events-none">bookmark_border</span>
                                     </button>
                                 </div>
