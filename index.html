@@ -1353,10 +1353,29 @@
 
     <script>
         // Use a dynamic script tag for destinations.js to prevent stale caching on GitHub
+        // Using an onload handler to guarantee data is ready before initialization
         (function () {
             const script = document.createElement('script');
             script.src = 'destinations.js?v=' + Date.now();
-            script.async = false; // Maintain execution order
+            script.async = false;
+            script.onload = function () {
+                console.log('[Pride Travel Scout] destinations.js loaded, initializing data...');
+                if (typeof window.psLoadDestinationsData === 'function') {
+                    window.psLoadDestinationsData();
+                }
+            };
+            script.onerror = function () {
+                console.error('[Pride Travel Scout] Failed to load destinations.js');
+                const hotspotsSection = document.getElementById('hotspots-section');
+                if (hotspotsSection) {
+                    hotspotsSection.innerHTML = `
+                        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-2xl border-2 border-red-200 dark:border-red-800 text-center">
+                            <span class="material-symbols-outlined text-red-500 text-4xl mb-2">error</span>
+                            <p class="text-red-800 dark:text-red-200 font-bold">Critical Error: Data script missing.</p>
+                            <p class="text-red-600 dark:text-red-300 text-sm">Please ensure destinations.js is in the same folder as this file.</p>
+                        </div>`;
+                }
+            };
             document.head.appendChild(script);
         })();
     </script>
@@ -1457,60 +1476,31 @@
                 try {
                     const data = window.__DESTINATIONS_DATA__;
                     if (!data) {
-                        console.error('[Pride Travel Scout] destinations.js not loaded!');
-                        // Show a visible hint for the user on GitHub
+                        console.error('[Pride Travel Scout] window.__DESTINATIONS_DATA__ not found!');
                         const hotspotsSection = document.getElementById('hotspots-section');
                         if (hotspotsSection) {
                             hotspotsSection.innerHTML = `
                                 <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-2xl border-2 border-red-200 dark:border-red-800 text-center">
                                     <span class="material-symbols-outlined text-red-500 text-4xl mb-2">error</span>
                                     <p class="text-red-800 dark:text-red-200 font-bold">Data failed to load.</p>
-                                    <p class="text-red-600 dark:text-red-300 text-sm">Please ensure destinations.js is present and try a hard refresh (Ctrl+F5).</p>
+                                    <p class="text-red-600 dark:text-red-300 text-sm">The data script loaded but was empty. Please try a hard refresh (Ctrl+F5).</p>
                                 </div>`;
                         }
                         return Promise.reject('No destination data');
                     }
 
-                    console.log('[Pride Travel Scout] Loading destinations data...');
+                    console.log('[Pride Travel Scout] Processing destinations data...');
 
-                    // Populate DESTINATION_LINKS
-                    if (data.destinationLinks) {
-                        Object.assign(DESTINATION_LINKS, data.destinationLinks);
-                        console.log('  ✓ Destination links:', Object.keys(DESTINATION_LINKS).length);
-                    }
-
-                    // Populate DATABASE mappings and details
-                    if (data.mappings) {
-                        window.DATABASE.mappings = data.mappings;
-                        console.log('  ✓ Mappings loaded (regions:', Object.keys(data.mappings.regions || {}).length,
-                            ', countries:', Object.keys(data.mappings.countries || {}).length,
-                            ', cities:', Object.keys(data.mappings.cities || {}).length, ')');
-                    }
-                    if (data.details) {
-                        window.DATABASE.details = data.details;
-                        console.log('  ✓ Destination details:', Object.keys(data.details).length);
-                    }
-
-                    // Populate SPECIAL_EVENTS_DATA
-                    if (data.specialEvents) {
-                        SPECIAL_EVENTS_DATA.push(...data.specialEvents);
-                        console.log('  ✓ Special events:', SPECIAL_EVENTS_DATA.length);
-                    }
-
-                    // Populate EVENT_HOTELS
-                    if (data.eventHotels) {
-                        window._EVENT_HOTELS = data.eventHotels;
-                        console.log('  ✓ Event hotels:', Object.keys(data.eventHotels).length);
-                    }
-
-                    // Populate SAFE_HOTSPOTS_DATA
-                    if (data.safeHotspots) {
-                        SAFE_HOTSPOTS_DATA.push(...data.safeHotspots);
-                        console.log('  ✓ Safe hotspots:', SAFE_HOTSPOTS_DATA.length);
-                    }
+                    // Populate mappings and details
+                    if (data.destinationLinks) Object.assign(DESTINATION_LINKS, data.destinationLinks);
+                    if (data.mappings) window.DATABASE.mappings = data.mappings;
+                    if (data.details) window.DATABASE.details = data.details;
+                    if (data.specialEvents) SPECIAL_EVENTS_DATA.push(...data.specialEvents);
+                    if (data.eventHotels) window._EVENT_HOTELS = data.eventHotels;
+                    if (data.safeHotspots) SAFE_HOTSPOTS_DATA.push(...data.safeHotspots);
 
                     _destinationsLoaded = true;
-                    console.log('[Pride Travel Scout] ✓ All destination data loaded successfully');
+                    console.log('[Pride Travel Scout] ✓ Data initialization complete');
 
                     // Trigger UI population
                     if (typeof populateTrendingEvents === 'function') populateTrendingEvents();
@@ -1518,13 +1508,19 @@
 
                     return Promise.resolve();
                 } catch (e) {
-                    console.error('[Pride Travel Scout] Error parsing destination data:', e);
+                    console.error('[Pride Travel Scout] Error during initialization:', e);
                     return Promise.reject(e);
                 }
             }
 
-            // Load data immediately (synchronous since destinations.js is already loaded)
-            loadDestinationsData();
+            // Expose globally for the script.onload callback
+            window.psLoadDestinationsData = loadDestinationsData;
+
+            // Load data immediately if script somehow loaded first,
+            // otherwise the onload handler will trigger it.
+            if (window.__DESTINATIONS_DATA__) {
+                loadDestinationsData();
+            }
             // === END DESTINATIONS DATA LOADER ===
 
             const form = document.querySelector('#searchForm');
