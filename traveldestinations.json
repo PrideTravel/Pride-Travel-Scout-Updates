@@ -4505,7 +4505,19 @@
     "tours": [{"name":"Ybor City Food Tour","style":"Food & Drink"},{"name":"Busch Gardens","style":"Cultural"},{"name":"Riverwalk","style":"Cultural"},{"name":"Gay-Friendly Winery Tour","style":"Food & Drink"},{"name":"LGBTQ+ History Walking Tour","style":"History"},{"name":"City Highlights Bus Tour","style":"Cultural"},{"name":"Sunset Cruise Excursion","style":"Relaxing"},{"name":"Market & Shopping Spree","style":"Food & Drink"},{"name":"Hidden Gems Night Tour","style":"Adventurous"},{"name":"Queer Art & Culture Walk","style":"Cultural"}]
   },
   "lhr": {
-    "monthlyWeather": {"0":{"high":"46°F","low":"38°F","summary":"Cold & Overcast"},"1":{"high":"47°F","low":"38°F","summary":"Cold & Cloudy"},"2":{"high":"54°F","low":"41°F","summary":"Cool & Breezy"},"3":{"high":"60°F","low":"44°F","summary":"Mild"},"4":{"high":"66°F","low":"49°F","summary":"Partly Sunny"},"5":{"high":"72°F","low":"55°F","summary":"Warm"},"6":{"high":"74°F","low":"59°F","summary":"Warm & Partly Sunny"},"7":{"high":"73°F","low":"58°F","summary":"Warm"},"8":{"high":"67°F","low":"54°F","summary":"Mild"},"9":{"high":"59°F","low":"48°F","summary":"Cool & Rainy"},"10":{"high":"51°F","low":"42°F","summary":"Cool & Overcast"},"11":{"high":"46°F","low":"39°F","summary":"Cold & Overcast"}},
+    "monthlyWeather": {
+    "0": {"high": "46°F", "low": "38°F", "summary": "Cold and gray; heavy coats and umbrellas are essential.", "description": "Peak winter with gray skies and a steady chill. Warm coats and umbrellas are necessary for city walks."},
+    "1": {"high": "47°F", "low": "38°F", "summary": "Chilly and overcast; ideal for indoor sightseeing.", "description": "Continuing winter chill with frequent cloud cover. Perfect for exploring indoor museums and historical sites."},
+    "2": {"high": "54°F", "low": "41°F", "summary": "Brisk spring air; layered clothing is recommended.", "description": "Spring begins with refreshing breezes and scattered sunshine. Layered clothing is best for changing conditions."},
+    "3": {"high": "60°F", "low": "44°F", "summary": "Mild and pleasant; great for walking through parks.", "description": "Pleasant spring weather with blooming parks. A great time for walking tours and outdoor sightseeing."},
+    "4": {"high": "66°F", "low": "49°F", "summary": "Comfortably warm; perfect for river cruises and gardens.", "description": "Bright and comfortable days. Ideal for river cruises and enjoying the city's famous green spaces."},
+    "5": {"high": "72°F", "low": "55°F", "summary": "Warm and sunny; ideal for rooftops and festivals.", "description": "Start of summer with long, light evenings. Perfect for rooftop bars and outdoor festivals across the city."},
+    "6": {"high": "74°F", "low": "59°F", "summary": "Peak summer warmth; long days and outdoor events.", "description": "Peak summer warmth and sunshine. The city is vibrant with outdoor events and busy riverside terraces."},
+    "7": {"high": "73°F", "low": "58°F", "summary": "Pleasantly warm; perfect for sightseeing and picnics.", "description": "Comfortably warm days continue. Great for exploring the South Bank and attending summer festivals."},
+    "8": {"high": "67°F", "low": "54°F", "summary": "Mild autumn transition; crisp days and local markets.", "description": "Mild and pleasant transition into autumn. Crisp afternoons are perfect for exploring local markets and neighborhoods."},
+    "9": {"high": "59°F", "low": "48°F", "summary": "Cool and rainy; keep an umbrella ready.", "description": "Cooler air and autumn colors arrive. Keep an umbrella handy for frequent but light London showers."},
+    "10": {"high": "51°F", "low": "42°F", "summary": "Brisk and cloudy; warm layers are necessary.", "description": "Brisk autumn days with gray, heavy skies. A warm sweater and waterproof jacket are highly recommended."},
+    "11": {"high": "46°F", "low": "39°F", "summary": "Cold and festive; full winter gear is required.", "description": "Cold winter air and festive city lights. Heavy coats are needed for outdoor markets and holiday events."}
     "name": "London Heathrow (LHR)",
     "iata": "LHR",
     "image": "&#127468;&#127463;",
