@@ -2085,8 +2085,8 @@
                                 const monthIndex = new Date(safeDate).getUTCMonth();
                                 const monthName = getMonthName(safeDate);
                                 const mWeather = data.monthlyWeather ? data.monthlyWeather[monthIndex] : null;
-                                const highTemp = mWeather ? mWeather.high : '72°F';
-                                const lowTemp = mWeather ? mWeather.low : '55°F';
+                                const highTemp = (mWeather && mWeather.high) ? mWeather.high : '72°F';
+                                const lowTemp = (mWeather && mWeather.low) ? mWeather.low : '55°F';
                                 const summary = mWeather && mWeather.summary ? mWeather.summary : 'Sunny';
                                 const description = (mWeather && mWeather.description) ? mWeather.description : (data.weather ? data.weather.replace(/[.\s]*\d+[°&]?(deg;)?\s*[CF]/g, '').trim() : '');
                                 const gear = (mWeather && mWeather.gear) ? mWeather.gear : 'Light layers and comfortable walking shoes.';
@@ -2102,10 +2102,10 @@
                                         <div class="flex-1 pl-1">
                                             <p class="text-xs font-black text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-widest mb-1">${monthName} Average</p>
                                             <div class="flex items-baseline gap-3 mb-2">
-                                                <span class="text-2xl font-black text-slate-900 dark:text-white">${highTemp}</span>
-                                                <span class="text-sm font-bold text-slate-400 dark:text-slate-300">High</span>
-                                                <span class="text-lg font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300">${lowTemp}</span>
-                                                <span class="text-sm font-bold text-slate-400 dark:text-slate-300">Low</span>
+                                                <span class="text-[20px] font-black text-slate-900 dark:text-white">${highTemp}</span>
+                                                <span class="text-[20px] font-bold text-slate-400 dark:text-slate-300">High</span>
+                                                <span class="text-[20px] font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300">${lowTemp}</span>
+                                                <span class="text-[20px] font-bold text-slate-400 dark:text-slate-300">Low</span>
                                             </div>
                                             <p class="text-[20px] leading-relaxed font-bold text-primary mt-1">Gear & Packing: <span class="text-slate-600 dark:text-slate-400">${gear}</span></p>
                                         </div>
