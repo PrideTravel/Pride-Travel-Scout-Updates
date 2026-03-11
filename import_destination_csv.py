@@ -59,9 +59,48 @@ def load_json() -> dict:
         return json.load(f)
 
 
+# Fields within a destination block that should be compacted onto a single line
+_COMPACT_FIELDS = {"hotels", "nightlife", "tours", "events", "monthlyWeather"}
+
+
+def format_json(data: dict) -> str:
+    """
+    Semi-readable JSON format:
+      - Each destination gets an indented block (one field per line)
+      - Array/dict fields (hotels, nightlife, tours, events, monthlyWeather)
+        are collapsed to a single compact line each
+      - Non-destination top-level keys (mappings, destinationLinks) stay
+        fully compact on a single line
+    """
+    def is_destination(v: object) -> bool:
+        return isinstance(v, dict) and "iata" in v
+
+    def compact(v: object) -> str:
+        return json.dumps(v, separators=(",", ":"), ensure_ascii=False)
+
+    parts: list[str] = []
+    items = list(data.items())
+    for i, (key, value) in enumerate(items):
+        trail = "," if i < len(items) - 1 else ""
+        key_str = json.dumps(key)
+
+        if is_destination(value):
+            field_lines: list[str] = []
+            field_items = list(value.items())
+            for j, (fk, fv) in enumerate(field_items):
+                ftrail = "," if j < len(field_items) - 1 else ""
+                field_lines.append(f"    {json.dumps(fk)}:{compact(fv)}{ftrail}")
+            inner = "\n".join(field_lines)
+            parts.append(f"  {key_str}:{{\n{inner}\n  }}{trail}")
+        else:
+            parts.append(f"  {key_str}:{compact(value)}{trail}")
+
+    return "{\n" + "\n".join(parts) + "\n}"
+
+
 def save_json(data: dict) -> None:
-    with open(JSON_PATH, "w") as f:
-        json.dump(data, f, separators=(',', ':'), ensure_ascii=False)
+    with open(JSON_PATH, "w", encoding="utf-8") as f:
+        f.write(format_json(data))
     print(f"  Saved → {JSON_PATH}")
 
 
