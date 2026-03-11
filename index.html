@@ -2003,7 +2003,7 @@
                                     ${randomRestaurants.map((r, i) => {
                                 let color = 'pride-orange'; // default restaurant
                                 const t = (r.type || '').toLowerCase();
-                                if (t.includes('cafe') || t.includes('coffee') || t.includes('bakery')) color = 'pride-yellow';
+                                if (t.includes('cafe') || t.includes('coffee') || t.includes('bakery')) color = 'pride-orange';
                                 else if (t.includes('shop') || t.includes('store')) color = 'pride-green';
                                 const icon = getRestaurantIcon(r.type);
                                 const firstTag = r.tags && r.tags.length > 0 ? r.tags[0] : '';
@@ -2027,8 +2027,9 @@
                             <!-- 7. Weather Forecast -->
                             <section class="bg-gradient-to-r from-pride-red/10 via-pride-yellow/10 to-pride-purple/10 rounded-xl p-5 border border-primary/20">
                                 ${(() => {
-                                const monthIndex = dateStart ? new Date(dateStart).getUTCMonth() : new Date().getUTCMonth();
-                                const monthName = getMonthName(dateStart || new Date().toISOString());
+                                const safeDate = (dateStart && dateStart !== 'undefined' && dateStart !== 'null') ? dateStart : new Date().toISOString();
+                                const monthIndex = new Date(safeDate).getUTCMonth();
+                                const monthName = getMonthName(safeDate);
                                 const mWeather = data.monthlyWeather ? data.monthlyWeather[monthIndex] : null;
                                 const highTemp = mWeather ? mWeather.high : '72°F';
                                 const lowTemp = mWeather ? mWeather.low : '55°F';
