@@ -1982,7 +1982,7 @@
                                             <button onclick="window.psBookmarkPlace('${n.name.replace(/'/g, "\\'")}', 'Nightlife', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this place" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10">
                                                 <span class="material-symbols-outlined text-[16px]">bookmark</span>
                                             </button>
-                                            <div class="w-10 h-10 bg-${color} rounded-full flex items-center justify-center text-white mb-3 group-hover:bg-white dark:bg-slate-800 group-hover:text-${color}">
+                                            <div class="w-10 h-10 bg-${color} rounded-full flex items-center justify-center text-white mb-3 group-hover:bg-white dark:bg-white dark:text-${color} group-hover:text-${color}">
                                                 ${icon}
                                             </div>
                                             <p class="font-bold group-hover:text-white text-black" style="color: black !important;">${n.name}</p>
@@ -2012,7 +2012,7 @@
                                             <button onclick="window.psBookmarkPlace('${r.name.replace(/'/g, "\\'")}', 'Dining', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this place" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10">
                                                 <span class="material-symbols-outlined text-[16px]">bookmark</span>
                                             </button>
-                                            <div class="w-10 h-10 bg-${color} rounded-full flex items-center justify-center text-white mb-3 group-hover:bg-white dark:bg-slate-800 group-hover:text-${color}">
+                                            <div class="w-10 h-10 bg-${color} rounded-full flex items-center justify-center text-white mb-3 group-hover:bg-white dark:bg-white dark:text-${color} group-hover:text-${color}">
                                                 ${icon}
                                             </div>
                                             <p class="font-bold group-hover:text-white text-black" style="color: black !important;">${r.name}</p>
@@ -2040,7 +2040,7 @@
                                 return `
                                 <div class="flex justify-between items-start mb-4 gap-4">
                                     <h3 class="font-bold dark-pill whitespace-nowrap"><a href="https://www.google.com/search?q=Weather+in+${encodeURIComponent(data.name)}+in+${encodeURIComponent(monthName)}" target="_blank" class="pride-gradient-text hover:underline">${monthName} Weather</a></h3>
-                                    <span class="text-xs font-bold text-slate-600 dark:text-slate-300 text-right leading-tight max-w-[60%]">${description}</span>
+                                    <span class="text-[18px] font-bold text-slate-600 dark:text-slate-300 text-right leading-tight max-w-[60%]">${description}</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <div class="w-full flex items-center gap-5 p-4 bg-white dark:bg-slate-800/60 rounded-xl">
@@ -2053,7 +2053,7 @@
                                                 <span class="text-lg font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300">${lowTemp}</span>
                                                 <span class="text-sm font-bold text-slate-400 dark:text-slate-300">Low</span>
                                             </div>
-                                            <p class="text-[11px] leading-relaxed font-bold text-primary mt-1">Gear & Packing: <span class="text-slate-600 dark:text-slate-400">${gear}</span></p>
+                                            <p class="text-[18px] leading-relaxed font-bold text-primary mt-1">Gear & Packing: <span class="text-slate-600 dark:text-slate-400">${gear}</span></p>
                                         </div>
                                     </div>
                                 </div>
