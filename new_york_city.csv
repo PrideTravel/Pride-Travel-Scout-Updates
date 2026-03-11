@@ -1,0 +1,140 @@
+# ═════════════════════════════════════════════════════════════════════════════
+# Pride Travel Scout – New York City, USA
+# ═════════════════════════════════════════════════════════════════════════════
+
+Info, New York City USA, JFK, 🇺🇸, "USA: Extremely safe. Chelsea and Hell's Kitchen are iconic LGBTQ neighborhoods; rights strongly protected citywide.", 95, Chelsea / Hell's Kitchen
+
+Weather, Four distinct seasons with hot humid summers and cold snowy winters., 350, 900
+
+# Monthly weather
+Month, 0,  37°F, 25°F, "Bitterly cold with freezing winds and frequent snow; heavy insulated winter layers required."
+Month, 1,  40°F, 27°F, "Frigid and damp, often bringing the season's heaviest snow; waterproof winter footwear is essential."
+Month, 2,  50°F, 34°F, "Highly unpredictable transition from winter slush to cool sun; versatile mid-weight layers are best."
+Month, 3,  62°F, 44°F, "Refreshingly mild but known for frequent spring showers; waterproof shells and light jackets recommended."
+Month, 4,  71°F, 54°F, "Perfectly pleasant with low humidity and warm afternoons; ideal for light sweaters and t-shirts."
+Month, 5,  80°F, 63°F, "Warm and increasingly humid with occasional evening thunderstorms; breathable cotton or linen fabrics work best."
+Month, 6,  85°F, 69°F, "Peak summer heat and high humidity; stay hydrated and wear the lightest possible clothing."
+Month, 7,  83°F, 68°F, "Oppressive humidity remains with very warm nights; moisture-wicking clothes are necessary for city walking."
+Month, 8,  76°F, 61°F, "Warm golden days and crisp evenings; the most comfortable month for layering light fashion."
+Month, 9,  64°F, 50°F, "Cool brisk air and bright autumn sun; medium-weight coats and boots are classic NYC staples."
+Month, 10, 53°F, 41°F, "Sharp chilly winds signal winter's approach; warm wool coats and thermal accessories become necessary."
+Month, 11, 39°F, 28°F, "Cold and festive but prone to biting wind-chill; full winter gear is needed for outdoors."
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Hotels
+# ─────────────────────────────────────────────────────────────────────────────
+Hotel, The Moore Chelsea,                    Moderate,    LGBTQ Owned & Operated
+Hotel, Kimpton Eventi Hotel,                 Luxury,      World Rainbow Hotels Member
+Hotel, Kimpton Hotel Theta,                  Moderate,    World Rainbow Hotels Member
+Hotel, W New York - Times Square,            Luxury,      World Rainbow Hotels Member
+Hotel, W New York - Union Square,            Luxury,      World Rainbow Hotels Member
+Hotel, The Standard High Line,               Moderate,    IGLTA Accredited
+Hotel, The Standard East Village,            Moderate,    IGLTA Accredited
+Hotel, New York Marriott Marquis,            Moderate,    IGLTA Accredited
+Hotel, The Westin New York at Times Square,  Moderate,    IGLTA Accredited
+Hotel, Sheraton New York Times Square,       Mid-priced,  IGLTA Accredited
+Hotel, Maritime Hotel,                       Moderate,    LGBTQ Friendly
+Hotel, The Chelsea Hotel,                    Luxury,      LGBTQ Friendly
+Hotel, The High Line Hotel,                  Luxury,      LGBTQ Friendly
+Hotel, The Jane Hotel,                       Budget,      LGBTQ Friendly
+Hotel, Arlo Nomad,                           Mid-priced,  LGBTQ Friendly
+Hotel, Public Hotel,                         Moderate,    LGBTQ Friendly
+Hotel, The Ludlow Hotel,                     Luxury,      LGBTQ Friendly
+Hotel, Moxy NYC Chelsea,                     Mid-priced,  LGBTQ Friendly
+Hotel, Ace Hotel New York,                   Moderate,    LGBTQ Friendly
+Hotel, The William Vale (Brooklyn),          Luxury,      LGBTQ Friendly
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Bars & Clubs
+# ─────────────────────────────────────────────────────────────────────────────
+Bar, The Duplex,         Bar,   Piano Bar | Cabaret
+Bar, Stonewall Inn,      Bar,   Iconic | Historical
+Bar, Julius',            Bar,   Historical | Neighborhood
+Bar, Pieces,             Bar,   Drag | Video Bar
+Bar, Ty's,               Bar,   Neighborhood | Men Only
+Bar, Monster Bar,        Bar,   Piano Bar | Dance
+Bar, Cubbyhole,          Bar,   Lesbian | Eclectic
+Bar, Henrietta Hudson,   Club,  Lesbian | Dance
+Bar, Industry,           Club,  Dance | Drag
+Bar, Therapy,            Bar,   Cocktails | Drag
+Bar, Ritz Bar & Lounge,  Bar,   Dance | Patio
+Bar, Flaming Saddles,    Bar,   Country | Go-go Boys
+Bar, The Townhouse,      Bar,   Cocktails | Piano Bar
+Bar, Eagle NYC,          Bar,   Leather | Rooftop
+Bar, Barracuda,          Bar,   Drag | Dive
+Bar, Gym Sportsbar,      Bar,   Sports Bar | Bear
+Bar, Rebar,              Club,  Dance | Cruise
+Bar, Metropolitan,       Bar,   Craft Beer | Patio
+Bar, The Rosemont,       Club,  Dance | Patio
+Bar, 3 Dollar Bill,      Club,  Dance | Performance
+Bar, The Deep End,       Bar,   Bear | Creative
+Bar, The Phoenix,        Bar,   Dive | Neighborhood
+Bar, Nowhere,            Bar,   Dive | Alternative
+Bar, The Cock,           Bar,   Cruise | Alternative
+Bar, Fairytale Lounge,   Bar,   Go-go Boys | Strip
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Saunas
+# ─────────────────────────────────────────────────────────────────────────────
+Bar, East Side Club / ConTEAnenal,  Sauna,  Men Only
+Bar, West Side Spa,                 Sauna,  Cruise Club
+Bar, East Side Club,                Sauna,  Cruise Club
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Stores
+# ─────────────────────────────────────────────────────────────────────────────
+Bar, Bureau of Gen. Services,  Store,  LGBTQ Bookstore
+Bar, The Phluid Project,       Store,  Clothing
+Bar, Purple Passion,           Store,  Leather | Fetish
+Bar, Rainbow Station,          Store,  Leather | Fetish
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Restaurants
+# ─────────────────────────────────────────────────────────────────────────────
+Bar, Elmo,                    Restaurant,  Restaurant
+Bar, Big Gay Ice Cream,       Restaurant,  Bakery | Dessert
+Bar, La Buvette,              Restaurant,  Cafe | Restaurant
+Bar, The Coppola's,           Restaurant,  Restaurant
+Bar, The Bus Stop Cafe,       Restaurant,  Cafe | Restaurant
+Bar, Daily Provisions,        Restaurant,  Cafe | Bakery
+Bar, Pink-A-Boo,              Restaurant,  Bakery | Cafe
+Bar, Winner,                  Restaurant,  Bakery | Cafe
+Bar, Buvette,                 Restaurant,  Restaurant | Cafe
+Bar, Cafeteria,               Restaurant,  Restaurant
+Bar, Freddie's Tiny Bar,      Restaurant,  Restaurant | Bar
+Bar, Hearth,                  Restaurant,  Restaurant
+Bar, Otway,                   Restaurant,  Restaurant | Bakery
+Bar, Rangoon,                 Restaurant,  Restaurant
+Bar, Witch Craft,             Restaurant,  Cafe | Restaurant
+Bar, Ninth Street Espresso,   Restaurant,  Coffeeshop
+Bar, Koffee Kake Bakery,      Restaurant,  Bakery
+Bar, La Bergamote,            Restaurant,  Bakery | Cafe
+Bar, Donut Pub,               Restaurant,  Bakery
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Tours
+# ─────────────────────────────────────────────────────────────────────────────
+Tour, 9/11 Memorial & Museum Entry,                   History,       Budget
+Tour, Summit One Vanderbilt Observation Deck,          Cultural,      Moderate
+Tour, Statue of Liberty & Ellis Island Guided Tour,    History,       Moderate
+Tour, Chelsea Market & High Line Food Tour,            Food & Drink,  Moderate
+Tour, Circle Line: Best of NYC Sightseeing Cruise,     Cultural,      Moderate
+Tour, The Metropolitan Museum of Art Guided Tour,      Cultural,      Moderate
+Tour, Manhattan Sky-High Helicopter Tour,              Adventurous,   Luxury
+Tour, Broadway Show Experience,                        Show,          Luxury
+Tour, Greenwich Village Culinary Walking Tour,         Food & Drink,  Moderate
+Tour, Bateaux New York Glass-Enclosed Dinner Cruise,   Show,          Luxury
+Tour, Brooklyn Bridge & DUMBO Walking Tour,            Cultural,      Budget
+Tour, "Intrepid Sea, Air & Space Museum",              Cultural,      Moderate
+Tour, Empire State Building AM/PM Experience,          Cultural,      Moderate
+Tour, Central Park Horse and Carriage Ride,            Cultural,      Moderate
+Tour, One World Observatory Discovery Ticket,          Cultural,      Moderate
+Tour, Pride Walking Tour: History of LGBTQ Rights,     History,       Budget
+Tour, Greenwich Village LGBTQ History Tour,            History,       Moderate
+Tour, The Stonewall Uprising Historical Tour,          History,       Budget
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Mappings
+# ─────────────────────────────────────────────────────────────────────────────
+Map, north america,  region,   new york city usa
+Map, usa,            country,  new york city usa
