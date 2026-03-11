@@ -1733,7 +1733,7 @@
 
                         // Prepare Vibrant Nightlife Section
                         let nightlifeOptions = [];
-                        let availableNightlife = data.nightlife ? [...data.nightlife] : [];
+                        let availableNightlife = Array.isArray(data.nightlife) ? [...data.nightlife] : [];
                         let availableRestaurants = data.restaurants ? [...data.restaurants] : [];
 
                         // 1. Pick 1 Lesbian or Trans-Friendly Venue
@@ -1776,7 +1776,7 @@
                         
                         // Remaining restaurants go to the Restaurants & Cafes section
                         const randomRestaurants = getRandomSubset(remainRestaurants, 8);
-                        const randomTours = data.tours.slice(0, 5);
+                        const randomTours = (data.tours || []).slice(0, 5);
                         const fareEstimate = calculateFareEstimate(data.baseFare);
                         const delay = index * 200;
 
