@@ -61,7 +61,7 @@ def load_json() -> dict:
 
 def save_json(data: dict) -> None:
     with open(JSON_PATH, "w") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+        json.dump(data, f, separators=(',', ':'), ensure_ascii=False)
     print(f"  Saved → {JSON_PATH}")
 
 
