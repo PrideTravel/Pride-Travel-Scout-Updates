@@ -1,0 +1,91 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Pride Travel Scout – Destination Import Template
+# ─────────────────────────────────────────────────────────────────────────────
+# Rules:
+#   • First column is always the ROW TYPE (Info, Hotel, Bar, Tour, etc.)
+#   • Tags use  |  as a separator  →  Drag | Dance | Late Night
+#   • Month rows use 3-letter abbreviation OR 0-11 index
+#   • Lines starting with # are comments and are ignored
+#   • Blank rows are ignored
+#
+# COLUMNS BY ROW TYPE:
+#   Info,    Full City Name,  IATA,  Flag Emoji,  LGBTQ Safety text,  Safety Score (0-100),  Gay District
+#   Hotel,   Name,            Type (Luxury|Moderate|Boutique),  Tags
+#   Bar,     Name,            Type (Bar|Club|Sauna|Store),      Tags
+#   Tour,    Name,            Style,                            Price (optional)
+#   Weather, General text,    Fare Min,  Fare Max
+#   Month,   jan-dec or 0-11, High temp, Low temp, Summary
+#   Event,   Name,            Start YYYY-MM-DD,  End YYYY-MM-DD
+#   Map,     Mapping key,     Type (region|country|city),  City key to add
+#   Link,    City key,        Type (gaycities|youtube),    URL
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ═════════════════════════════════════════════════════════════════════════════
+# EXAMPLE DESTINATION: Barcelona, Spain
+# ═════════════════════════════════════════════════════════════════════════════
+
+Info, Barcelona Spain, BCN, 🇪🇸, Spain: Safe. Eixample is one of Europe's most vibrant gay neighborhoods., 85, Eixample (Gayxample)
+
+Weather, Mediterranean. 80°F summers., 400, 900
+
+# Monthly weather — use jan/feb/... or 0/1/...
+Month, jan,  55°F,  42°F,  Mild Winter
+Month, feb,  57°F,  43°F,  Mild Winter
+Month, mar,  62°F,  48°F,  Early Spring
+Month, apr,  68°F,  53°F,  Spring Breeze
+Month, may,  74°F,  59°F,  Spring Warmth
+Month, jun,  82°F,  67°F,  Summer Begins
+Month, jul,  88°F,  72°F,  Hot Summer
+Month, aug,  88°F,  73°F,  Peak Summer
+Month, sep,  81°F,  67°F,  Warm Fall
+Month, oct,  72°F,  58°F,  Fall Crisp
+Month, nov,  62°F,  49°F,  Mild Fall
+Month, dec,  56°F,  43°F,  Winter Chill
+
+# Hotels — Type: Luxury | Moderate | Boutique
+Hotel, Axel Hotel Barcelona,       Moderate,  LGBTQ Hotel | Rooftop Pool
+Hotel, Hotel Arts Barcelona,       Luxury,    Beachfront | Spa
+Hotel, Casa Camper,                Boutique,  Design | Central
+Hotel, The Serras Hotel,           Luxury,    Gothic Quarter | Terrace
+Hotel, Generator Barcelona,        Moderate,  Social | Budget-Friendly
+
+# Bars & Clubs — Type: Bar | Club | Sauna | Store
+Bar, Punto BCN,       Bar,    Men Only | Cruise
+Bar, Arena Madre,     Club,   Dance | Mixed
+Bar, Sala Diana,      Club,   Lesbian | Dance
+Bar, Metro Disco,     Club,   Iconic | Late Night
+Bar, Federica & Co,  Bar,    Lesbian-Friendly | Cocktails
+Bar, Thermas BCN,    Sauna,  Men Only | Spa
+Bar, Ovlas Store,    Store,  Gear | Leather | Fetish
+
+# Tours — Style: Cultural | History | Food & Drink | Nature | Show | Adventurous
+Tour, Gothic Quarter Walk,           History,    $20
+Tour, Sagrada Familia Skip-the-Line, Cultural,   $35
+Tour, Gay Tapas & Cocktail Tour,     Food & Drink
+Tour, LGBTQ+ History of Barcelona,   History
+
+# Events
+Event, Circuit Festival Barcelona,  2026-08-05,  2026-08-12
+
+# Map — add this city to existing mapping groups
+# Map, <group name>, <type: region|country|city>, <city key (blank = current)>
+Map, europe,     region,   barcelona
+Map, spain,      country,  barcelona
+
+# Link — gaycities or youtube links for this destination
+Link, barcelona, gaycities, https://barcelona.gaycities.com/
+Link, barcelona, youtube,   https://www.youtube.com/watch?v=example
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# ADD ANOTHER DESTINATION BELOW — just start a new Info row
+# ═════════════════════════════════════════════════════════════════════════════
+
+# Info, City Name Country, IATA, 🏳️‍🌈, Safety text., 75, District Name
+# Weather, Brief weather description., 300, 700
+# Month, jan, 60°F, 48°F, Mild
+# Hotel, Hotel Name, Moderate, LGBTQ Friendly
+# Bar, Bar Name, Bar/Club, Drag | Dance
+# Tour, Tour Name, Cultural
+# Map, europe, region, city-key
+# Link, city-key, gaycities, https://...
