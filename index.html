@@ -2026,24 +2026,24 @@
                             <!-- 7. Weather Forecast -->
                             <section class="bg-gradient-to-r from-pride-red/10 via-pride-yellow/10 to-pride-purple/10 rounded-xl p-5 border border-primary/20">
                                 ${(() => {
-                                const monthIndex = new Date(dateStart).getUTCMonth();
-                                const monthName = getMonthName(dateStart);
+                                const monthIndex = dateStart ? new Date(dateStart).getUTCMonth() : new Date().getUTCMonth();
+                                const monthName = getMonthName(dateStart || new Date().toISOString());
                                 const mWeather = data.monthlyWeather ? data.monthlyWeather[monthIndex] : null;
                                 const highTemp = mWeather ? mWeather.high : '72°F';
                                 const lowTemp = mWeather ? mWeather.low : '55°F';
-                                const summary = mWeather ? mWeather.summary : 'Sunny';
-                                const description = mWeather && mWeather.description ? mWeather.description : (data.weather ? data.weather.replace(/[.\s]*\d+[°&]?(deg;)?\s*[CF]/g, '').trim() : '');
-                                const gear = mWeather && mWeather.gear ? mWeather.gear : 'Light layers and comfortable walking shoes.';
+                                const summary = mWeather && mWeather.summary ? mWeather.summary : 'Sunny';
+                                const description = (mWeather && mWeather.description) ? mWeather.description : (data.weather ? data.weather.replace(/[.\s]*\d+[°&]?(deg;)?\s*[CF]/g, '').trim() : '');
+                                const gear = (mWeather && mWeather.gear) ? mWeather.gear : 'Light layers and comfortable walking shoes.';
 
                                 return `
                                 <div class="flex justify-between items-start mb-4 gap-4">
-                                    <h3 class="font-bold dark-pill whitespace-nowrap"><a href="https://www.google.com/search?q=Weather+in+${encodeURIComponent(data.name)}+in+${encodeURIComponent(monthName)}" target="_blank" class="pride-gradient-text hover:underline">${monthName} ${new Date(dateStart).getUTCFullYear()} Weather</a></h3>
+                                    <h3 class="font-bold dark-pill whitespace-nowrap"><a href="https://www.google.com/search?q=Weather+in+${encodeURIComponent(data.name)}+in+${encodeURIComponent(monthName)}" target="_blank" class="pride-gradient-text hover:underline">${monthName} Weather</a></h3>
                                     <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300 text-right leading-tight max-w-[60%]">${description}</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <div class="w-full flex items-center gap-5 p-4 bg-white dark:bg-slate-800/60 rounded-xl">
-                                        <div class="flex-shrink-0 pr-4">${getWeatherIcon(summary)}</div>
-                                        <div class="flex-1">
+                                        <div class="flex-shrink-0 pr-4 border-r border-slate-200 dark:border-slate-700">${getWeatherIcon(summary)}</div>
+                                        <div class="flex-1 pl-1">
                                             <p class="text-xs font-black text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-widest mb-1">${monthName} Average</p>
                                             <div class="flex items-baseline gap-3 mb-2">
                                                 <span class="text-2xl font-black text-slate-900 dark:text-white">${highTemp}</span>
