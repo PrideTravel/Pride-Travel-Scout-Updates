@@ -2,282 +2,223 @@
   "destinationLinks": {
     "aruba": {
       "gaycities": "https://aruba.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-caribbean/gay-aruba"
-    },
+          },
     "aua": {
       "gaycities": "https://aruba.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-caribbean/gay-aruba"
-    },
+       },
     "lisbon": {
       "gaycities": "https://lisbon.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-portugal/gay-lisbon",
       "youtube": "https://www.youtube.com/watch?v=FjU_xwE1TPA"
     },
     "lis": {
       "gaycities": "https://lisbon.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-portugal/gay-lisbon",
       "youtube": "https://www.youtube.com/watch?v=FjU_xwE1TPA"
     },
     "frankfurt": {
       "gaycities": "https://frankfurt.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-germany/gay-frankfurt"
-    },
+          },
     "london": {
       "gaycities": "https://london.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-united-kingdom/gay-london",
       "youtube": "https://www.youtube.com/watch?v=4jqE8MoxamM"
     },
     "san antonio": {
       "gaycities": "https://sanantonio.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-texas/gay-san-antonio"
-    },
+         },
     "phoenix": {
       "gaycities": "https://phoenix.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-arizona/gay-phoenix"
-    },
+         },
     "tucson": {
       "gaycities": "https://tucson.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-arizona/gay-tucson"
-    },
+          },
     "telluride": {
       "gaycities": "https://telluride.gaycities.com/"
     },
     "cabo san lucas": {
       "gaycities": "https://cabo.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-mexico/gay-cabo"
-    },
+          },
     "cabo": {
       "gaycities": "https://cabo.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-mexico/gay-cabo"
     },
     "new orleans": {
       "gaycities": "https://neworleans.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-louisiana/gay-new-orleans"
-    },
+   },
     "manchester": {
       "gaycities": "https://manchester.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-united-kingdom/gay-manchester"
+    
     },
     "fire island": {
       "gaycities": "https://fireisland.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-new-york/gay-fire-island"
     },
     "cologne": {
       "gaycities": "https://cologne.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-germany/gay-cologne"
     },
     "hamburg": {
       "gaycities": "https://hamburg.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-germany/gay-hamburg"
+    
     },
     "gran canaria": {
       "gaycities": "https://grancanaria.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-spain/gay-gran-canaria",
-      "youtube": "https://www.youtube.com/watch?v=2Yk2r5E80n0"
+           "youtube": "https://www.youtube.com/watch?v=2Yk2r5E80n0"
     },
     "guadalajara": {
       "gaycities": "https://guadalajara.gaycities.com/"
     },
     "dublin": {
       "gaycities": "https://dublin.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-ireland/gay-dublin"
+    
     },
     "vienna": {
       "gaycities": "https://vienna.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-austria/gay-vienna",
+      
       "youtube": "https://www.youtube.com/watch?v=paIyuNTJek0"
     },
     "shanghai": {
-      "travelgay": "https://www.travelgay.com/destination/gay-china/gay-shanghai",
-      "youtube": "https://www.youtube.com/watch?v=BkfTpOWQjAk&t=366s"
+     "youtube": "https://www.youtube.com/watch?v=BkfTpOWQjAk&t=366s"
     },
     "medellin": {
       "gaycities": "https://medellin.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-colombia/gay-medellin"
     },
     "san diego": {
       "gaycities": "https://sandiego.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-california/gay-san-diego"
     },
     "tampa": {
       "gaycities": "https://tampa.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-florida/gay-tampa"
     },
     "paris": {
       "gaycities": "https://paris.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-france/gay-paris",
       "youtube": "https://www.youtube.com/watch?v=f5StO9xRRMA&t=530s"
     },
     "amsterdam": {
       "gaycities": "https://amsterdam.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-netherlands/gay-amsterdam",
       "youtube": "https://www.youtube.com/watch?v=JlVAFQ2OKhY"
     },
     "berlin": {
       "gaycities": "https://berlin.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-germany/gay-berlin",
       "youtube": "https://www.youtube.com/watch?v=9N_Iyej3vew&t=36s"
     },
     "sydney": {
       "gaycities": "https://sydney.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-australia/gay-sydney"
     },
     "melbourne": {
       "gaycities": "https://melbourne.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-australia/gay-melbourne",
       "youtube": "https://www.youtube.com/watch?v=mFrSBVDVPcw"
     },
     "nyc": {
       "gaycities": "https://newyork.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-new-york/gay-new-york-city",
       "youtube": "https://www.youtube.com/watch?v=ovNAT5eJB6I"
     },
     "san francisco": {
       "gaycities": "https://sanfrancisco.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-california/gay-san-francisco",
       "youtube": "https://www.youtube.com/watch?v=SdtZBxNH8Gg"
     },
     "los angeles": {
       "gaycities": "https://losangeles.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-california/gay-los-angeles"
     },
     "palm springs": {
       "gaycities": "https://palmsprings.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-california/gay-palm-springs",
       "youtube": "https://www.youtube.com/watch?v=bPGyTQKWT00&pp=0gcJCa4KAYcqIYzv"
     },
     "las vegas": {
       "gaycities": "https://lasvegas.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-nevada/gay-las-vegas"
     },
     "denver": {
       "gaycities": "https://denver.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-colorado/gay-denver"
     },
     "aspen": {
       "gaycities": "https://aspen.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-colorado/gay-aspen"
     },
     "honolulu": {
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-hawaii"
+      "gaycities": "https://hawaii.gaycities.com/",
     },
     "chicago": {
       "gaycities": "https://chicago.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-illinois/gay-chicago"
     },
     "columbus": {
       "gaycities": "https://columbus.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-ohio/gay-columbus"
     },
     "minneapolis": {
       "gaycities": "https://minneapolis.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-minnesota/gay-minneapolis"
     },
     "houston": {
       "gaycities": "https://houston.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-texas/gay-houston"
     },
     "boston": {
       "gaycities": "https://boston.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-massachusetts/gay-boston"
     },
     "washington dc": {
       "gaycities": "https://washingtondc.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-washington-dc"
     },
     "philadelphia": {
       "gaycities": "https://philadelphia.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-pennsylvania/gay-philadelphia"
     },
     "nashville": {
       "gaycities": "https://nashville.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-tennessee/gay-nashville"
     },
     "newark": {
       "gaycities": "https://newyork.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-new-york/gay-new-york-city"
     },
     "detroit": {
       "gaycities": "https://detroit.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-michigan/gay-detroit"
     },
     "charlotte": {
       "gaycities": "https://charlotte.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-north-carolina/gay-charlotte"
     },
     "atlanta": {
       "gaycities": "https://atlanta.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-georgia-usa/gay-atlanta"
     },
     "miami": {
       "gaycities": "https://miami.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-florida/gay-miami",
       "youtube": "https://www.youtube.com/watch?v=dsaWn6NL3bQ"
     },
     "fort lauderdale": {
       "gaycities": "https://fortlauderdale.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-florida/gay-fort-lauderdale"
     },
     "orlando": {
       "gaycities": "https://orlando.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-florida/gay-orlando"
     },
     "dallas": {
       "gaycities": "https://dallas.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-nevada"
     },
     "provincetown": {
       "gaycities": "https://ptown.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-massachusetts/gay-provincetown"
     },
     "key west": {
       "gaycities": "https://keywest.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-florida/gay-key-west"
     },
     "cancun": {
       "gaycities": "https://cancun.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-mexico/gay-cancun"
     },
     "san juan": {
       "gaycities": "https://puertorico.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/gay-puerto-rico"
     },
     "curacao": {
       "gaycities": "https://curacao.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-caribbean/gay-curacao"
     },
     "puerto vallarta": {
       "gaycities": "https://vallarta.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-mexico/gay-puerto-vallarta",
       "youtube": "https://www.youtube.com/watch?v=WQDW7Jrxjhk"
     },
     "mexico city": {
       "gaycities": "https://mexicocity.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-mexico/gay-mexico-city",
       "youtube": "https://www.youtube.com/watch?v=IUU8PwBDSjU"
     },
     "rio de janeiro": {
       "gaycities": "https://rio.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-brazil/gay-rio-de-janeiro",
       "youtube": "https://www.youtube.com/watch?v=JTSqdcq8NAc"
     },
     "sao paulo": {
       "gaycities": "https://saopaulo.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-brazil/gay-sao-paulo",
       "youtube": "https://www.youtube.com/watch?v=Pa6lmeXxW60"
     },
     "bogota": {
       "gaycities": "https://bogota.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-colombia/gay-bogota"
     },
     "bangkok": {
       "gaycities": "https://bangkok.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-thailand/gay-bangkok",
       "youtube": "https://www.youtube.com/watch?v=h1Sff08SMN0"
     },
     "tokyo": {
       "gaycities": "https://tokyo.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-japan/gay-tokyo",
       "youtube": "https://www.youtube.com/watch?v=LTXA1Tlm79U"
     },
     "osaka": {
@@ -285,184 +226,142 @@
     },
     "taipei": {
       "gaycities": "https://taipei.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-taiwan/gay-taipei",
       "youtube": "https://www.youtube.com/watch?v=iyvQG2nv-NA&pp=0gcJCa4KAYcqIYzv"
     },
     "auckland": {
       "gaycities": "https://auckland.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-new-zealand/gay-auckland"
     },
-    "brisbane": {
-      "travelgay": "https://www.travelgay.com/destination/gay-australia/gay-brisbane"
-    },
-    "manila": {
-      "travelgay": "https://www.travelgay.com/destination/gay-philippines/gay-manila",
+     "manila": {
       "youtube": "https://www.youtube.com/watch?v=DdcIFK36ACw&pp=0gcJCa4KAYcqIYzv"
     },
     "singapore": {
-      "travelgay": "https://www.travelgay.com/destination/gay-singapore",
       "youtube": "https://www.youtube.com/watch?v=WPY3BRoQg_Q"
     },
     "hong kong": {
-      "travelgay": "https://www.travelgay.com/destination/gay-china/gay-hong-kong",
       "youtube": "https://www.youtube.com/watch?v=Oe-BnLjw-yM"
     },
     "bali": {
-      "travelgay": "https://www.travelgay.com/destination/gay-indonesia/gay-bali",
       "youtube": "https://www.youtube.com/watch?v=X0TaSBBAdXY"
     },
     "phuket": {
       "gaycities": "https://phuket.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-thailand/gay-phuket"
     },
     "seoul": {
-      "travelgay": "https://www.travelgay.com/destination/gay-south-korea/gay-seoul",
       "youtube": "https://www.youtube.com/watch?v=MwUaAjamOf8"
     },
     "cape town": {
       "gaycities": "https://capetown.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-south-africa/gay-cape-town"
     },
     "toronto": {
       "gaycities": "https://toronto.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-canada/gay-toronto",
       "youtube": "https://www.youtube.com/watch?v=HBODdRhyuLM"
     },
     "montreal": {
       "gaycities": "https://montreal.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-canada/gay-montreal",
       "youtube": "https://www.youtube.com/watch?v=8BpUZLSp7Qg"
     },
     "vancouver": {
       "gaycities": "https://vancouver.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-canada/gay-vancouver"
     },
     "madrid": {
       "gaycities": "https://madrid.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-spain/gay-madrid",
       "youtube": "https://www.youtube.com/watch?v=4njXnPnbtXo"
     },
     "brussels": {
       "gaycities": "https://brussels.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-belgium/gay-brussels",
       "youtube": "https://www.youtube.com/watch?v=SHjrlgPUtoc"
     },
     "antwerp": {
       "gaycities": "https://antwerp.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-belgium/gay-antwerp"
     },
     "ibiza": {
       "gaycities": "https://ibiza.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-spain/gay-ibiza",
       "youtube": "https://www.youtube.com/watch?v=-lsjKy20DXs"
     },
     "barcelona": {
       "gaycities": "https://barcelona.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-spain/gay-barcelona",
       "youtube": "https://www.youtube.com/watch?v=9kfR6E8M2cI&t=1s"
     },
     "mykonos": {
       "gaycities": "https://mykonos.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-greece/gay-mykonos",
       "youtube": "https://www.youtube.com/watch?v=4TWbQ6EFKbc"
     },
     "rome": {
       "gaycities": "https://rome.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-italy/gay-rome",
       "youtube": "https://www.youtube.com/watch?v=gRWKLZQ_phk"
     },
     "sitges": {
       "gaycities": "https://sitges.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-spain/gay-sitges",
       "youtube": "https://www.youtube.com/watch?v=E377BctjyQc"
     },
     "torremolinos": {
-      "travelgay": "https://www.travelgay.com/destination/gay-spain/gay-torremolinos",
       "youtube": "https://www.youtube.com/watch?v=57vScZrAEEg"
     },
     "athens": {
       "gaycities": "https://athens.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-greece/gay-athens",
       "youtube": "https://www.youtube.com/watch?v=Vw153AGI7fU"
     },
     "malta": {
-      "travelgay": "https://www.travelgay.com/destination/gay-malta",
       "youtube": "https://www.youtube.com/watch?v=5QdpERS8dA4"
     },
     "portland": {
       "gaycities": "https://portland.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-oregon-usa/gay-portland"
     },
     "seattle": {
       "gaycities": "https://seattle.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-washington-state/gay-seattle"
     },
     "fra": {
       "gaycities": "https://frankfurt.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-germany/gay-frankfurt"
     },
     "lhr": {
       "gaycities": "https://london.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-united-kingdom/gay-london",
       "youtube": "https://www.youtube.com/watch?v=4jqE8MoxamM"
     },
     "lgw": {
       "gaycities": "https://london.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-united-kingdom/gay-london",
       "youtube": "https://www.youtube.com/watch?v=4jqE8MoxamM"
     },
     "phx": {
       "gaycities": "https://phoenix.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-arizona/gay-phoenix"
     },
     "tus": {
       "gaycities": "https://tucson.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-arizona/gay-tucson"
     },
     "tex": {
       "gaycities": "https://telluride.gaycities.com/"
     },
     "sjd": {
       "gaycities": "https://cabo.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-mexico/gay-cabo"
     },
     "isp": {
       "gaycities": "https://fireisland.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-new-york/gay-fire-island"
     },
     "jfk": {
       "gaycities": "https://newyork.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-new-york/gay-new-york-city",
       "youtube": "https://www.youtube.com/watch?v=ovNAT5eJB6I"
     },
     "lga": {
       "gaycities": "https://newyork.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-new-york/gay-new-york-city",
       "youtube": "https://www.youtube.com/watch?v=ovNAT5eJB6I"
     },
     "ewr": {
       "gaycities": "https://newyork.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-usa/gay-new-york/gay-new-york-city",
       "youtube": "https://www.youtube.com/watch?v=ovNAT5eJB6I"
     },
     "cdg": {
       "gaycities": "https://paris.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-france/gay-paris",
       "youtube": "https://www.youtube.com/watch?v=f5StO9xRRMA&t=530s"
     },
     "ory": {
       "gaycities": "https://paris.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-france/gay-paris",
       "youtube": "https://www.youtube.com/watch?v=f5StO9xRRMA&t=530s"
     },
     "nrt": {
       "gaycities": "https://tokyo.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-japan/gay-tokyo",
       "youtube": "https://www.youtube.com/watch?v=LTXA1Tlm79U"
     },
     "hnd": {
       "gaycities": "https://tokyo.gaycities.com/",
-      "travelgay": "https://www.travelgay.com/destination/gay-japan/gay-tokyo",
       "youtube": "https://www.youtube.com/watch?v=LTXA1Tlm79U"
     },
     "kix": {
