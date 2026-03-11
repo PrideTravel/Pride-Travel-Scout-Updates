@@ -1676,8 +1676,38 @@
                             randomHotels = randomHotels.slice(0, 4);
                         }
 
-                        const randomNightlife = getRandomSubset(data.nightlife, 3);
-                        const randomRestaurants = data.restaurants ? getRandomSubset(data.restaurants, 3) : [];
+                        // Prepare Vibrant Nightlife Section
+                        let nightlifeOptions = [];
+                        let availableNightlife = data.nightlife ? [...data.nightlife] : [];
+                        let availableRestaurants = data.restaurants ? [...data.restaurants] : [];
+
+                        // Pick 4 Gay Bars
+                        const lgbtqBars = availableNightlife.filter(n => !n.tags?.some(t => t.toLowerCase().includes('lesbian') || t.toLowerCase().includes('trans')));
+                        const barSubset = getRandomSubset(lgbtqBars, 4);
+                        nightlifeOptions.push(...barSubset);
+
+                        // Pick 1 Lesbian or Trans
+                        const lesbianTransBars = availableNightlife.filter(n => n.tags?.some(t => t.toLowerCase().includes('lesbian') || t.toLowerCase().includes('trans')));
+                        if (lesbianTransBars.length > 0) {
+                            nightlifeOptions.push(getRandomSubset(lesbianTransBars, 1)[0]);
+                        }
+
+                        // We need 1 Store, 1 Restaurant, 1 Cafe
+                        const shops = availableRestaurants.filter(r => (r.type || '').toLowerCase().includes('shop') || (r.tags || []).some(t => t.toLowerCase().includes('shop')));
+                        if (shops.length > 0) nightlifeOptions.push(getRandomSubset(shops, 1)[0]);
+
+                        const restaurantsInfo = availableRestaurants.filter(r => (r.type || '').toLowerCase().includes('restaurant') && !shops.includes(r));
+                        if (restaurantsInfo.length > 0) nightlifeOptions.push(getRandomSubset(restaurantsInfo, 1)[0]);
+
+                        const cafes = availableRestaurants.filter(r => {
+                            const tStr = (r.type || '').toLowerCase();
+                            const tgStr = (r.tags || []).join(' ').toLowerCase();
+                            return tStr.includes('cafe') || tStr.includes('bakery') || tgStr.includes('cafe') || tgStr.includes('bakery') || tgStr.includes('sweet') || tgStr.includes('ice cream');
+                        });
+                        if (cafes.length > 0) nightlifeOptions.push(getRandomSubset(cafes, 1)[0]);
+
+                        const randomNightlife = nightlifeOptions.slice(0, 8);
+                        const randomRestaurants = [];
                         const randomTours = data.tours.slice(0, 5);
                         const fareEstimate = calculateFareEstimate(data.baseFare);
                         const delay = index * 200;
@@ -1975,7 +2005,7 @@
                             <!-- 7. Weather Forecast -->
                             <section class="bg-gradient-to-r from-pride-red/10 via-pride-yellow/10 to-pride-purple/10 rounded-xl p-5 border border-primary/20">
                                 <div class="flex justify-between items-center mb-4">
-                                    <h3 class="font-bold dark-pill"><a href="https://weather.com/search/enhancedlocalsearch?where=${encodeURIComponent(data.name)}" target="_blank" class="pride-gradient-text hover:underline">${getMonthName(dateStart)} ${new Date(dateStart).getUTCFullYear()} Weather Outlook</a></h3>
+                                    <h3 class="font-bold dark-pill"><a href="https://www.google.com/search?q=Weather+in+${encodeURIComponent(data.name)}" target="_blank" class="pride-gradient-text hover:underline">${getMonthName(dateStart)} ${new Date(dateStart).getUTCFullYear()} Weather Outlook</a></h3>
                                     <span class="text-primary font-bold">${data.weather.replace(/[.\s]*\d+[°&]?(deg;)?\s*[CF]/g, '').trim()}</span>
                                 </div>
                                 <div class="flex justify-between">
@@ -2096,6 +2126,9 @@
                 if (t.includes('club') || t.includes('disco')) return '<span class="material-symbols-outlined">celebration</span>';
                 if (t.includes('bar')) return '<span class="material-symbols-outlined">local_bar</span>';
                 if (t.includes('cruising')) return '<span class="material-symbols-outlined">visibility</span>';
+                if (t.includes('cafe') || t.includes('bakery')) return '<span class="material-symbols-outlined">local_cafe</span>';
+                if (t.includes('shop')) return '<span class="material-symbols-outlined">storefront</span>';
+                if (t.includes('restaurant') || t.includes('dining')) return '<span class="material-symbols-outlined">restaurant</span>';
                 return '<span class="material-symbols-outlined">music_note</span>';
             }
 
