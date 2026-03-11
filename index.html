@@ -1681,7 +1681,6 @@
                         // Prepare Vibrant Nightlife Section
                         let nightlifeOptions = [];
                         let availableNightlife = data.nightlife ? [...data.nightlife] : [];
-                        let availableStores = data.stores ? [...data.stores] : [];
                         let availableRestaurants = data.restaurants ? [...data.restaurants] : [];
 
                         // 1. Pick 1 Lesbian or Trans-Friendly Venue
@@ -1691,37 +1690,39 @@
                             lesbianTransItem = getRandomSubset(lesbianTransBars, 1)[0];
                         }
 
-                        // 2. Pick 1 Shop/Store
+                        // 2. Pick 1 Shop/Store (From nightlife now)
                         let storeItem = null;
-                        if (availableStores.length > 0) {
-                            storeItem = getRandomSubset(availableStores, 1)[0];
-                        } else {
-                            const shops = availableRestaurants.filter(r => (r.type || '').toLowerCase().includes('shop') || (r.tags || '').includes('shop'));
-                            if (shops.length > 0) {
-                                storeItem = getRandomSubset(shops, 1)[0];
-                            }
+                        const shops = availableNightlife.filter(n => (n.type || '').toLowerCase().includes('store') || (n.type || '').toLowerCase().includes('shop'));
+                        if (shops.length > 0) {
+                            storeItem = getRandomSubset(shops, 1)[0];
                         }
 
                         // 3. Pick 1 Restaurant
                         let restaurantItem = null;
-                        const restInfo = availableRestaurants.filter(r => r !== storeItem && !(r.type || '').toLowerCase().includes('shop') && !(r.tags || '').includes('shop'));
-                        if (restInfo.length > 0) {
-                            restaurantItem = getRandomSubset(restInfo, 1)[0];
+                        if (availableRestaurants.length > 0) {
+                            restaurantItem = getRandomSubset(availableRestaurants, 1)[0];
                         }
 
-                        // Calculate how many regular gay bars we need minimum (to total 8)
+                        // Remove selected items to avoid duplicates
+                        const remainNightlife = availableNightlife.filter(n => n !== lesbianTransItem && n !== storeItem);
+                        const remainRestaurants = availableRestaurants.filter(r => r !== restaurantItem);
+
+                        // Calculate how many regular venues we need minimum (to total 8)
                         const countFixed = (lesbianTransItem ? 1 : 0) + (storeItem ? 1 : 0) + (restaurantItem ? 1 : 0);
-                        const requiredBars = 8 - countFixed;
-                        const lgbtqBars = availableNightlife.filter(n => n !== lesbianTransItem);
-                        const barSubset = getRandomSubset(lgbtqBars, requiredBars);
+                        const requiredBars = Math.max(0, 8 - countFixed);
+                        const barSubset = getRandomSubset(remainNightlife, requiredBars);
 
                         nightlifeOptions.push(...barSubset);
                         if (lesbianTransItem) nightlifeOptions.push(lesbianTransItem);
                         if (storeItem) nightlifeOptions.push(storeItem);
                         if (restaurantItem) nightlifeOptions.push(restaurantItem);
 
+                        // Shuffle options
+                        nightlifeOptions = nightlifeOptions.sort(() => 0.5 - Math.random());
                         const randomNightlife = nightlifeOptions.slice(0, 8);
-                        const randomRestaurants = [];
+                        
+                        // Remaining restaurants go to the Restaurants & Cafes section
+                        const randomRestaurants = getRandomSubset(remainRestaurants, 8);
                         const randomTours = data.tours.slice(0, 5);
                         const fareEstimate = calculateFareEstimate(data.baseFare);
                         const delay = index * 200;
@@ -2031,16 +2032,17 @@
                                 const highTemp = mWeather ? mWeather.high : '72°F';
                                 const lowTemp = mWeather ? mWeather.low : '55°F';
                                 const summary = mWeather ? mWeather.summary : 'Sunny';
-                                const description = mWeather && mWeather.description ? mWeather.description : (data.weather ? data.weather.replace(/[.\\s]*\\d+[°&]?(deg;)?\\s*[CF]/g, '').trim() : '');
+                                const description = mWeather && mWeather.description ? mWeather.description : (data.weather ? data.weather.replace(/[.\s]*\d+[°&]?(deg;)?\s*[CF]/g, '').trim() : '');
+                                const gear = mWeather && mWeather.gear ? mWeather.gear : 'Light layers and comfortable walking shoes.';
 
                                 return `
-                                <div class="flex justify-between items-center mb-4">
-                                    <h3 class="font-bold dark-pill"><a href="https://www.google.com/search?q=Weather+in+${encodeURIComponent(data.name)}+in+${encodeURIComponent(monthName)}" target="_blank" class="pride-gradient-text hover:underline">${monthName} ${new Date(dateStart).getUTCFullYear()} Weather Outlook</a></h3>
-                                    <span class="text-primary font-bold text-right">${summary}</span>
+                                <div class="flex justify-between items-start mb-4 gap-4">
+                                    <h3 class="font-bold dark-pill whitespace-nowrap"><a href="https://www.google.com/search?q=Weather+in+${encodeURIComponent(data.name)}+in+${encodeURIComponent(monthName)}" target="_blank" class="pride-gradient-text hover:underline">${monthName} ${new Date(dateStart).getUTCFullYear()} Weather</a></h3>
+                                    <span class="text-[11px] font-bold text-slate-600 dark:text-slate-300 text-right leading-tight max-w-[60%]">${description}</span>
                                 </div>
                                 <div class="flex justify-between">
                                     <div class="w-full flex items-center gap-5 p-4 bg-white dark:bg-slate-800/60 rounded-xl">
-                                        <div class="flex-shrink-0">${getWeatherIcon(summary)}</div>
+                                        <div class="flex-shrink-0 pr-4">${getWeatherIcon(summary)}</div>
                                         <div class="flex-1">
                                             <p class="text-xs font-black text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-widest mb-1">${monthName} Average</p>
                                             <div class="flex items-baseline gap-3 mb-2">
@@ -2049,7 +2051,7 @@
                                                 <span class="text-lg font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300">${lowTemp}</span>
                                                 <span class="text-sm font-bold text-slate-400 dark:text-slate-300">Low</span>
                                             </div>
-                                            <p class="text-[11px] leading-relaxed font-bold text-primary mt-1">${description}</p>
+                                            <p class="text-[11px] leading-relaxed font-bold text-primary mt-1">Gear & Packing: <span class="text-slate-600 dark:text-slate-400">${gear}</span></p>
                                         </div>
                                     </div>
                                 </div>
