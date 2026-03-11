@@ -1679,32 +1679,44 @@
                         // Prepare Vibrant Nightlife Section
                         let nightlifeOptions = [];
                         let availableNightlife = data.nightlife ? [...data.nightlife] : [];
+                        let availableStores = data.stores ? [...data.stores] : [];
                         let availableRestaurants = data.restaurants ? [...data.restaurants] : [];
 
-                        // Pick 4 Gay Bars
-                        const lgbtqBars = availableNightlife.filter(n => !n.tags?.some(t => t.toLowerCase().includes('lesbian') || t.toLowerCase().includes('trans')));
-                        const barSubset = getRandomSubset(lgbtqBars, 4);
-                        nightlifeOptions.push(...barSubset);
-
-                        // Pick 1 Lesbian or Trans
+                        // 1. Pick 1 Lesbian or Trans-Friendly Venue
+                        let lesbianTransItem = null;
                         const lesbianTransBars = availableNightlife.filter(n => n.tags?.some(t => t.toLowerCase().includes('lesbian') || t.toLowerCase().includes('trans')));
                         if (lesbianTransBars.length > 0) {
-                            nightlifeOptions.push(getRandomSubset(lesbianTransBars, 1)[0]);
+                            lesbianTransItem = getRandomSubset(lesbianTransBars, 1)[0];
                         }
 
-                        // We need 1 Store, 1 Restaurant, 1 Cafe
-                        const shops = availableRestaurants.filter(r => (r.type || '').toLowerCase().includes('shop') || (r.tags || []).some(t => t.toLowerCase().includes('shop')));
-                        if (shops.length > 0) nightlifeOptions.push(getRandomSubset(shops, 1)[0]);
+                        // 2. Pick 1 Shop/Store
+                        let storeItem = null;
+                        if (availableStores.length > 0) {
+                            storeItem = getRandomSubset(availableStores, 1)[0];
+                        } else {
+                            const shops = availableRestaurants.filter(r => (r.type || '').toLowerCase().includes('shop') || (r.tags || '').includes('shop'));
+                            if (shops.length > 0) {
+                                storeItem = getRandomSubset(shops, 1)[0];
+                            }
+                        }
 
-                        const restaurantsInfo = availableRestaurants.filter(r => (r.type || '').toLowerCase().includes('restaurant') && !shops.includes(r));
-                        if (restaurantsInfo.length > 0) nightlifeOptions.push(getRandomSubset(restaurantsInfo, 1)[0]);
+                        // 3. Pick 1 Restaurant
+                        let restaurantItem = null;
+                        const restInfo = availableRestaurants.filter(r => r !== storeItem && !(r.type || '').toLowerCase().includes('shop') && !(r.tags || '').includes('shop'));
+                        if (restInfo.length > 0) {
+                            restaurantItem = getRandomSubset(restInfo, 1)[0];
+                        }
 
-                        const cafes = availableRestaurants.filter(r => {
-                            const tStr = (r.type || '').toLowerCase();
-                            const tgStr = (r.tags || []).join(' ').toLowerCase();
-                            return tStr.includes('cafe') || tStr.includes('bakery') || tgStr.includes('cafe') || tgStr.includes('bakery') || tgStr.includes('sweet') || tgStr.includes('ice cream');
-                        });
-                        if (cafes.length > 0) nightlifeOptions.push(getRandomSubset(cafes, 1)[0]);
+                        // Calculate how many regular gay bars we need minimum (to total 8)
+                        const countFixed = (lesbianTransItem ? 1 : 0) + (storeItem ? 1 : 0) + (restaurantItem ? 1 : 0);
+                        const requiredBars = 8 - countFixed;
+                        const lgbtqBars = availableNightlife.filter(n => n !== lesbianTransItem);
+                        const barSubset = getRandomSubset(lgbtqBars, requiredBars);
+
+                        nightlifeOptions.push(...barSubset);
+                        if (lesbianTransItem) nightlifeOptions.push(lesbianTransItem);
+                        if (storeItem) nightlifeOptions.push(storeItem);
+                        if (restaurantItem) nightlifeOptions.push(restaurantItem);
 
                         const randomNightlife = nightlifeOptions.slice(0, 8);
                         const randomRestaurants = [];
@@ -2011,7 +2023,7 @@
                                 const highTemp = mWeather ? mWeather.high : '72°F';
                                 const lowTemp = mWeather ? mWeather.low : '55°F';
                                 const summary = mWeather ? mWeather.summary : 'Sunny';
-                                const parsedWeatherDesc = data.weather ? data.weather.replace(/[.\\s]*\\d+[°&]?(deg;)?\\s*[CF]/g, '').trim() : '';
+                                const description = mWeather && mWeather.description ? mWeather.description : (data.weather ? data.weather.replace(/[.\\s]*\\d+[°&]?(deg;)?\\s*[CF]/g, '').trim() : '');
 
                                 return `
                                 <div class="flex justify-between items-center mb-4">
@@ -2019,17 +2031,17 @@
                                     <span class="text-primary font-bold text-right">${summary}</span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <div class="w-full flex items-center gap-5 p-3 bg-white dark:bg-slate-800/60 rounded-xl">
+                                    <div class="w-full flex items-center gap-5 p-4 bg-white dark:bg-slate-800/60 rounded-xl">
                                         <div class="flex-shrink-0">${getWeatherIcon(summary)}</div>
                                         <div class="flex-1">
                                             <p class="text-xs font-black text-slate-500 dark:text-slate-400 dark:text-slate-300 uppercase tracking-widest mb-1">${monthName} Average</p>
-                                            <div class="flex items-baseline gap-3">
+                                            <div class="flex items-baseline gap-3 mb-2">
                                                 <span class="text-2xl font-black text-slate-900 dark:text-white">${highTemp}</span>
                                                 <span class="text-sm font-bold text-slate-400 dark:text-slate-300">High</span>
                                                 <span class="text-lg font-bold text-slate-500 dark:text-slate-400 dark:text-slate-300">${lowTemp}</span>
                                                 <span class="text-sm font-bold text-slate-400 dark:text-slate-300">Low</span>
                                             </div>
-                                            <p class="text-xs font-bold text-primary mt-1">${parsedWeatherDesc}</p>
+                                            <p class="text-[11px] leading-relaxed font-bold text-primary mt-1">${description}</p>
                                         </div>
                                     </div>
                                 </div>
