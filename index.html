@@ -1734,7 +1734,7 @@
                         // Prepare Vibrant Nightlife Section
                         let nightlifeOptions = [];
                         let availableNightlife = Array.isArray(data.nightlife) ? [...data.nightlife] : [];
-                        let availableRestaurants = data.restaurants ? [...data.restaurants] : [];
+                        const availableRestaurants = data.restaurants ? [...data.restaurants] : [];
 
                         // 1. Pick 1 Lesbian or Trans-Friendly Venue
                         let lesbianTransItem = null;
@@ -1743,39 +1743,31 @@
                             lesbianTransItem = getRandomSubset(lesbianTransBars, 1)[0];
                         }
 
-                        // 2. Pick 1 Shop/Store (From nightlife now)
+                        // 2. Pick 1 Shop/Store
                         let storeItem = null;
                         const shops = availableNightlife.filter(n => (n.type || '').toLowerCase().includes('store') || (n.type || '').toLowerCase().includes('shop'));
                         if (shops.length > 0) {
                             storeItem = getRandomSubset(shops, 1)[0];
                         }
 
-                        // 3. Pick 1 Restaurant
-                        let restaurantItem = null;
-                        if (availableRestaurants.length > 0) {
-                            restaurantItem = getRandomSubset(availableRestaurants, 1)[0];
-                        }
-
-                        // Remove selected items to avoid duplicates
+                        // Remove selected items to avoid duplicates in the nightlife section
                         const remainNightlife = availableNightlife.filter(n => n !== lesbianTransItem && n !== storeItem);
-                        const remainRestaurants = availableRestaurants.filter(r => r !== restaurantItem);
 
-                        // Calculate how many regular venues we need minimum (to total 8)
-                        const countFixed = (lesbianTransItem ? 1 : 0) + (storeItem ? 1 : 0) + (restaurantItem ? 1 : 0);
+                        // Calculate how many regular venues we need to total 8
+                        const countFixed = (lesbianTransItem ? 1 : 0) + (storeItem ? 1 : 0);
                         const requiredBars = Math.max(0, 8 - countFixed);
                         const barSubset = getRandomSubset(remainNightlife, requiredBars);
 
                         nightlifeOptions.push(...barSubset);
                         if (lesbianTransItem) nightlifeOptions.push(lesbianTransItem);
                         if (storeItem) nightlifeOptions.push(storeItem);
-                        if (restaurantItem) nightlifeOptions.push(restaurantItem);
 
                         // Shuffle options
                         nightlifeOptions = nightlifeOptions.sort(() => 0.5 - Math.random());
                         const randomNightlife = nightlifeOptions.slice(0, 8);
-                        
-                        // Remaining restaurants go to the Restaurants & Cafes section
-                        const randomRestaurants = getRandomSubset(remainRestaurants, 8);
+
+                        // All restaurants go to the dedicated Restaurants & Cafes section
+                        const randomRestaurants = getRandomSubset(availableRestaurants, 8);
                         const randomTours = (data.tours || []).slice(0, 5);
                         const fareEstimate = calculateFareEstimate(data.baseFare);
                         const delay = index * 200;
