@@ -10724,64 +10724,88 @@
     ],
     "monthlyWeather": [
       {
-        "month": "January (0)",
+        "high": "42°F",
+        "low": "35°F",
         "summary": "Cold and wet; heavy winter gear and waterproofs required.",
-        "description": "Peak winter brings a biting chill with frequent sleet or cold rain. Heavy insulation and waterproof layers are essential for any outdoor activity."
+        "description": "Peak winter brings a biting chill with frequent sleet or cold rain. Heavy insulation and waterproof layers are essential for any outdoor activity.",
+        "gear": "Heavy coat, waterproofs, gloves, scarf, hat."
       },
       {
-        "month": "February (1)",
+        "high": "43°F",
+        "low": "35°F",
         "summary": "Chilly and overcast; damp cold remains consistent.",
-        "description": "Skies stay predominantly gray. The dampness makes the temperature feel colder than it is; high-quality woolens and wind-resistant layers are recommended."
+        "description": "Skies stay predominantly gray. The dampness makes the temperature feel colder than it is; high-quality woolens and wind-resistant layers are recommended.",
+        "gear": "Heavy wool layers, waterproof jacket, warm boots."
       },
       {
-        "month": "March (2)",
+        "high": "49°F",
+        "low": "38°F",
         "summary": "Cool and crisp; light winter layers still necessary.",
-        "description": "A slight thaw begins, but the air remains sharp. Perfect for walking tours if wearing a moderate jacket and comfortable boots."
+        "description": "A slight thaw begins, but the air remains sharp. Perfect for walking tours if wearing a moderate jacket and comfortable boots.",
+        "gear": "Mid-weight jacket, light scarf, waterproof shoes."
       },
       {
-        "month": "April (3)",
+        "high": "55°F",
+        "low": "42°F",
         "summary": "Mild and refreshing; perfect for sightseeing in layers.",
-        "description": "Spring is in full swing. Days are pleasantly mild, though evenings drop quickly, making a versatile light jacket or sweater a must-pack."
+        "description": "Spring is in full swing. Days are pleasantly mild, though evenings drop quickly, making a versatile light jacket or sweater a must-pack.",
+        "gear": "Light jacket, layers for cool evenings, comfortable walking shoes."
       },
       {
-        "month": "May (4)",
+        "high": "62°F",
+        "low": "48°F",
         "summary": "Partly sunny and comfortable; ideal for outdoor exploration.",
-        "description": "The most temperate time for walking. Bright intervals are common, making it ideal for park visits and boat tours with just a light outer layer."
+        "description": "The most temperate time for walking. Bright intervals are common, making it ideal for park visits and boat tours with just a light outer layer.",
+        "gear": "Light jacket, breathable layers, umbrella."
       },
       {
-        "month": "June (5)",
+        "high": "68°F",
+        "low": "54°F",
         "summary": "Warm and pleasant; long days with gentle breezes.",
-        "description": "Excellent summer weather that isn't overbearing. Perfect for outdoor dining and late-night strolls; light breathable fabrics are best."
+        "description": "Excellent summer weather that isn't overbearing. Perfect for outdoor dining and late-night strolls; light breathable fabrics are best.",
+        "gear": "Light cottons, a thin layer for evenings, comfortable sandals."
       },
       {
-        "month": "July (6)",
+        "high": "72°F",
+        "low": "58°F",
         "summary": "Warm and partly cloudy; peak outdoor event weather.",
-        "description": "The warmest month of the year. Expect vibrant energy in the streets; while mostly sunny, occasional clouds provide a welcome break from the heat."
+        "description": "The warmest month of the year. Expect vibrant energy in the streets; while mostly sunny, occasional clouds provide a welcome break from the heat.",
+        "gear": "Lightweight clothing, sunscreen, a light jacket for evenings."
       },
       {
-        "month": "August (7)",
+        "high": "72°F",
+        "low": "58°F",
         "summary": "Warm and stable; consistent temperatures for city tours.",
-        "description": "Summer lingers with reliable warmth. Great for all-day sightseeing; stay hydrated and wear light clothing to remain comfortable in the sun."
+        "description": "Summer lingers with reliable warmth. Great for all-day sightseeing; stay hydrated and wear light clothing to remain comfortable in the sun.",
+        "gear": "Light clothing, sunscreen, sunglasses, water bottle."
       },
       {
-        "month": "September (8)",
+        "high": "66°F",
+        "low": "53°F",
         "summary": "Mild and clearing; the air begins to turn crisp.",
-        "description": "A beautiful transition month. The harshness of summer fades into golden, mild afternoons that are perfect for extended photography walks."
+        "description": "A beautiful transition month. The harshness of summer fades into golden, mild afternoons that are perfect for extended photography walks.",
+        "gear": "Light jacket, layers for variable temperatures."
       },
       {
-        "month": "October (9)",
+        "high": "57°F",
+        "low": "46°F",
         "summary": "Cool and rainy; bring an umbrella and waterproof boots.",
-        "description": "Autumn dampness sets in. Skies turn moody with frequent showers; waterproof footwear and a compact umbrella are essential for daily use."
+        "description": "Autumn dampness sets in. Skies turn moody with frequent showers; waterproof footwear and a compact umbrella are essential for daily use.",
+        "gear": "Waterproof jacket, warm layers, waterproof boots, umbrella."
       },
       {
-        "month": "November (10)",
+        "high": "49°F",
+        "low": "40°F",
         "summary": "Cool and overcast; brisk winds and gray skies return.",
-        "description": "The city turns gray and chilly. Brisk winds are common, so windbreakers and warm scarves are recommended for navigating the streets."
+        "description": "The city turns gray and chilly. Brisk winds are common, so windbreakers and warm scarves are recommended for navigating the streets.",
+        "gear": "Warm jacket, scarf, windbreaker, gloves."
       },
       {
-        "month": "December (11)",
+        "high": "43°F",
+        "low": "37°F",
         "summary": "Cold and wet; full winter attire needed for markets.",
-        "description": "Winter returns with a mix of cold rain and mist. Full winter gear, including gloves and hats, is necessary for visiting outdoor holiday markets."
+        "description": "Winter returns with a mix of cold rain and mist. Full winter gear, including gloves and hats, is necessary for visiting outdoor holiday markets.",
+        "gear": "Heavy winter coat, gloves, hat, scarf, waterproof boots."
       }
     ],
     "restaurants": [
