@@ -2406,8 +2406,8 @@
                     return titleBox + `<div class="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">${cards}</div>`;
                 }
 
-                // Featured Destinations section — all 20 safeHotspots as image cards
-                const featuredDestinations = (SAFE_HOTSPOTS_DATA || []);
+                // Featured Destinations section — 6 randomly selected from full pool
+                const featuredDestinations = getRandomSubset(SAFE_HOTSPOTS_DATA || [], 6);
                 const destTitleBox = `
                     <div class="col-span-full mt-8 mb-4">
                         <div class="px-4 py-2 bg-pride-green/10 rounded-xl inline-flex items-center gap-2 border-l-4 border-pride-green shadow-sm">
