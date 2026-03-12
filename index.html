@@ -1885,7 +1885,7 @@
                                     <p class="text-2xl font-bold mb-1 text-slate-900 dark:text-white">${fareEstimate} <span class="text-xs font-normal text-slate-500 dark:text-slate-400 dark:text-slate-300">/ round-trip</span></p>
                                     <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300 mb-4">Cheapest options via regional budget carriers</p>
                                     <div class="flex gap-2">
-                                        <a href="${getGoogleFlightsLink(origin, data.name, dateStart, dateEnd)}" target="_blank"
+                                        <a href="${getGoogleFlightsLink(origin, data.name, dateStart, dateEnd, data)}" target="_blank"
                                            class="flex-1 py-2 bg-pride-blue text-white rounded-full font-bold text-sm flex items-center justify-center gap-2 transition-opacity hover:opacity-90">
                                             Google
                                         </a>
@@ -2283,8 +2283,13 @@
                 return `$${min} - $${max} `;
             }
 
-            function getGoogleFlightsLink(origin, destination, start, end) {
-                const q = `Flights from ${origin} to ${destination} on ${start} returning ${end} `;
+            function getGoogleFlightsLink(origin, destination, start, end, dataObj) {
+                // Check if destination has nearby airports (e.g., Fire Island, Provincetown)
+                let destString = destination;
+                if (dataObj && dataObj.nearbyAirports && dataObj.nearbyAirports.length > 0) {
+                    destString = `${dataObj.nearbyAirports.join(' or ')}`;
+                }
+                const q = `Flights from ${origin} to ${destString} on ${start} returning ${end} `;
                 return `https://www.google.com/travel/flights?q=${encodeURIComponent(q)}`;
             }
 
@@ -2321,7 +2326,7 @@
 
             function getEmailLink(origin, data, start, end) {
                 const subject = `Trip Idea: ${data.name} for Pride Travel`;
-                const body = `Hey,\n\nI found a great trip idea using Pride Travel Scout!\n\nDestination: ${data.name}\nDates: ${start} to ${end}\nFrom: ${origin}\n\nWeather: ${data.weather}\nLGBTQ Safety: ${data.lgbtqSafety}\n\nCheck out flights:\nGoogle Flights: ${getGoogleFlightsLink(origin, data.name, start, end)}\n\nSent from Pride Travel Scout`;
+                const body = `Hey,\n\nI found a great trip idea using Pride Travel Scout!\n\nDestination: ${data.name}\nDates: ${start} to ${end}\nFrom: ${origin}\n\nWeather: ${data.weather}\nLGBTQ Safety: ${data.lgbtqSafety}\n\nCheck out flights:\nGoogle Flights: ${getGoogleFlightsLink(origin, data.name, start, end, data)}\n\nSent from Pride Travel Scout`;
                 return `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             }
 

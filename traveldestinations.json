@@ -477,6 +477,7 @@
     "lgbtqDistrict":"Pines / Cherry Grove",
     "lgbtqSafety":"United States: The ultimate LGBTQ+ summer haven. The Pines and Cherry Grove are legendary.",
     "name":"Fire Island, NY",
+    "nearbyAirports":["JFK","LGA","EWR","ISP"],
     "nightlife":[{"name":"Pavilion","type":"Club","tags":["Legendary"]},{"name":"Sip N Twirl","type":"Bar","tags":["Tea Dance"]},{"name":"Blue Whale","type":"Bar","tags":["Tea"]},{"name":"Ice Palace","type":"Club","tags":["Drag"]},{"name":"Cherry's","type":"Bar","tags":["Bayview"]},{"name":"Island Breeze","type":"Bar","tags":["Outdoor"]},{"name":"Low Tea","type":"Event","tags":["Social"]},{"name":"High Tea","type":"Event","tags":["Party"]},{"name":"Underwear Party","type":"Event","tags":["Late"]}],
     "restaurants":[{"name":"Sand Castle","type":"Restaurant","tags":["Dining"]}],
     "tours":[{"name":"Sunken Forest","style":"Cultural"},{"name":"Lighthouse","style":"Cultural"},{"name":"Meat Rack Walk","style":"Cultural"},{"name":"LGBTQ+ History Walking Tour","style":"History"},{"name":"Drag Queen Hosted Pub Crawl","style":"Show"},{"name":"Sunset Cruise Excursion","style":"Relaxing"},{"name":"Historic Gay Neighborhood Tour","style":"History"},{"name":"Queer Art & Culture Walk","style":"Cultural"},{"name":"Market & Shopping Spree","style":"Food & Drink"},{"name":"Local Pride Food Tasting","style":"Food & Drink"}]
@@ -1143,12 +1144,13 @@
   "provincetown":{
     "baseFare":[300,600],
     "hotels":[{"name":"Brass Key","type":"Luxury","tags":["Guesthouse"]},{"name":"Boatslip Resort","type":"Moderate","tags":["Tea Dance"]},{"name":"Crown & Anchor","type":"Moderate","tags":["Central"]},{"name":"Land's End","type":"Luxury","tags":["Inn"]},{"name":"Pilgrim House","type":"Moderate","tags":["Shows"]},{"name":"Gifford House","type":"Budget","tags":["Historic"]},{"name":"Red Inn","type":"Luxury","tags":["Waterfront"]},{"name":"Crowne Pointe","type":"Luxury","tags":["Spa"]},{"name":"Admiral's Landing","type":"Moderate","tags":["Friendly"]},{"name":"White Porch","type":"Moderate","tags":["Art"]},{"name":"Brass Key Guesthouse","type":"Luxury","tags":["LGBTQ Owned/Operated"]},{"name":"Land's End Inn","type":"Moderate","tags":["LGBTQ Owned/Operated"]}],
-    "iata":"PVC",
+    "iata":"BOS",
     "image":"\u00f0\u0178\u008f\u00b3\u00ef\u00b8\u008f\u00e2\u20ac\u008d\u00f0\u0178\u0152\u02c6",
     "lgbtqDistrict":"Commercial Street",
     "lgbtqSafety":"United States: Extremely Safe. America's oldest gay resort town.",
     "monthlyWeather":{"0":{"high":"38\u00b0F","low":"25\u00b0F","summary":"Cold & Windy"},"1":{"high":"40\u00b0F","low":"26\u00b0F","summary":"Cold"},"2":{"high":"47\u00b0F","low":"33\u00b0F","summary":"Cool"},"3":{"high":"57\u00b0F","low":"41\u00b0F","summary":"Mild"},"4":{"high":"65\u00b0F","low":"50\u00b0F","summary":"Partly Sunny"},"5":{"high":"74\u00b0F","low":"59\u00b0F","summary":"Warm"},"6":{"high":"80\u00b0F","low":"65\u00b0F","summary":"Warm & Sunny"},"7":{"high":"79\u00b0F","low":"64\u00b0F","summary":"Warm & Sunny"},"8":{"high":"73\u00b0F","low":"58\u00b0F","summary":"Pleasant"},"9":{"high":"62\u00b0F","low":"49\u00b0F","summary":"Cool"},"10":{"high":"53\u00b0F","low":"40\u00b0F","summary":"Cool"},"11":{"high":"42\u00b0F","low":"29\u00b0F","summary":"Cold"}},
     "name":"Provincetown, USA",
+    "nearbyAirports":["BOS","MHT"],
     "nightlife":[{"name":"The A-House","type":"Club","tags":["Legendary"]},{"name":"Tea Dance","type":"Club","tags":["Outdoor"]},{"name":"Purgatory","type":"Club","tags":["Leather"]},{"name":"Shipwreck","type":"Bar","tags":["Lounge"]},{"name":"Vault","type":"Bar","tags":["Leather"]},{"name":"Paramount","type":"Club","tags":["Show"]},{"name":"Wave","type":"Bar","tags":["Lesbian"]},{"name":"Mach","type":"Bar","tags":["Cruising"]},{"name":"Porchside","type":"Bar","tags":["Cocktails"]},{"name":"Governor Bradford","type":"Bar","tags":["Drag"]}],
     "safetyScore":68,
     "tours":[{"name":"Dune Tour","style":"Cultural"},{"name":"Whale Watch","style":"Cultural"},{"name":"Bike Trails","style":"Cultural"},{"name":"Queer Art & Culture Walk","style":"Cultural"},{"name":"Sunset Cruise Excursion","style":"Relaxing"},{"name":"City Highlights Bus Tour","style":"Cultural"},{"name":"Drag Queen Hosted Pub Crawl","style":"Show"},{"name":"Local Pride Food Tasting","style":"Food & Drink"},{"name":"Historic Gay Neighborhood Tour","style":"History"},{"name":"LGBTQ+ History Walking Tour","style":"History"}]
