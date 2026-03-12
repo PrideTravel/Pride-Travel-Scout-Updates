@@ -2149,7 +2149,9 @@
                                 const tourName = typeof t === 'object' ? t.name : t;
                                 const tourStyle = typeof t === 'object' ? t.style : 'Featured Tour';
                                 const tourPrice = typeof t === 'object' && t.price ? t.price : '';
-                                const tourDesc = tourPrice ? `Activity: ${tourStyle} &bull; Price: ${tourPrice}` : `Approx. 3 hours &bull; ${tourStyle}`;
+                                const activityLevels = ['low', 'moderate', 'high', 'easy', 'adventurous'];
+                                const styleLabel = activityLevels.includes(tourStyle.toLowerCase()) ? `Activity Level: ${tourStyle}` : tourStyle;
+                                const tourDesc = tourPrice ? `Activity: ${tourStyle} &bull; Price: ${tourPrice}` : `Approx. 3 hours &bull; ${styleLabel}`;
                                 return `
                                     <div class="flex gap-4 items-center bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm group cursor-pointer border border-slate-100 dark:border-slate-700 hover:border-primary/20">
                                         <div class="flex-1">
