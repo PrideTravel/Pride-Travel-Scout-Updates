@@ -573,9 +573,7 @@
             </button>
             <h2 class="text-3xl font-black mb-2 inline-block dark-pill"><span class="pride-gradient-text">Explore More
                     Safe Hotspots</span></h2>
-            <p class="text-slate-500 dark:text-slate-400 dark:text-slate-300 text-sm font-medium mb-6">Discover 20
-                trending LGBTQ+ destinations, events, and
-                neighborhoods across the globe.</p>
+            <p class="text-slate-500 dark:text-slate-400 dark:text-slate-300 text-sm font-medium mb-6">Our 20 featured LGBTQ+ destinations — plus trending events and cruises from across the globe.</p>
 
             <div id="allHotspotsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Randomized Hotspots injected here -->
@@ -2305,7 +2303,6 @@
                 const grid = document.getElementById('allHotspotsGrid');
                 if (!grid) return;
 
-                // Ensure data is loaded
                 if (!SPECIAL_EVENTS_DATA.length) {
                     grid.innerHTML = '<div class="col-span-full text-center py-10"><p class="text-slate-500">Loading your pride guide...</p></div>';
                     return;
@@ -2313,52 +2310,28 @@
 
                 const eventPool = SPECIAL_EVENTS_DATA.filter(e => e.type !== 'Cruise');
                 const cruisePool = SPECIAL_EVENTS_DATA.filter(e => e.type === 'Cruise');
-                const cityPool = [];
-                if (typeof DATABASE !== 'undefined' && DATABASE.details) {
-                    Object.keys(DATABASE.details).forEach(key => {
-                        const data = DATABASE.details[key];
-                        if (data && data.name) {
-                            cityPool.push({
-                                type: 'Destination',
-                                name: data.name,
-                                location: data.iata || '',
-                                searchQuery: key,
-                                eqScore: data.safetyScore
-                            });
-                        }
-                    });
-                }
-
-                // User wants 30 total: 20 Events, 5 Cruises, 5 Destinations
                 const selEvents = getRandomSubset(eventPool, 20);
                 const selCruises = getRandomSubset(cruisePool, 5);
-                const selCities = getRandomSubset(cityPool, 5);
 
-                const sections = [
-                    { title: 'LGBTQ Events', items: selEvents, color: 'pride-purple', icon: 'event_upcoming' },
-                    { title: 'LGBTQ Cruises', items: selCruises, color: 'pride-blue', icon: 'directions_boat' },
-                    { title: 'Destinations', items: selCities, color: 'pride-green', icon: 'location_on' }
-                ];
-
-                grid.innerHTML = sections.map(s => {
+                // Section helper for list-style cards (Events & Cruises)
+                function listSection(title, color, icon, items) {
+                    if (!items.length) return '';
                     const titleBox = `
                         <div class="col-span-full mt-8 mb-4">
-                            <div class="px-4 py-2 bg-${s.color}/10 rounded-xl inline-flex items-center gap-2 border-l-4 border-${s.color} shadow-sm">
-                                <span class="material-symbols-outlined text-${s.color}">${s.icon}</span>
-                                <span class="font-extrabold text-xl pride-gradient-text">${s.title}</span>
+                            <div class="px-4 py-2 bg-${color}/10 rounded-xl inline-flex items-center gap-2 border-l-4 border-${color} shadow-sm">
+                                <span class="material-symbols-outlined text-${color}">${icon}</span>
+                                <span class="font-extrabold text-xl pride-gradient-text">${title}</span>
                             </div>
                         </div>`;
-
-                    const items = s.items.map(h => {
+                    const cards = items.map(h => {
                         const location = h.location || h.city || '';
                         const meta = h.date ? `${location} • ${h.date}` : location;
                         const query = h.searchQuery || h.city || h.name;
-
                         return `
-                            <div onclick="quickSearch('${query.replace(/'/g, "\\'")}', '${h.start || ''}', '${h.end || ''}')" 
-                                 class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-lg border-l-4 border-${s.color} flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform group relative">
-                                <div class="w-12 h-12 rounded-xl bg-${s.color}/10 flex items-center justify-center text-${s.color} shrink-0">
-                                    <span class="material-symbols-outlined">${s.icon}</span>
+                            <div onclick="quickSearch('${query.replace(/'/g, "\\'")}', '${h.start || ''}', '${h.end || ''}')"
+                                 class="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-lg border-l-4 border-${color} flex gap-4 cursor-pointer hover:scale-[1.02] transition-transform group relative">
+                                <div class="w-12 h-12 rounded-xl bg-${color}/10 flex items-center justify-center text-${color} shrink-0">
+                                    <span class="material-symbols-outlined">${icon}</span>
                                 </div>
                                 <div class="overflow-hidden flex-1 pr-6">
                                     <p class="font-black text-slate-900 dark:text-white truncate text-lg">${h.name}</p>
@@ -2369,9 +2342,50 @@
                                 </div>
                             </div>`;
                     }).join('');
+                    return titleBox + `<div class="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">${cards}</div>`;
+                }
 
-                    return titleBox + `<div class="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">${items}</div>`;
+                // Featured Destinations section — all 20 safeHotspots as image cards
+                const featuredDestinations = (SAFE_HOTSPOTS_DATA || []);
+                const destTitleBox = `
+                    <div class="col-span-full mt-8 mb-4">
+                        <div class="px-4 py-2 bg-pride-green/10 rounded-xl inline-flex items-center gap-2 border-l-4 border-pride-green shadow-sm">
+                            <span class="material-symbols-outlined text-pride-green">location_on</span>
+                            <span class="font-extrabold text-xl pride-gradient-text">Featured Destinations</span>
+                        </div>
+                    </div>`;
+                const destCards = featuredDestinations.map(h => {
+                    const cityEvents = SPECIAL_EVENTS_DATA.filter(e => e.city?.toLowerCase() === h.city?.toLowerCase() && e.type !== 'Cruise');
+                    let tag = `<span class="bg-pride-blue text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg">Featured Destination</span>`;
+                    let params = `'${h.city.replace(/'/g, "\\'")}'`;
+                    if (h.city === 'Amsterdam') {
+                        tag = `<span class="bg-pride-orange text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg">World Pride & Amsterdam Pride 2026</span>`;
+                        params = `'Amsterdam', '2026-07-25', '2026-08-08'`;
+                    } else if (cityEvents.length) {
+                        tag = `<span class="bg-pride-orange text-white text-[10px] font-black px-2 py-1 rounded-lg uppercase mb-2 inline-block shadow-lg truncate max-w-[200px]">Event: ${cityEvents[0].name}</span>`;
+                        params = `'${h.city.replace(/'/g, "\\'")}', '${cityEvents[0].start}', '${cityEvents[0].end}'`;
+                    }
+                    const borderClass = h.city === 'Amsterdam' ? 'rainbow-border' : '';
+                    return `
+                        <div onclick="quickSearch(${params})"
+                             class="rounded-3xl overflow-hidden relative group shadow-2xl cursor-pointer active:scale-95 transition-transform ${borderClass}">
+                            <img class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-110" src="${h.image}" alt="${h.city}" loading="lazy" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                            <div class="absolute bottom-5 left-5 right-5">
+                                ${tag}
+                                <h4 class="text-white text-xl font-black mb-1">${h.city}, ${h.country}</h4>
+                                <div class="flex items-center gap-2 text-white/90 text-xs font-bold">
+                                    <span class="material-symbols-outlined text-sm text-green-400 fill-1">verified_user</span> Equality Index: ${h.safetyScore || 'N/A'}/100
+                                </div>
+                            </div>
+                        </div>`;
                 }).join('');
+
+                grid.innerHTML =
+                    listSection('LGBTQ Events', 'pride-purple', 'event_upcoming', selEvents) +
+                    listSection('LGBTQ Cruises', 'pride-blue', 'directions_boat', selCruises) +
+                    destTitleBox +
+                    `<div class="col-span-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">${destCards}</div>`;
             }
 
             function populateTrendingEvents() {
@@ -2442,19 +2456,17 @@
                 const container = document.getElementById('hotspotsContainer');
                 if (!container) return;
 
-                // Requirement: Amsterdam Pride is the 1st permanent featured hotspot
-                const amsterdamPride = {
-                    city: 'Amsterdam',
-                    country: 'Netherlands',
-                    safetyScore: 94,
+                // Amsterdam (World Pride 2026) is always 1st — pulled from safeHotspots data
+                const amsterdam = (SAFE_HOTSPOTS_DATA || []).find(h => h.city && h.city.toLowerCase() === 'amsterdam') || {
+                    city: 'Amsterdam', country: 'Netherlands', safetyScore: 76,
                     image: 'https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?auto=format&fit=crop&w=800&q=80',
                     featured: true
                 };
 
                 const others = (SAFE_HOTSPOTS_DATA || []).filter(h => h.city && h.city.toLowerCase() !== 'amsterdam');
-                // Use randomSubset for the other 2 destinations
+                // Randomly pick 2 more from the 19 remaining featured destinations
                 const selectedOthers = getRandomSubset(others, 2);
-                const selected = [amsterdamPride, ...selectedOthers];
+                const selected = [amsterdam, ...selectedOthers];
 
                 container.innerHTML = selected.filter(h => h).map((h, index) => {
                     const cityEvents = SPECIAL_EVENTS_DATA.filter(e => e.city?.toLowerCase() === h.city?.toLowerCase() && e.type !== 'Cruise');
