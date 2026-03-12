@@ -1731,40 +1731,16 @@
                             randomHotels = randomHotels.slice(0, 4);
                         }
 
-                        // Prepare Vibrant Nightlife Section
-                        let nightlifeOptions = [];
-                        let availableNightlife = Array.isArray(data.nightlife) ? [...data.nightlife] : [];
+                        // Split nightlife into distinct categories
+                        const availableNightlife = Array.isArray(data.nightlife) ? [...data.nightlife] : [];
                         const availableRestaurants = data.restaurants ? [...data.restaurants] : [];
 
-                        // 1. Pick 1 Lesbian or Trans-Friendly Venue
-                        let lesbianTransItem = null;
-                        const lesbianTransBars = availableNightlife.filter(n => n.tags?.some(t => t.toLowerCase().includes('lesbian') || t.toLowerCase().includes('trans')));
-                        if (lesbianTransBars.length > 0) {
-                            lesbianTransItem = getRandomSubset(lesbianTransBars, 1)[0];
-                        }
+                        const isStore = n => (n.type || '').toLowerCase().includes('store') || (n.type || '').toLowerCase().includes('shop');
+                        const isSauna = n => (n.type || '').toLowerCase().includes('sauna') || (n.type || '').toLowerCase().includes('bath') || (n.type || '').toLowerCase().includes('cruising');
 
-                        // 2. Pick 1 Shop/Store
-                        let storeItem = null;
-                        const shops = availableNightlife.filter(n => (n.type || '').toLowerCase().includes('store') || (n.type || '').toLowerCase().includes('shop'));
-                        if (shops.length > 0) {
-                            storeItem = getRandomSubset(shops, 1)[0];
-                        }
-
-                        // Remove selected items to avoid duplicates in the nightlife section
-                        const remainNightlife = availableNightlife.filter(n => n !== lesbianTransItem && n !== storeItem);
-
-                        // Calculate how many regular venues we need to total 8
-                        const countFixed = (lesbianTransItem ? 1 : 0) + (storeItem ? 1 : 0);
-                        const requiredBars = Math.max(0, 8 - countFixed);
-                        const barSubset = getRandomSubset(remainNightlife, requiredBars);
-
-                        nightlifeOptions.push(...barSubset);
-                        if (lesbianTransItem) nightlifeOptions.push(lesbianTransItem);
-                        if (storeItem) nightlifeOptions.push(storeItem);
-
-                        // Shuffle options
-                        nightlifeOptions = nightlifeOptions.sort(() => 0.5 - Math.random());
-                        const randomNightlife = nightlifeOptions.slice(0, 8);
+                        const randomStores   = getRandomSubset(availableNightlife.filter(n => isStore(n)), 8);
+                        const randomSaunas   = getRandomSubset(availableNightlife.filter(n => isSauna(n)), 8);
+                        const randomNightlife = getRandomSubset(availableNightlife.filter(n => !isStore(n) && !isSauna(n)), 8);
 
                         // All restaurants go to the dedicated Restaurants & Cafes section
                         const randomRestaurants = getRandomSubset(availableRestaurants, 8);
@@ -2007,20 +1983,73 @@
                                 ` : ''}
                             </section>
 
-                            <!-- 6. Bars & Nightlife -->
+                            <!-- 6. Shops & Stores -->
+                            ${randomStores.length > 0 ? `
                             <section>
                                 <h3 class="text-xl font-bold mb-4 inline-block dark-pill">
-                                    <span class="pride-gradient-text">Shops, Cafes, Nightlife</span>
+                                    <span class="pride-gradient-text">Shops & Stores</span>
+                                </h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    ${randomStores.map((n, i) => {
+                                const icon = getNightlifeIcon(n.type);
+                                const firstTag = n.tags && n.tags.length > 0 ? n.tags[0] : '';
+                                return `
+                                        <div class="bg-white p-4 rounded-xl border border-pride-green/20 group hover:bg-pride-green transition-colors duration-300 relative cursor-default">
+                                            <button onclick="window.psBookmarkPlace('${n.name.replace(/'/g, "\\'")}', 'Shopping', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this place" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10">
+                                                <span class="material-symbols-outlined text-[16px]">bookmark</span>
+                                            </button>
+                                            <div class="w-10 h-10 bg-pride-green rounded-full flex items-center justify-center text-white mb-3 group-hover:bg-white dark:bg-white dark:text-pride-green group-hover:text-pride-green">
+                                                ${icon}
+                                            </div>
+                                            <p class="font-bold group-hover:text-white text-black" style="color: black !important;">${n.name}</p>
+                                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300 group-hover:text-white/80">${n.type}${firstTag ? ' &bull; ' + firstTag : ''}</p>
+                                        </div>
+                                        `;
+                            }).join('')}
+                                </div>
+                            </section>
+                            ` : ''}
+
+                            <!-- Saunas & Bathhouses -->
+                            ${randomSaunas.length > 0 ? `
+                            <section>
+                                <h3 class="text-xl font-bold mb-4 inline-block dark-pill">
+                                    <span class="pride-gradient-text">Saunas & Bathhouses</span>
+                                </h3>
+                                <div class="grid grid-cols-2 gap-3">
+                                    ${randomSaunas.map((n, i) => {
+                                const icon = getNightlifeIcon(n.type);
+                                const firstTag = n.tags && n.tags.length > 0 ? n.tags[0] : '';
+                                return `
+                                        <div class="bg-white p-4 rounded-xl border border-pride-red/20 group hover:bg-pride-red transition-colors duration-300 relative cursor-default">
+                                            <button onclick="window.psBookmarkPlace('${n.name.replace(/'/g, "\\'")}', 'Nightlife', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this place" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200 transition-colors text-slate-400 z-10">
+                                                <span class="material-symbols-outlined text-[16px]">bookmark</span>
+                                            </button>
+                                            <div class="w-10 h-10 bg-pride-red rounded-full flex items-center justify-center text-white mb-3 group-hover:bg-white dark:bg-white dark:text-pride-red group-hover:text-pride-red">
+                                                ${icon}
+                                            </div>
+                                            <p class="font-bold group-hover:text-white text-black" style="color: black !important;">${n.name}</p>
+                                            <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300 group-hover:text-white/80">${n.type}${firstTag ? ' &bull; ' + firstTag : ''}</p>
+                                        </div>
+                                        `;
+                            }).join('')}
+                                </div>
+                            </section>
+                            ` : ''}
+
+                            <!-- Bars & Nightlife -->
+                            ${randomNightlife.length > 0 ? `
+                            <section>
+                                <h3 class="text-xl font-bold mb-4 inline-block dark-pill">
+                                    <span class="pride-gradient-text">Bars & Nightlife</span>
                                 </h3>
                                 <div class="grid grid-cols-2 gap-3">
                                     ${randomNightlife.map((n, i) => {
                                 let color = 'pride-purple';
                                 const t = (n.type || '').toLowerCase();
-                                if (t.includes('sauna') || t.includes('bath')) color = 'pride-red';
-                                else if (t.includes('club') || t.includes('disco')) color = 'pride-blue';
-                                else if (t.includes('shop') || t.includes('store')) color = 'pride-green';
+                                if (t.includes('club') || t.includes('disco')) color = 'pride-blue';
                                 else if (t.includes('bar')) color = 'pride-purple';
-                                else color = 'pride-orange'; // fallback color
+                                else color = 'pride-orange';
                                 const icon = getNightlifeIcon(n.type);
                                 const firstTag = n.tags && n.tags.length > 0 ? n.tags[0] : '';
                                 return `
@@ -2038,6 +2067,7 @@
                             }).join('')}
                                 </div>
                             </section>
+                            ` : ''}
 
                             <!-- Restaurants & Cafes -->
                             ${randomRestaurants.length > 0 ? `
