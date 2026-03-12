@@ -4107,78 +4107,31 @@
     ]
   },
   "safeHotspots": [
-    {
-      "city": "London",
-      "country": "UK",
-      "safetyScore": 68,
-      "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Orlando",
-      "country": "USA",
-      "safetyScore": 68,
-      "image": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Tokyo",
-      "country": "Japan",
-      "safetyScore": 53,
-      "image": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Rio de Janeiro",
-      "country": "Brazil",
-      "safetyScore": 75,
-      "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Miami",
-      "country": "USA",
-      "safetyScore": 68,
-      "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "safetyScore": 76,
-      "image": "https://images.unsplash.com/photo-1517736996303-4eec4a66bb17?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Paris",
-      "country": "France",
-      "safetyScore": 74,
-      "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Mexico City",
-      "country": "Mexico",
-      "safetyScore": 70,
-      "image": "https://images.unsplash.com/photo-1585464231875-d9ef1f5ad396?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Buenos Aires",
-      "country": "Argentina",
-      "safetyScore": 74,
-      "image": "https://images.unsplash.com/photo-1589909202802-8f4aadce1849?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Berlin",
-      "country": "Germany",
-      "safetyScore": 80,
-      "image": "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "Barcelona",
-      "country": "Spain",
-      "safetyScore": 83,
-      "image": "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=800&q=80"
-    },
-    {
-      "city": "San Francisco",
-      "country": "USA",
-      "safetyScore": 68,
-      "image": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80"
-    }
+    { "city": "Amsterdam",      "country": "Netherlands", "safetyScore": 76, "image": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=800&q=80" },
+    { "city": "New York",       "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Orlando",        "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1575089976121-8ed7b2a54265?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Los Angeles",    "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1534430480872-3498386e7856?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Chicago",        "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=800&q=80" },
+    { "city": "San Francisco",  "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Paris",          "country": "France",      "safetyScore": 74, "image": "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Tokyo",          "country": "Japan",       "safetyScore": 53, "image": "https://images.unsplash.com/photo-1503899036084-c55cdd92da26?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Honolulu",       "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1505852679233-d9fd70aff56d?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Bangkok",        "country": "Thailand",    "safetyScore": 65, "image": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Las Vegas",      "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Sydney",         "country": "Australia",   "safetyScore": 78, "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Palm Springs",   "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1581351721010-8cf859cb14a4?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Puerto Vallarta","country": "Mexico",      "safetyScore": 70, "image": "https://images.unsplash.com/photo-1518638150340-f706e86654de?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Rio de Janeiro", "country": "Brazil",      "safetyScore": 75, "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Miami",          "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80" },
+    { "city": "New Orleans",    "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1568478266411-f7b0060f62c1?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Toronto",        "country": "Canada",      "safetyScore": 79, "image": "https://images.unsplash.com/photo-1517935706615-2717063c2225?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Fort Lauderdale","country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Berlin",         "country": "Germany",     "safetyScore": 80, "image": "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=800&q=80" },
+    { "city": "San Juan",       "country": "Puerto Rico", "safetyScore": 68, "image": "https://images.unsplash.com/photo-1580168485920-cf5f4509d1f2?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Vancouver",      "country": "Canada",      "safetyScore": 79, "image": "https://images.unsplash.com/photo-1559511260-10a3e51ea703?auto=format&fit=crop&w=800&q=80" },
+    { "city": "London",         "country": "UK",          "safetyScore": 68, "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Cancun",         "country": "Mexico",      "safetyScore": 70, "image": "https://images.unsplash.com/photo-1552074284-5e88ef1aef18?auto=format&fit=crop&w=800&q=80" },
+    { "city": "Washington DC",  "country": "USA",         "safetyScore": 68, "image": "https://images.unsplash.com/photo-1501466044931-62695aada8e9?auto=format&fit=crop&w=800&q=80" }
   ],
   "lisbon": {
     "name": "Lisbon, Portugal",
