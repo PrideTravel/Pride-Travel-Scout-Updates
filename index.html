@@ -1738,12 +1738,12 @@
                         const isStore = n => (n.type || '').toLowerCase().includes('store') || (n.type || '').toLowerCase().includes('shop');
                         const isSauna = n => (n.type || '').toLowerCase().includes('sauna') || (n.type || '').toLowerCase().includes('bath') || (n.type || '').toLowerCase().includes('cruising');
 
-                        const randomStores   = getRandomSubset(availableNightlife.filter(n => isStore(n)), 8);
-                        const randomSaunas   = getRandomSubset(availableNightlife.filter(n => isSauna(n)), 8);
-                        const randomNightlife = getRandomSubset(availableNightlife.filter(n => !isStore(n) && !isSauna(n)), 8);
+                        const randomStores    = getRandomSubset(availableNightlife.filter(n => isStore(n)), 2);
+                        const randomSaunas    = getRandomSubset(availableNightlife.filter(n => isSauna(n)), 2);
+                        const randomNightlife = getRandomSubset(availableNightlife.filter(n => !isStore(n) && !isSauna(n)), 4);
 
                         // All restaurants go to the dedicated Restaurants & Cafes section
-                        const randomRestaurants = getRandomSubset(availableRestaurants, 8);
+                        const randomRestaurants = getRandomSubset(availableRestaurants, 2);
                         const randomTours = (data.tours || []).slice(0, 5);
                         const fareEstimate = calculateFareEstimate(data.baseFare);
                         const delay = index * 200;
