@@ -11170,86 +11170,86 @@
       {
         "high": "81°F",
         "low": "68°F",
-        "summary": "Sunny",
-        "description": "Warm, sunny, and humid beach weather with occasional refreshing coastal sea breezes.",
-        "gear": "Swimwear, light cottons."
+        "summary": "Warm, sunny, and humid beach weather with occasional coastal sea breezes.",
+        "description": "Peak summer brings vibrant outdoor energy. Days are hot and bright; humidity is high but offset by ocean breezes and frequent beach swims.",
+        "gear": "Light cottons, swimsuit, sunscreen, sunglasses."
       },
       {
         "high": "80°F",
         "low": "68°F",
-        "summary": "Sunny",
-        "description": "Balmy and humid; late summer afternoon thunderstorms are frequent but usually brief.",
-        "gear": "Shorts, umbrellas."
+        "summary": "Balmy and humid; late summer afternoon thunderstorms are frequent but brief.",
+        "description": "Still warm and tropical. Afternoon thunderstorms cool things down quickly; they're usually quick but dramatic.",
+        "gear": "Light clothing, umbrella, quick-dry fabrics."
       },
       {
         "high": "78°F",
         "low": "65°F",
-        "summary": "Sunny",
-        "description": "Mildly warm and the wettest month; humidity begins to drop as autumn starts.",
-        "gear": "Light jackets, raincoats."
+        "summary": "Mildly warm and the wettest month; humidity begins to drop as autumn starts.",
+        "description": "Transition into autumn. Still warm, but rain is more common now, and humidity eases.",
+        "gear": "Lightweight layers, water-resistant jacket."
       },
       {
         "high": "74°F",
         "low": "59°F",
-        "summary": "Sunny",
-        "description": "Refreshingly mild with clear skies; ideal weather for walking and outdoor exploration.",
-        "gear": "Jeans, t-shirts."
+        "summary": "Refreshingly mild with clear skies; ideal weather for walking and outdoor exploration.",
+        "description": "Autumn in full swing. Clear days and pleasant temperatures make this perfect for sightseeing without summer's intensity.",
+        "gear": "Light jacket, comfortable walking shoes."
       },
       {
         "high": "70°F",
         "low": "54°F",
-        "summary": "Sunny",
-        "description": "Crisp, sunny days and cool evenings; the most comfortable month for sightseeing.",
-        "gear": "Light sweaters, flannels."
+        "summary": "Crisp, sunny days and cool evenings; the most comfortable month for sightseeing.",
+        "description": "Crisp and clear. Days are bright and mild; evenings require a light layer. This is peak season weather.",
+        "gear": "Light jacket or sweater, walking shoes."
       },
       {
         "high": "65°F",
         "low": "50°F",
-        "summary": "Sunny",
-        "description": "Brisk and sunny; early winter air is clear but requires consistent layering.",
-        "gear": "Denim jackets, scarves."
+        "summary": "Brisk and sunny; early winter air is clear but requires consistent layering.",
+        "description": "Early winter arrives. Still many sunny days, but mornings and evenings turn cool. Water activities still pleasant.",
+        "gear": "Mid-weight jacket, layers, sneakers."
       },
       {
         "high": "64°F",
         "low": "47°F",
-        "summary": "Sunny",
-        "description": "Cool and bright; the coldest month but still feels mild under direct sun.",
-        "gear": "Wool sweaters, boots."
+        "summary": "Cool and bright; the coldest month but still feels mild under direct sun.",
+        "description": "The coolest month. Mornings can be chilly, but winter is mild by global standards, and sunny days are common.",
+        "gear": "Jacket, layers, comfortable walking shoes."
       },
       {
         "high": "67°F",
         "low": "49°F",
-        "summary": "Sunny",
-        "description": "Crisp winter air with low humidity; days are pleasant but nights turn chilly.",
-        "gear": "Medium coats, warm socks."
+        "summary": "Crisp winter air with low humidity; days are pleasant but nights turn chilly.",
+        "description": "Late winter heading toward spring. Days warm up nicely, but nights are still crisp. Humidity is very low.",
+        "gear": "Light jacket, layers for evening."
       },
       {
         "high": "71°F",
         "low": "54°F",
-        "summary": "Rain",
-        "description": "Windy and warming; spring arrives with clear skies and the lowest annual rainfall.",
-        "gear": "Windbreakers, sunglasses."
+        "summary": "Windy and warming; spring arrives with clear skies and the lowest annual rainfall.",
+        "description": "Spring transition. Wind picks up but days are warming nicely. This month has the least rain of the year.",
+        "gear": "Light layers, windbreaker."
       },
       {
         "high": "74°F",
         "low": "58°F",
-        "summary": "Sunny",
-        "description": "Beautifully warm and dry; perfect conditions for parks and coastal cliff walks.",
-        "gear": "Light layers, sneakers."
+        "summary": "Beautifully warm and dry; perfect conditions for parks and coastal cliff walks.",
+        "description": "Spring in full glory. Warm, dry, and clear—absolutely beautiful for outdoor exploring and photography.",
+        "gear": "Light clothing, hat, sunglasses."
       },
       {
         "high": "76°F",
         "low": "62°F",
-        "summary": "Sunny",
-        "description": "Warm and increasingly sunny; summer vibes return without the intense peak heat.",
-        "gear": "Short sleeves, sun hats."
+        "summary": "Warm and increasingly sunny; summer vibes return without the intense peak heat.",
+        "description": "Spring moving toward summer. Warm and sunny with low rainfall. Perfect beach and outdoor weather is returning.",
+        "gear": "Light clothing, swimsuit, sunscreen."
       },
       {
         "high": "78°F",
         "low": "65°F",
-        "summary": "Sunny",
-        "description": "Hot and bright; the lead-up to Christmas is sunny with rising tropical humidity.",
-        "gear": "Linen shirts, sunblock."
+        "summary": "Hot and bright; the lead-up to Christmas is sunny with rising tropical humidity.",
+        "description": "Early summer builds. Days are hot and bright; humidity begins to rise as the season transitions to peak summer.",
+        "gear": "Light cottons, swimsuit, sunscreen, sunglasses."
       }
     ],
     "name": "Sydney, Australia",
@@ -11265,169 +11265,149 @@
     "hotels": [
       {
         "name": "Sydney Boutique Hotel",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Owned & Operated"
         ],
-        "price": "Mid-priced"
+        "pricing": "Mid-priced"
       },
       {
         "name": "The Beresford (Loft)",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Owned & Operated"
         ],
-        "price": "Moderate"
+        "pricing": "Moderate"
       },
       {
         "name": "Ovolo Woolloomooloo",
-        "type": "Hotel",
         "tags": [
           "World Rainbow Hotels Member"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       },
       {
         "name": "Hotel Woolstore 1888",
-        "type": "Hotel",
         "tags": [
           "World Rainbow Hotels Member"
         ],
-        "price": "Moderate"
+        "pricing": "Moderate"
       },
       {
         "name": "The Old Clare Hotel",
-        "type": "Hotel",
         "tags": [
           "World Rainbow Hotels Member"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       },
       {
         "name": "QT Sydney",
-        "type": "Hotel",
         "tags": [
           "World Rainbow Hotels Member"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       },
       {
         "name": "Four Seasons Hotel Sydney",
-        "type": "Hotel",
         "tags": [
           "IGLTA Accredited"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       },
       {
         "name": "Shangri-La Sydney",
-        "type": "Hotel",
         "tags": [
           "IGLTA Accredited"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       },
       {
         "name": "Hyatt Regency Sydney",
-        "type": "Hotel",
         "tags": [
           "IGLTA Accredited"
         ],
-        "price": "Moderate"
+        "pricing": "Moderate"
       },
       {
         "name": "InterContinental Sydney",
-        "type": "Hotel",
         "tags": [
           "IGLTA Accredited"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       },
       {
         "name": "Capella Sydney",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Friendly"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       },
       {
         "name": "Harbour Rocks Hotel",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Friendly"
         ],
-        "price": "Moderate"
+        "pricing": "Moderate"
       },
       {
         "name": "Little National Hotel Sydney",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Friendly"
         ],
-        "price": "Moderate"
+        "pricing": "Moderate"
       },
       {
         "name": "Hotel Challis Potts Point",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Friendly"
         ],
-        "price": "Mid-priced"
+        "pricing": "Mid-priced"
       },
       {
         "name": "Courthouse Hotel",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Friendly"
         ],
-        "price": "Budget"
+        "pricing": "Budget"
       },
       {
         "name": "Vibe Hotel Sydney",
-        "type": "Hotel",
         "tags": [
           "IGLTA Accredited"
         ],
-        "price": "Mid-priced"
+        "pricing": "Mid-priced"
       },
       {
         "name": "W Sydney",
-        "type": "Hotel",
         "tags": [
           "IGLTA Accredited"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       },
       {
         "name": "Ace Hotel Sydney",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Friendly"
         ],
-        "price": "Moderate"
+        "pricing": "Moderate"
       },
       {
         "name": "Establishment Hotel",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Friendly"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       },
       {
         "name": "The Fullerton Hotel Sydney",
-        "type": "Hotel",
         "tags": [
           "LGBTQ Friendly"
         ],
-        "price": "Luxury"
+        "pricing": "Luxury"
       }
     ],
     "nightlife": [
       {
         "name": "ARQ Sydney",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Dance",
           "Circuit"
@@ -11435,7 +11415,7 @@
       },
       {
         "name": "The Columbian Hotel",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Dance",
           "Video Bar"
@@ -11443,7 +11423,7 @@
       },
       {
         "name": "Stonewall Hotel",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Drag",
           "Dance"
@@ -11451,7 +11431,7 @@
       },
       {
         "name": "The Oxford Hotel",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Neighborhood",
           "Performance"
@@ -11459,7 +11439,7 @@
       },
       {
         "name": "Palms on Oxford",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Retro",
           "Dance"
@@ -11467,7 +11447,7 @@
       },
       {
         "name": "Universal Sydney",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Drag",
           "Dance"
@@ -11475,7 +11455,7 @@
       },
       {
         "name": "The Beresford",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Courtyard",
           "Social"
@@ -11483,7 +11463,7 @@
       },
       {
         "name": "Kinselas",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Cocktails",
           "Historical"
@@ -11491,7 +11471,7 @@
       },
       {
         "name": "The Cliff Dive",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Alt-Gay",
           "Tropical"
@@ -11499,7 +11479,7 @@
       },
       {
         "name": "The Bank Hotel",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Alt-Gay",
           "Patio"
@@ -11507,7 +11487,7 @@
       },
       {
         "name": "The Imperial Erskineville",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Iconic",
           "Drag"
@@ -11515,7 +11495,7 @@
       },
       {
         "name": "The Lord Gladstone",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Alt-Gay",
           "Local"
@@ -11523,7 +11503,7 @@
       },
       {
         "name": "Beauchamp Hotel",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Local",
           "Social"
@@ -11531,7 +11511,7 @@
       },
       {
         "name": "The Sydney Connection",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Cruise",
           "Men"
@@ -11539,7 +11519,7 @@
       },
       {
         "name": "Lord Roberts Hotel",
-        "type": "Bar/Club",
+        "type": "Bar",
         "tags": [
           "Pub",
           "Rooftop"
@@ -11581,130 +11561,136 @@
         "name": "The Bookshop Darlinghurst",
         "type": "Store",
         "tags": [
-          "Bookstore & Queer History"
+          "Bookstore",
+          "Queer History"
         ]
       },
       {
         "name": "Sock Drawer Heroes",
         "type": "Store",
         "tags": [
-          "Gender Expression Wear & Gifts"
+          "Gender Expression Wear",
+          "Gifts"
         ]
       },
       {
         "name": "Flirt Adult Boutique",
         "type": "Store",
         "tags": [
-          "Adult & Novelties"
+          "Adult",
+          "Novelties"
         ]
       },
       {
         "name": "Daily Press",
         "type": "Store",
         "tags": [
-          "Bookstore & Art"
+          "Bookstore",
+          "Art"
         ]
       },
       {
         "name": "Better Read Than Dead",
         "type": "Store",
         "tags": [
-          "Bookstore (Inclusive section)"
+          "Bookstore",
+          "Inclusive"
         ]
       },
       {
         "name": "The Oxford Shop",
         "type": "Store",
         "tags": [
-          "Men's Clothing & Essentials"
+          "Mens Clothing",
+          "Essentials"
         ]
       }
     ],
     "tours": [
       {
         "name": "Sydney Opera House Inside Look Guided Tour",
-        "style": "Moderate",
-        "price": "Budget"
+        "activity": "Moderate",
+        "pricing": "Budget"
       },
       {
         "name": "Sydney Harbour BridgeClimb",
-        "style": "High",
-        "price": "Luxury"
+        "activity": "High",
+        "pricing": "Luxury"
       },
       {
         "name": "Taronga Zoo Entry with Cable Car Ride",
-        "style": "Moderate",
-        "price": "Moderate"
+        "activity": "Moderate",
+        "pricing": "Moderate"
       },
       {
         "name": "Blue Mountains All-Inclusive Day Trip",
-        "style": "Moderate",
-        "price": "Moderate"
+        "activity": "Moderate",
+        "pricing": "Moderate"
       },
       {
         "name": "Sydney Harbour Lunch Cruise",
-        "style": "Low",
-        "price": "Moderate"
+        "activity": "Low",
+        "pricing": "Moderate"
       },
       {
         "name": "Bondi Beach Surf Lesson",
-        "style": "High",
-        "price": "Moderate"
+        "activity": "High",
+        "pricing": "Moderate"
       },
       {
         "name": "Sydney Tower Eye Observation Deck",
-        "style": "Low",
-        "price": "Budget"
+        "activity": "Low",
+        "pricing": "Budget"
       },
       {
         "name": "Rocks District Historic Walking Tour",
-        "style": "Moderate",
-        "price": "Budget"
+        "activity": "Moderate",
+        "pricing": "Budget"
       },
       {
         "name": "Hunter Valley Wine & Chocolate Tasting Tour",
-        "style": "Low",
-        "price": "Luxury"
+        "activity": "Low",
+        "pricing": "Luxury"
       },
       {
         "name": "Manly to Spit Bridge Coastal Walk",
-        "style": "High",
-        "price": "Budget"
+        "activity": "High",
+        "pricing": "Budget"
       },
       {
         "name": "Nightly Spirits Ghost Tour",
-        "style": "Moderate",
-        "price": "Budget"
+        "activity": "Moderate",
+        "pricing": "Budget"
       },
       {
         "name": "Art Gallery of New South Wales Private Tour",
-        "style": "Moderate",
-        "price": "Moderate"
+        "activity": "Moderate",
+        "pricing": "Moderate"
       },
       {
         "name": "Sydney Cricket Ground (SCG) Behind-the-Scenes",
-        "style": "Moderate",
-        "price": "Budget"
+        "activity": "Moderate",
+        "pricing": "Budget"
       },
       {
         "name": "Captain Cook Sunset Dinner Cruise",
-        "style": "Low",
-        "price": "Moderate"
+        "activity": "Low",
+        "pricing": "Moderate"
       },
       {
         "name": "Illawarra Fly Treetop Walk",
-        "style": "Moderate",
-        "price": "Moderate"
+        "activity": "Moderate",
+        "pricing": "Moderate"
       },
       {
         "name": "Oxford Street LGBTQ+ Heritage Tour",
-        "style": "Moderate",
-        "price": "Moderate"
+        "activity": "Moderate",
+        "pricing": "Moderate"
       },
       {
         "name": "Sydney Mardi Gras History & Icons Walk",
-        "style": "Moderate",
-        "price": "Budget"
+        "activity": "Moderate",
+        "pricing": "Budget"
       }
     ],
     "events": [
@@ -11727,33 +11713,27 @@
     "restaurants": [
       {
         "name": "Claire's Kitchen at le Salon",
-        "type": "Restaurant (French)",
-        "tags": []
+        "type": "Restaurant (French)"
       },
       {
         "name": "Thai Kanteen",
-        "type": "Restaurant",
-        "tags": []
+        "type": "Restaurant"
       },
       {
         "name": "Maggie's",
-        "type": "Restaurant/Cafe",
-        "tags": []
+        "type": "Restaurant/Cafe"
       },
       {
         "name": "Zinc",
-        "type": "Cafe",
-        "tags": []
+        "type": "Cafe"
       },
       {
         "name": "Bertoni",
-        "type": "Bakery & Cafe",
-        "tags": []
+        "type": "Bakery & Cafe"
       },
       {
         "name": "bills (Darlinghurst)",
-        "type": "Restaurant",
-        "tags": []
+        "type": "Restaurant"
       }
     ]
   },
@@ -14703,68 +14683,92 @@
     }
   },
   "palm springs": {
-    "monthlyWeather": {
-      "0": {
-        "high": "70°F",
-        "low": "45°F",
-        "summary": "Warm & Sunny"
+    "monthlyWeather": [
+      {
+        "high": "71°F",
+        "low": "47°F",
+        "summary": "Warm, sunny days and chilly nights; quintessential high-desert winter luxury weather.",
+        "description": "Winter is the golden season. Days are warm and bright; nights dip cool. Perfect for pools and golf.",
+        "gear": "Light layers, sunglasses, jacket for evenings."
       },
-      "1": {
-        "high": "76°F",
-        "low": "50°F",
-        "summary": "Warm & Sunny"
+      {
+        "high": "73°F",
+        "low": "49°F",
+        "summary": "Pleasantly warm afternoons with clear skies; perfect for poolside lounging and golf.",
+        "description": "Late winter maintains the perfect weather. Still cool mornings and evenings, but afternoons are gorgeous.",
+        "gear": "Lightweight clothing, layers, sunscreen."
       },
-      "2": {
-        "high": "83°F",
-        "low": "56°F",
-        "summary": "Warm & Sunny"
+      {
+        "high": "80°F",
+        "low": "53°F",
+        "summary": "Very warm and dry; the desert begins to bloom under bright sun.",
+        "description": "Spring arrives with wildflower blooms. Temperatures rise noticeably; days are hot and clear.",
+        "gear": "Light clothing, hat, sunglasses, sunscreen."
       },
-      "3": {
+      {
+        "high": "88°F",
+        "low": "59°F",
+        "summary": "Hot and arid; summer-like conditions arrive early with intense direct sun.",
+        "description": "Late spring turns to early summer. Heat intensifies; direct sun becomes strong. Pool time recommended.",
+        "gear": "Light cottons, sunscreen, hat, sunglasses."
+      },
+      {
+        "high": "94°F",
+        "low": "65°F",
+        "summary": "Intensifying heat; dry desert air makes for very hot afternoons and warm nights.",
+        "description": "Early summer heat sets in. Afternoons are blazing; even nights are warm. Morning activities best.",
+        "gear": "Lightweight clothing, sunscreen, water bottle."
+      },
+      {
+        "high": "103°F",
+        "low": "72°F",
+        "summary": "Sweltering; extreme heat requires moving activities to early morning or late evening.",
+        "description": "Peak heat arrives. Daytime temps are dangerous for outdoor activity. Indoors and pools are essential.",
+        "gear": "Loose lightweight clothing, hat, sunglasses, water."
+      },
+      {
+        "high": "108°F",
+        "low": "78°F",
+        "summary": "Peak desert heat; dangerously high temperatures with zero shade or rain.",
+        "description": "The absolute hottest month. Outdoor activity is limited to early morning/late evening. Stay hydrated.",
+        "gear": "Minimal lightweight clothing, hat, sunscreen, water."
+      },
+      {
+        "high": "107°F",
+        "low": "79°F",
+        "summary": "Oppressive and dry; staying indoors or in the pool is the priority.",
+        "description": "Still brutal heat, though slightly less intense than July. Pool parties and indoor activities dominate.",
+        "gear": "Loose clothing, sunscreen, water bottle, hat."
+      },
+      {
+        "high": "102°F",
+        "low": "73°F",
+        "summary": "Hot but slightly retreating; sunsets are stunning but the air remains very warm.",
+        "description": "Late summer, heat beginning to ease slightly. Mornings are slightly cooler; evenings remain warm.",
+        "gear": "Light clothing, sunscreen, hat, water."
+      },
+      {
         "high": "91°F",
         "low": "64°F",
-        "summary": "Hot & Dry"
+        "summary": "Warm and pleasant; the start of the most comfortable season for visitors.",
+        "description": "Fall arrives with relief. Temperatures drop noticeably; outdoors becomes enjoyable again.",
+        "gear": "Light layers, comfortable walking clothes."
       },
-      "4": {
-        "high": "99°F",
-        "low": "73°F",
-        "summary": "Very Hot"
-      },
-      "5": {
-        "high": "107°F",
-        "low": "81°F",
-        "summary": "Extreme Desert Heat"
-      },
-      "6": {
-        "high": "108°F",
-        "low": "84°F",
-        "summary": "Extreme Desert Heat"
-      },
-      "7": {
-        "high": "107°F",
-        "low": "83°F",
-        "summary": "Extreme Desert Heat"
-      },
-      "8": {
-        "high": "102°F",
-        "low": "77°F",
-        "summary": "Very Hot"
-      },
-      "9": {
-        "high": "91°F",
-        "low": "65°F",
-        "summary": "Hot & Dry"
-      },
-      "10": {
+      {
         "high": "78°F",
-        "low": "52°F",
-        "summary": "Warm & Sunny"
+        "low": "54°F",
+        "summary": "Ideal fall weather; warm sun and cool, crisp evenings for outdoor dining.",
+        "description": "Fall in full swing. Warm days, cool evenings, perfect for exploring and dining outdoors.",
+        "gear": "Light jacket, layers, comfortable shoes."
       },
-      "11": {
-        "high": "70°F",
-        "low": "44°F",
-        "summary": "Warm & Sunny"
+      {
+        "high": "69°F",
+        "low": "45°F",
+        "summary": "Cool and bright; clear desert air makes for chilly nights and mild days.",
+        "description": "Winter season returns. Days stay pleasant; nights cool down. Season's first frost possible.",
+        "gear": "Light jacket, layers, sweater for evenings."
       }
-    },
+    ],
     "name": "Palm Springs, CA",
     "iata": "PSP",
     "image": "&#127482;&#127480;",
@@ -14777,260 +14781,478 @@
     "lgbtqDistrict": "Arenas Road",
     "hotels": [
       {
-        "name": "Santiago Resort",
-        "type": "Moderate",
+        "name": "Santiago Resort (Men Only)",
         "tags": [
-          "LGBTQ Hotel"
-        ]
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Moderate"
       },
       {
         "name": "Triangle Inn",
-        "type": "Moderate",
         "tags": [
-          "LGBTQ Hotel"
-        ]
-      },
-      {
-        "name": "Canyon Club",
-        "type": "moderate",
-        "tags": [
-          "LGBTQ Hotel"
-        ]
-      },
-      {
-        "name": "CCBC Resort",
-        "type": "Details",
-        "tags": [
-          "LGBTQ Hotel"
-        ]
-      },
-      {
-        "name": "La Dolce Vita",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Hotel"
-        ]
-      },
-      {
-        "name": "Ace Hotel",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Friendly"
-        ]
-      },
-      {
-        "name": "Saguaro",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Friendly"
-        ]
-      },
-      {
-        "name": "Tuscany Manor",
-        "type": "Budget",
-        "tags": [
-          "LGBTQ Friendly"
-        ]
-      },
-      {
-        "name": "Kimpton Rowan",
-        "type": "Luxury",
-        "tags": [
-          "LGBTQ Friendly"
-        ]
-      },
-      {
-        "name": "Parker Palm Springs",
-        "type": "Luxury",
-        "tags": [
-          "LGBTQ Friendly"
-        ]
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Moderate"
       },
       {
         "name": "Descanso Resort",
-        "type": "Luxury",
         "tags": [
-          "LGBTQ Owned/Operated",
-          "Men Only",
-          "Clothing Optional"
-        ]
-      },
-      {
-        "name": "Desert Paradise",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
-      },
-      {
-        "name": "Gatsby's Landing",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
-      },
-      {
-        "name": "INNdulge",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
-      },
-      {
-        "name": "The Copper Rabbit",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
-      },
-      {
-        "name": "The Highlands",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
-      },
-      {
-        "name": "The Men's Resort",
-        "type": "Luxury",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
-      },
-      {
-        "name": "The Santiago",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
-      },
-      {
-        "name": "Trixie Motel",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Moderate"
       },
       {
         "name": "Vista Grande Resort",
-        "type": "Luxury",
         "tags": [
-          "LGBTQ Owned/Operated"
-        ]
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "InnDulge Palm Springs",
+        "tags": [
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "Canyon Club Hotel",
+        "tags": [
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Mid-priced"
+      },
+      {
+        "name": "Casitas Laquita",
+        "tags": [
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "The Willows Historic Palm Springs Inn",
+        "tags": [
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Luxury"
+      },
+      {
+        "name": "Kimpton Rowan Palm Springs",
+        "tags": [
+          "World Rainbow Hotels Member"
+        ],
+        "pricing": "Luxury"
+      },
+      {
+        "name": "Ace Hotel & Swim Club",
+        "tags": [
+          "IGLTA Accredited"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "Parker Palm Springs",
+        "tags": [
+          "IGLTA Accredited"
+        ],
+        "pricing": "Luxury"
+      },
+      {
+        "name": "L'Horizon Resort & Spa",
+        "tags": [
+          "IGLTA Accredited"
+        ],
+        "pricing": "Luxury"
+      },
+      {
+        "name": "Arrive Palm Springs",
+        "tags": [
+          "LGBTQ Friendly"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "The Saguaro Palm Springs",
+        "tags": [
+          "LGBTQ Friendly"
+        ],
+        "pricing": "Mid-priced"
+      },
+      {
+        "name": "Holiday House",
+        "tags": [
+          "LGBTQ Friendly"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "Sands Hotel & Spa",
+        "tags": [
+          "LGBTQ Friendly"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "V Palm Springs",
+        "tags": [
+          "LGBTQ Friendly"
+        ],
+        "pricing": "Mid-priced"
+      },
+      {
+        "name": "Korakia Pensione",
+        "tags": [
+          "LGBTQ Friendly"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "Trixie Motel (Trixie Mattel Owned)",
+        "tags": [
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "Sparrows Lodge",
+        "tags": [
+          "LGBTQ Friendly"
+        ],
+        "pricing": "Moderate"
       }
     ],
     "nightlife": [
       {
-        "name": "Hunters",
-        "type": "Club",
+        "name": "Hunters Nightclub",
+        "type": "Bar",
         "tags": [
-          "Dance"
+          "Dance",
+          "Video Bar"
         ]
       },
       {
         "name": "Streetbar",
         "type": "Bar",
         "tags": [
-          "Karaoke"
+          "Neighborhood",
+          "Iconic"
         ]
       },
       {
         "name": "Chill Bar",
         "type": "Bar",
         "tags": [
-          "Lounge"
+          "Dance",
+          "Drag"
         ]
       },
       {
         "name": "Blackbook",
         "type": "Bar",
         "tags": [
-          "Food"
+          "Cocktails",
+          "Dining"
         ]
       },
       {
         "name": "Eagle 501",
         "type": "Bar",
         "tags": [
-          "Leather"
+          "Leather",
+          "Bear"
         ]
       },
       {
         "name": "Quadz",
         "type": "Bar",
         "tags": [
-          "Video"
+          "Video Bar",
+          "Sing-along"
         ]
       },
       {
-        "name": "Stacy's",
+        "name": "The Score",
         "type": "Bar",
         "tags": [
-          "Piano"
+          "Cruise",
+          "Men"
         ]
       },
       {
-        "name": "Toucan's",
-        "type": "Club",
-        "tags": [
-          "Drag"
-        ]
-      },
-      {
-        "name": "One Eleven",
+        "name": "Stacy's @ Palm Springs",
         "type": "Bar",
         "tags": [
+          "Piano Bar",
           "Cocktails"
         ]
       },
       {
-        "name": "Tool Shed",
+        "name": "Toucans Tiki Lounge",
         "type": "Bar",
         "tags": [
-          "Leather"
+          "Drag",
+          "Dance"
+        ]
+      },
+      {
+        "name": "The Tool Shed",
+        "type": "Bar",
+        "tags": [
+          "Leather",
+          "Bear"
+        ]
+      },
+      {
+        "name": "Revenge",
+        "type": "Bar",
+        "tags": [
+          "Cruise",
+          "Men"
+        ]
+      },
+      {
+        "name": "One Eleven Bar",
+        "type": "Bar",
+        "tags": [
+          "Drag",
+          "Cabaret"
+        ]
+      },
+      {
+        "name": "The Barracks",
+        "type": "Bar",
+        "tags": [
+          "Leather",
+          "Sunday Beer Bust"
+        ]
+      },
+      {
+        "name": "Roost Lounge",
+        "type": "Bar",
+        "tags": [
+          "Neighborhood",
+          "Entertainment"
+        ]
+      },
+      {
+        "name": "All Worlds Resort",
+        "type": "Bar",
+        "tags": [
+          "Cruise Club",
+          "Sauna"
+        ]
+      },
+      {
+        "name": "The CCBC Resort",
+        "type": "Bar",
+        "tags": [
+          "Cruise Club",
+          "Clothing Optional"
+        ]
+      },
+      {
+        "name": "Club 541",
+        "type": "Sauna",
+        "tags": [
+          "Sauna",
+          "Cruise Club"
+        ]
+      },
+      {
+        "name": "Gay Pride 66",
+        "type": "Store",
+        "tags": [
+          "Gifts",
+          "Pride Apparel"
+        ]
+      },
+      {
+        "name": "Rough Trade Gear",
+        "type": "Store",
+        "tags": [
+          "Fetish",
+          "Leather & Gear"
+        ]
+      },
+      {
+        "name": "Bear Wear",
+        "type": "Store",
+        "tags": [
+          "Clothing",
+          "Bear-themed Gear"
+        ]
+      },
+      {
+        "name": "On The Mark",
+        "type": "Store",
+        "tags": [
+          "Food",
+          "Gifts & Lifestyle"
+        ]
+      },
+      {
+        "name": "Division Palm Springs",
+        "type": "Store",
+        "tags": [
+          "Clothing",
+          "Swimwear"
+        ]
+      },
+      {
+        "name": "Greetings Palm Springs",
+        "type": "Store",
+        "tags": [
+          "Gifts",
+          "Cards & Novelties"
+        ]
+      },
+      {
+        "name": "Destination PSP",
+        "type": "Store",
+        "tags": [
+          "Gifts",
+          "Home & Apparel"
+        ]
+      },
+      {
+        "name": "Mr. Turk",
+        "type": "Store",
+        "tags": [
+          "Clothing",
+          "High-end"
+        ]
+      },
+      {
+        "name": "Baza",
+        "type": "Store",
+        "tags": [
+          "Clothing",
+          "Accessories"
+        ]
+      },
+      {
+        "name": "Wabi Sabi Japan Living",
+        "type": "Store",
+        "tags": [
+          "Gifts",
+          "Home"
+        ]
+      },
+      {
+        "name": "Peepa's",
+        "type": "Store",
+        "tags": [
+          "Gifts",
+          "Apparel"
+        ]
+      },
+      {
+        "name": "Windmill City Mercantile",
+        "type": "Store",
+        "tags": [
+          "Gifts",
+          "Lifestyle"
+        ]
+      },
+      {
+        "name": "Brandini Toffee",
+        "type": "Store",
+        "tags": [
+          "Sweets",
+          "Gifts"
         ]
       }
     ],
     "tours": [
       {
-        "name": "Aerial Tramway",
-        "style": "Cultural"
+        "name": "Palm Springs Aerial Tramway Ticket",
+        "activity": "Easy",
+        "pricing": "Budget"
       },
       {
-        "name": "Joshua Tree",
-        "style": "Cultural"
+        "name": "Modernism Architecture & History Bike Tour",
+        "activity": "High",
+        "pricing": "Moderate"
       },
       {
-        "name": "Mid-Century Home Tour",
-        "style": "History"
+        "name": "Legends & Icons Tour of Palm Springs (Star Homes)",
+        "activity": "Easy",
+        "pricing": "Moderate"
       },
       {
-        "name": "Queer Art & Culture Walk",
-        "style": "Cultural"
+        "name": "Indian Canyons Hiking Tour by Jeep",
+        "activity": "Moderate",
+        "pricing": "Moderate"
       },
       {
-        "name": "Gay-Friendly Winery Tour",
-        "style": "Food & Drink"
+        "name": "San Andreas Fault Jeep Tour from Palm Desert",
+        "activity": "Easy",
+        "pricing": "Moderate"
       },
       {
-        "name": "Sunset Cruise Excursion",
-        "style": "Relaxing"
+        "name": "Joshua Tree National Park Private Sightseeing Tour",
+        "activity": "Easy",
+        "pricing": "Luxury"
       },
       {
-        "name": "Market & Shopping Spree",
-        "style": "Food & Drink"
+        "name": "Palm Springs Air Museum Admission",
+        "activity": "Easy",
+        "pricing": "Budget"
       },
       {
-        "name": "LGBTQ+ History Walking Tour",
-        "style": "History"
+        "name": "Twin Palms Estates Mid-Century Modern Private Walk",
+        "activity": "Moderate",
+        "pricing": "Luxury"
       },
       {
-        "name": "Historic Gay Neighborhood Tour",
-        "style": "History"
+        "name": "Coachella Valley Hot Air Balloon Ride",
+        "activity": "Easy",
+        "pricing": "Luxury"
       },
       {
-        "name": "Local Pride Food Tasting",
-        "style": "Food & Drink"
+        "name": "Palm Springs Historical Society Walking Tour",
+        "activity": "Moderate",
+        "pricing": "Budget"
+      },
+      {
+        "name": "Self-Guided Celebrity Homes Driving Audio Tour",
+        "activity": "Easy",
+        "pricing": "Budget"
+      },
+      {
+        "name": "The Living Desert Zoo and Gardens Admission",
+        "activity": "Moderate",
+        "pricing": "Budget"
+      },
+      {
+        "name": "Palm Springs Scavenger Hunt Adventure",
+        "activity": "High",
+        "pricing": "Budget"
+      },
+      {
+        "name": "Private Shopping Tour to Desert Hills Premium Outlets",
+        "activity": "Moderate",
+        "pricing": "Luxury"
+      },
+      {
+        "name": "Sunnylands Center & Gardens Tour",
+        "activity": "Moderate",
+        "pricing": "Moderate"
+      },
+      {
+        "name": "LGBTQ: Drag Queen Hosted Mobile Theater Tour",
+        "activity": "Easy",
+        "pricing": "Luxury"
+      },
+      {
+        "name": "LGBTQ: Palm Springs Drag Brunch at The Saguaro",
+        "activity": "Easy",
+        "pricing": "Moderate"
+      },
+      {
+        "name": "LGBTQ: Trixie Motel Tour (Self-Guided/Exterior)",
+        "activity": "Easy",
+        "pricing": "Budget"
       }
     ],
     "events": [
@@ -15074,6 +15296,68 @@
         "start": "2026-11-05",
         "end": "2026-11-08",
         "link": "https://www.travelinpride.com/palm-springs-pride/"
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Eight4Nine",
+        "type": "Restaurant & Lounge"
+      },
+      {
+        "name": "Trio Palm Springs",
+        "type": "Restaurant"
+      },
+      {
+        "name": "Blackbook",
+        "type": "Restaurant & Bar"
+      },
+      {
+        "name": "Johannes",
+        "type": "Restaurant (Fine Dining)"
+      },
+      {
+        "name": "Townie Bagels",
+        "type": "Bakery & Cafe"
+      },
+      {
+        "name": "Pinocchio in the Desert",
+        "type": "Restaurant (Brunch)"
+      },
+      {
+        "name": "Lulu California Bistro",
+        "type": "Restaurant"
+      },
+      {
+        "name": "The Front Porch",
+        "type": "Restaurant & Cafe"
+      },
+      {
+        "name": "Peninsula Pastries",
+        "type": "Bakery"
+      },
+      {
+        "name": "Koffi (Multiple locations)",
+        "type": "Coffeeshop"
+      },
+      {
+        "name": "Il Giardino",
+        "type": "Restaurant"
+      },
+      {
+        "name": "Roly China Blues",
+        "type": "Restaurant"
+      },
+      {
+        "name": "Wilma & Frieda",
+        "type": "Restaurant (Brunch)"
+      },
+      {
+        "name": "Aspen Mills Bread Co.",
+        "type": "Bakery & Cafe"
+      },
+      {
+        "name": "4 Saints",
+        "type": "Restaurant (Rooftop)"
       }
     ]
   },
@@ -24881,68 +25165,92 @@
     ]
   },
   "bangkok": {
-    "monthlyWeather": {
-      "0": {
-        "high": "88°F",
-        "low": "68°F",
-        "summary": "Hot & Dry"
-      },
-      "1": {
+    "monthlyWeather": [
+      {
         "high": "90°F",
-        "low": "71°F",
-        "summary": "Hot & Dry"
+        "low": "73°F",
+        "summary": "Hot and dry; the \"cool\" season offers the most comfortable walking weather.",
+        "description": "Cool season by Thai standards. Days are hot and bright, but humidity is lower and nights cool down noticeably.",
+        "gear": "Light clothing, sunscreen, hat."
       },
-      "2": {
+      {
         "high": "93°F",
-        "low": "75°F",
-        "summary": "Very Hot"
+        "low": "76°F",
+        "summary": "Very hot and sunny; humidity is lower, making the high heat bearable.",
+        "description": "Still the cool/dry season. Very hot days but humidity is manageable for walking and sightseeing.",
+        "gear": "Lightweight clothing, sunscreen, sunglasses."
       },
-      "3": {
+      {
         "high": "95°F",
-        "low": "78°F",
-        "summary": "Very Hot"
+        "low": "79°F",
+        "summary": "Intense heat begins; dry air and bright sun make midday excursions difficult.",
+        "description": "Late cool season turning hot. Days are blazing; humidity begins creeping up. Plan activities for morning/evening.",
+        "gear": "Light clothing, sunscreen, water bottle."
       },
-      "4": {
+      {
+        "high": "97°F",
+        "low": "80°F",
+        "summary": "The hottest month; oppressive heat and humidity require frequent indoor cooling breaks.",
+        "description": "Hottest and most humid month. Oppressive conditions require careful activity planning and frequent air-conditioning breaks.",
+        "gear": "Lightest clothing, sunscreen, water, hat."
+      },
+      {
+        "high": "95°F",
+        "low": "80°F",
+        "summary": "Hot and muggy; the start of the monsoon season brings sudden downpours.",
+        "description": "Heat and humidity peak as monsoon season begins. Sudden afternoon thunderstorms provide dramatic relief.",
+        "gear": "Light clothing, sunscreen, umbrella."
+      },
+      {
+        "high": "94°F",
+        "low": "79°F",
+        "summary": "Steamy and wet; heavy tropical rain showers alternate with periods of intense sun.",
+        "description": "Full monsoon season. Heavy daily rain, high humidity, and heat. Everything is lush and wet.",
+        "gear": "Lightweight clothing, rain jacket, water-resistant shoes."
+      },
+      {
         "high": "93°F",
+        "low": "79°F",
+        "summary": "Consistent tropical rain; high humidity and warm nights are the norm.",
+        "description": "Peak monsoon. Persistent rain and extreme humidity. Streets flood; mosquitos are active.",
+        "gear": "Light clothing, rain gear, waterproof shoes."
+      },
+      {
+        "high": "92°F",
+        "low": "79°F",
+        "summary": "Hot and rainy; overcast skies provide some relief from the direct sun.",
+        "description": "Continued monsoon conditions. Less intense than June/July but still wet and humid daily.",
+        "gear": "Light clothing, rain jacket, umbrella."
+      },
+      {
+        "high": "92°F",
         "low": "78°F",
-        "summary": "Hot & Stormy"
+        "summary": "Peak monsoon; frequent heavy rain and high humidity make for lush scenery.",
+        "description": "Late monsoon, rain begins easing slightly. Still wet and humid but less intense than early season.",
+        "gear": "Light clothing, rain gear, quick-dry fabrics."
       },
-      "5": {
-        "high": "90°F",
-        "low": "77°F",
-        "summary": "Hot & Rainy"
+      {
+        "high": "91°F",
+        "low": "78°F",
+        "summary": "Warm and wet; rain begins to taper off toward the end of month.",
+        "description": "Monsoon winding down. Rain becomes less frequent; humidity still high but improving.",
+        "gear": "Light clothing, light rain jacket, comfortable shoes."
       },
-      "6": {
-        "high": "88°F",
+      {
+        "high": "91°F",
         "low": "76°F",
-        "summary": "Hot & Rainy"
+        "summary": "Drying out; humidity begins to drop as the pleasant \"cool\" season returns.",
+        "description": "Transition month. Rain decreases significantly; humidity begins dropping. Conditions improve noticeably.",
+        "gear": "Light layers, light jacket for evenings."
       },
-      "7": {
-        "high": "88°F",
-        "low": "76°F",
-        "summary": "Hot & Rainy"
-      },
-      "8": {
-        "high": "88°F",
-        "low": "75°F",
-        "summary": "Hot & Rainy"
-      },
-      "9": {
-        "high": "87°F",
-        "low": "74°F",
-        "summary": "Warm & Rainy"
-      },
-      "10": {
-        "high": "87°F",
-        "low": "72°F",
-        "summary": "Warm"
-      },
-      "11": {
-        "high": "87°F",
-        "low": "68°F",
-        "summary": "Hot & Dry"
+      {
+        "high": "89°F",
+        "low": "73°F",
+        "summary": "Warm and breezy; clear skies and lower humidity make this peak travel season.",
+        "description": "Cool season returns. Clear skies, lower humidity, perfect travel conditions. This is peak season.",
+        "gear": "Light clothing, light jacket for evenings, comfortable shoes."
       }
-    },
+    ],
     "name": "Bangkok, Thailand",
     "iata": "BKK",
     "image": "&#127481;&#127469;",
@@ -24955,202 +25263,413 @@
     "lgbtqDistrict": "Silom Soi 4",
     "hotels": [
       {
+        "name": "Babylon Bangkok",
+        "tags": [
+          "LGBTQ Owned & Operated"
+        ],
+        "pricing": "Mid-priced"
+      },
+      {
+        "name": "The Sukosol Hotel",
+        "tags": [
+          "World Rainbow Hotels Member"
+        ],
+        "pricing": "Mid-priced"
+      },
+      {
+        "name": "Siam@Siam Design Hotel",
+        "tags": [
+          "World Rainbow Hotels Member"
+        ],
+        "pricing": "Mid-priced"
+      },
+      {
+        "name": "Amara Bangkok",
+        "tags": [
+          "World Rainbow Hotels Member"
+        ],
+        "pricing": "Mid-priced"
+      },
+      {
+        "name": "The Landmark Bangkok",
+        "tags": [
+          "World Rainbow Hotels Member"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "Banyan Tree Bangkok",
+        "tags": [
+          "IGLTA Accredited"
+        ],
+        "pricing": "Luxury"
+      },
+      {
         "name": "W Bangkok",
-        "type": "Luxury",
+        "tags": [
+          "IGLTA Accredited"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "The Peninsula Bangkok",
+        "tags": [
+          "IGLTA Accredited"
+        ],
+        "pricing": "Luxury"
+      },
+      {
+        "name": "Shangri-La Bangkok",
+        "tags": [
+          "IGLTA Accredited"
+        ],
+        "pricing": "Luxury"
+      },
+      {
+        "name": "Anantara Siam Bangkok Hotel",
+        "tags": [
+          "IGLTA Accredited"
+        ],
+        "pricing": "Luxury"
+      },
+      {
+        "name": "Siri Heritage Bangkok Hotel",
         "tags": [
           "LGBTQ Friendly"
-        ]
+        ],
+        "pricing": "Mid-priced"
       },
       {
-        "name": "So/ Bangkok",
-        "type": "Luxury",
+        "name": "Baan Noppawong",
         "tags": [
           "LGBTQ Friendly"
-        ]
+        ],
+        "pricing": "Mid-priced"
       },
       {
-        "name": "Banyan Tree",
-        "type": "Luxury",
+        "name": "Warm Window Silom",
         "tags": [
           "LGBTQ Friendly"
-        ]
+        ],
+        "pricing": "Budget"
       },
       {
-        "name": "Babylon",
-        "type": "Budget",
-        "tags": [
-          "Men Only"
-        ]
-      },
-      {
-        "name": "Pullman G",
-        "type": "Moderate",
+        "name": "Neighbor Phuthon",
         "tags": [
           "LGBTQ Friendly"
-        ]
+        ],
+        "pricing": "Mid-priced"
       },
       {
-        "name": "Lebua",
-        "type": "Luxury",
+        "name": "Shanti Lodge Bangkok",
         "tags": [
           "LGBTQ Friendly"
-        ]
+        ],
+        "pricing": "Budget"
       },
       {
-        "name": "Novotel Silom",
-        "type": "Moderate",
+        "name": "SO/ Bangkok",
+        "tags": [
+          "World Rainbow Hotels Member"
+        ],
+        "pricing": "Moderate"
+      },
+      {
+        "name": "Sindhorn Kempinski Hotel Bangkok",
+        "tags": [
+          "IGLTA Accredited"
+        ],
+        "pricing": "Luxury"
+      },
+      {
+        "name": "The Standard, Bangkok Mahanakhon",
         "tags": [
           "LGBTQ Friendly"
-        ]
+        ],
+        "pricing": "Moderate"
       },
       {
-        "name": "Bandara Suites",
-        "type": "Moderate",
+        "name": "Kimpton Maa-Lai Bangkok",
         "tags": [
           "LGBTQ Friendly"
-        ]
+        ],
+        "pricing": "Luxury"
       },
       {
-        "name": "Siam Camp",
-        "type": "Budget",
-        "tags": [
-          "Hostel"
-        ]
-      },
-      {
-        "name": "Tawana",
-        "type": "Budget",
+        "name": "Lebua at State Tower",
         "tags": [
           "LGBTQ Friendly"
-        ]
-      },
-      {
-        "name": "Pullman Bangkok King Power",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
-      },
-      {
-        "name": "Arisara Manor",
-        "type": "Moderate",
-        "tags": [
-          "LGBTQ Owned/Operated"
-        ]
+        ],
+        "pricing": "Moderate"
       }
     ],
     "nightlife": [
       {
         "name": "DJ Station",
-        "type": "Club",
+        "type": "Bar",
         "tags": [
-          "Legendary"
+          "Dance",
+          "Iconic"
+        ]
+      },
+      {
+        "name": "G.O.D. (Guys on Display)",
+        "type": "Bar",
+        "tags": [
+          "Dance",
+          "Late Night"
+        ]
+      },
+      {
+        "name": "The Stranger Bar",
+        "type": "Bar",
+        "tags": [
+          "Drag",
+          "Cocktails"
         ]
       },
       {
         "name": "Telephone Pub",
         "type": "Bar",
         "tags": [
-          "Social"
+          "Dining",
+          "Neighborhood"
         ]
       },
       {
-        "name": "The Stranger",
+        "name": "Balcony Pub",
         "type": "Bar",
         "tags": [
-          "Drag"
+          "Karaoke",
+          "Patio"
         ]
       },
       {
-        "name": "Balcony",
+        "name": "White Party Bangkok",
         "type": "Bar",
         "tags": [
-          "Karaoke"
+          "Circuit",
+          "Event"
         ]
       },
       {
-        "name": "G-Spot",
-        "type": "Club",
-        "tags": [
-          "Theme"
-        ]
-      },
-      {
-        "name": "White Dragon",
+        "name": "FORK & CORK",
         "type": "Bar",
         "tags": [
+          "Cocktails",
           "Live Music"
         ]
       },
       {
-        "name": "Tawan",
+        "name": "Connections Bar",
         "type": "Bar",
         "tags": [
-          "Go-Go"
-        ]
-      },
-      {
-        "name": "Jupiter 2002",
-        "type": "Bar",
-        "tags": [
-          "Shows"
-        ]
-      },
-      {
-        "name": "Fake Club",
-        "type": "Club",
-        "tags": [
-          "Local"
+          "Neighborhood",
+          "Social"
         ]
       },
       {
         "name": "Maggie Choo's",
         "type": "Bar",
         "tags": [
-          "Speakeasy"
+          "Performance",
+          "Upscale"
+        ]
+      },
+      {
+        "name": "Tawan Bar",
+        "type": "Bar",
+        "tags": [
+          "Show",
+          "Go-Go Dancers"
+        ]
+      },
+      {
+        "name": "Banana Bar",
+        "type": "Bar",
+        "tags": [
+          "Neighborhood",
+          "Local"
+        ]
+      },
+      {
+        "name": "Chakran Sauna",
+        "type": "Sauna",
+        "tags": [
+          "Sauna",
+          "Luxury"
+        ]
+      },
+      {
+        "name": "Babylon Bangkok",
+        "type": "Sauna",
+        "tags": [
+          "Sauna",
+          "Iconic"
+        ]
+      },
+      {
+        "name": "R3 Sauna",
+        "type": "Sauna",
+        "tags": [
+          "Sauna",
+          "Cruise"
+        ]
+      },
+      {
+        "name": "V Club",
+        "type": "Sauna",
+        "tags": [
+          "Sauna",
+          "Cruise"
+        ]
+      },
+      {
+        "name": "Faros Sauna",
+        "type": "Sauna",
+        "tags": [
+          "Sauna",
+          "Cruise"
+        ]
+      },
+      {
+        "name": "G-Store (Silom)",
+        "type": "Store",
+        "tags": [
+          "Clothing",
+          "Clubwear"
+        ]
+      },
+      {
+        "name": "Side (Silom)",
+        "type": "Store",
+        "tags": [
+          "Underwear",
+          "Lifestyle Apparel"
+        ]
+      },
+      {
+        "name": "500 Cafe & Kink",
+        "type": "Store",
+        "tags": [
+          "Fetish Gear",
+          "Accessories"
+        ]
+      },
+      {
+        "name": "The Residences (Coming Soon)",
+        "type": "Store",
+        "tags": [
+          "Lifestyle",
+          "High-end Gifts"
+        ]
+      },
+      {
+        "name": "MBK Center (Queer stalls)",
+        "type": "Store",
+        "tags": [
+          "Clothing",
+          "Custom T-shirts"
+        ]
+      },
+      {
+        "name": "Siam Discovery (Alt brands)",
+        "type": "Store",
+        "tags": [
+          "Gender-neutral Clothing"
         ]
       }
     ],
     "tours": [
       {
-        "name": "Grand Palace",
-        "style": "History"
+        "name": "Grand Palace & Wat Phra Kaew Walking Tour",
+        "activity": "High",
+        "pricing": "Budget"
       },
       {
-        "name": "Ayutthaya",
-        "style": "Cultural"
+        "name": "Bangkok by Night: Temples, Markets & Food Tuk-Tuk",
+        "activity": "Moderate",
+        "pricing": "Moderate"
       },
       {
-        "name": "Floating Market",
-        "style": "Food & Drink"
+        "name": "Chao Phraya Princess Dinner Cruise",
+        "activity": "Easy",
+        "pricing": "Moderate"
       },
       {
-        "name": "Queer Art & Culture Walk",
-        "style": "Cultural"
+        "name": "Damnoen Saduak Floating Market Half-Day Tour",
+        "activity": "Moderate",
+        "pricing": "Budget"
       },
       {
-        "name": "Sunset Cruise Excursion",
-        "style": "Relaxing"
+        "name": "Bangkok Canal Tour by Private Longtail Boat",
+        "activity": "Easy",
+        "pricing": "Budget"
       },
       {
-        "name": "LGBTQ+ History Walking Tour",
-        "style": "History"
+        "name": "Thai Cooking Class with Market Visit",
+        "activity": "Moderate",
+        "pricing": "Budget"
       },
       {
-        "name": "Market & Shopping Spree",
-        "style": "Food & Drink"
+        "name": "Maeklong Railway Market & Floating Market Combo",
+        "activity": "Moderate",
+        "pricing": "Moderate"
       },
       {
-        "name": "City Highlights Bus Tour",
-        "style": "Cultural"
+        "name": "Wat Pho & Wat Arun Sunrise/Sunset Tour",
+        "activity": "High",
+        "pricing": "Budget"
       },
       {
-        "name": "Hidden Gems Night Tour",
-        "style": "Adventurous"
+        "name": "Bangkok Backstreets Food Tour (15+ Tastings)",
+        "activity": "High",
+        "pricing": "Moderate"
       },
       {
-        "name": "Local Pride Food Tasting",
-        "style": "Food & Drink"
+        "name": "Muay Thai Live: The Legend Lives Performance",
+        "activity": "Easy",
+        "pricing": "Moderate"
+      },
+      {
+        "name": "Ayutthaya Historical Park Day Trip from Bangkok",
+        "activity": "Moderate",
+        "pricing": "Moderate"
+      },
+      {
+        "name": "Mahanakhon SkyWalk Observation Deck",
+        "activity": "Easy",
+        "pricing": "Budget"
+      },
+      {
+        "name": "Bangkok Chinatown Street Food Tour by Night",
+        "activity": "High",
+        "pricing": "Budget"
+      },
+      {
+        "name": "Jim Thompson House & Museum Tour",
+        "activity": "Moderate",
+        "pricing": "Budget"
+      },
+      {
+        "name": "Royal Barges & Temple of Dawn Private Cruise",
+        "activity": "Easy",
+        "pricing": "Moderate"
+      },
+      {
+        "name": "LGBTQ: Ultimate Gay Night Out Guided Adventure",
+        "activity": "High",
+        "pricing": "Moderate"
+      },
+      {
+        "name": "LGBTQ: Calypso Ladyboy Cabaret Show",
+        "activity": "Easy",
+        "pricing": "Budget"
+      },
+      {
+        "name": "LGBTQ: Silom Soi 4 & Soi 2 Nightlife Insight Tour",
+        "activity": "High",
+        "pricing": "Moderate"
       }
     ],
     "events": [
@@ -25183,6 +25702,36 @@
         "start": "2026-12-29",
         "end": "2027-01-02",
         "link": "https://www.travelinpride.com/lgbtqia-pride-cruises-and-destination/"
+      }
+    ],
+    "restaurants": [
+      {
+        "name": "Ruen Urai",
+        "type": "Restaurant (Fine Thai)"
+      },
+      {
+        "name": "Mimosa Bangkok",
+        "type": "Restaurant (Mediterranean)"
+      },
+      {
+        "name": "Massilia (Ruam Rudee)",
+        "type": "Restaurant (Italian)"
+      },
+      {
+        "name": "Balcony Pub",
+        "type": "Restaurant & Bar"
+      },
+      {
+        "name": "Krua Chern Sab",
+        "type": "Restaurant"
+      },
+      {
+        "name": "Silver Sand (Ground Floor)",
+        "type": "Restaurant"
+      },
+      {
+        "name": "Tawandang German Brewery",
+        "type": "Restaurant (Friendly/Show)"
       }
     ]
   },
