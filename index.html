@@ -1751,21 +1751,16 @@
                             randomHotels = randomHotels.slice(0, 4);
                         }
 
-                        // Split nightlife into distinct categories
-                        const availableNightlife = Array.isArray(data.nightlife) ? [...data.nightlife] : [];
-                        const availableRestaurants = data.restaurants ? [...data.restaurants] : [];
+                        // Each category now has its own dedicated array in the data
+                        const availableNightlife    = Array.isArray(data.nightlife)    ? [...data.nightlife]    : [];
+                        const availableSaunas       = Array.isArray(data.saunas)       ? [...data.saunas]       : [];
+                        const availableStores       = Array.isArray(data.stores)       ? [...data.stores]       : [];
+                        const availableRestaurants  = Array.isArray(data.restaurants)  ? [...data.restaurants]  : [];
 
-                        const isStore = n => { const t = (n.type || '').toLowerCase(); return t.includes('store') || t.includes('shop'); };
-                        const isSauna = n => { const t = (n.type || '').toLowerCase(); const tags = (n.tags || []).map(g => g.toLowerCase()); return t.includes('sauna') || t.includes('bath') || tags.some(g => g.includes('sauna') || g.includes('bathhouse')); };
-                        const isRestaurant = n => { const t = (n.type || '').toLowerCase(); return t.includes('restaurant') || t.includes('diner') || t.includes('cafe') || t.includes('bakery') || t.includes('bistro'); };
-
-                        const randomStores    = getRandomSubset(availableNightlife.filter(n => isStore(n)), 2);
-                        const randomSaunas    = getRandomSubset(availableNightlife.filter(n => !isStore(n) && isSauna(n)), 2);
-                        const nightlifeRestaurants = availableNightlife.filter(n => !isStore(n) && !isSauna(n) && isRestaurant(n));
-                        const randomNightlife = getRandomSubset(availableNightlife.filter(n => !isStore(n) && !isSauna(n) && !isRestaurant(n)), 4);
-
-                        // Restaurants: dedicated array + any restaurant-type items found in nightlife array
-                        const randomRestaurants = getRandomSubset([...availableRestaurants, ...nightlifeRestaurants], 2);
+                        const randomNightlife   = getRandomSubset(availableNightlife, 4);
+                        const randomSaunas      = getRandomSubset(availableSaunas, 2);
+                        const randomStores      = getRandomSubset(availableStores, 2);
+                        const randomRestaurants = getRandomSubset(availableRestaurants, 2);
                         const randomTours = (data.tours || []).slice(0, 5);
                         const fareEstimate = calculateFareEstimate(data.baseFare);
                         const delay = index * 200;
