@@ -2151,11 +2151,16 @@
                                 const tourPrice = typeof t === 'object' && t.price ? t.price : '';
                                 const activityLevels = ['low', 'moderate', 'high', 'easy', 'adventurous'];
                                 const styleLabel = activityLevels.includes(tourStyle.toLowerCase()) ? `Activity Level: ${tourStyle}` : tourStyle;
-                                const tourDesc = tourPrice ? `Activity: ${tourStyle} &bull; Price: ${tourPrice}` : `Approx. 3 hours &bull; ${styleLabel}`;
+                                const tourDesc = `Approx. 3 hours &bull; ${styleLabel}`;
+                                const priceBadgeClass = tourPrice === 'Budget' ? 'bg-pride-green/10 text-pride-green' : tourPrice === 'Luxury' ? 'bg-pride-purple/10 text-pride-purple' : tourPrice === 'Moderate' ? 'bg-pride-blue/10 text-pride-blue' : '';
+                                const priceBadge = tourPrice ? `<span class="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full ${priceBadgeClass}">${tourPrice}</span>` : '';
                                 return `
                                     <div class="flex gap-4 items-center bg-white dark:bg-slate-800 p-3 rounded-xl shadow-sm group cursor-pointer border border-slate-100 dark:border-slate-700 hover:border-primary/20">
                                         <div class="flex-1">
-                                            <p class="font-bold text-sm text-slate-900 dark:text-white">${tourName}</p>
+                                            <div class="flex items-center gap-2 mb-0.5">
+                                                <p class="font-bold text-sm text-slate-900 dark:text-white">${tourName}</p>
+                                                ${priceBadge}
+                                            </div>
                                             <p class="text-xs text-slate-500 dark:text-slate-400 dark:text-slate-300">${tourDesc}</p>
                                         </div>
                                         <button onclick="window.psBookmarkPlace('${tourName.replace(/'/g, "\\'")}', 'Tour', '${data.name.replace(/'/g, "\\'")}', '${origin.replace(/'/g, "\\'")}', '${dateStart}', '${dateEnd}', this)" title="Bookmark this tour" class="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors text-slate-400">
